@@ -59,10 +59,12 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       body.sha = (fileResult.data as any).sha;
       let fileContent: string = (fileResult.data as any).content || '';
       let reuslt = fileContent.replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
-      body.content = reuslt;
+      body.content = Buffer.from(reuslt).toString("base64");
     }
   }
-
+  startGroup(`modifyPathContents Body:`)
+    info(`👉 ${JSON.stringify(body, null, 2)}`)
+  endGroup()
   return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     ...body,
   });
