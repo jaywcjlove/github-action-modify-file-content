@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { getInput, setFailed, info } from '@actions/core';
 import { modifyPathContents } from './utils';
 import formatter from '@uiw/formatter';
 
@@ -19,6 +19,7 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
         body = result
       }
     }
+    info(`👉 Body Content: ${body}`)
 
     await modifyPathContents({ path: filepath }, body);
   } catch (error) {
