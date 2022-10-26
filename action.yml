@@ -1,0 +1,36 @@
+name: 'Modify File Content'
+author: 'Kenny Wong'
+description: 'Replace text content and submit content'
+inputs:
+  token:
+    description: 'Your GITHUB_TOKEN'
+    default: ${{ github.token }}
+    required: false
+  body:
+    description: 'what needs to be replaced'
+    default: ''
+    required: false
+  path:
+    description: 'file to be replaced'
+    default: ''
+    required: false
+  openDelimiter:
+    description: 'Character to use for opening delimiter, by default `<!--GAMFC-->`'
+    default: '<!--GAMFC-->'
+    required: false
+  closeDelimiter:
+    description: 'Character to use for closing delimiter, by default `<!--GAMFC-END-->`'
+    default: '<!--GAMFC-END-->'
+    required: false
+
+outputs:
+  content:
+    description: 'text file content'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'list'
+  color: 'blue'
