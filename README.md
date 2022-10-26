@@ -10,6 +10,7 @@ Here is the example: update time <!--GAMFC-->2022-10-26 14:51:48<!--GAMFC-END-->
 - `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
 - `body` what needs to be replaced
 - `path` file to be replaced
+- `overwrite` overwrite file, by default `true`
 - `openDelimiter` Character to use for opening delimiter, by default `<!--GAMFC-->`
 - `closeDelimiter` Character to use for closing delimiter, by default `<!--GAMFC-END-->`
 

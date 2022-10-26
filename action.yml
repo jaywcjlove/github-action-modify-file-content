@@ -22,6 +22,10 @@ inputs:
     description: 'Character to use for closing delimiter, by default `<!--GAMFC-END-->`'
     default: '<!--GAMFC-END-->'
     required: false
+  overwrite:
+    description: 'overwrite file'
+    default: 'true'
+    required: false
 
 outputs:
   content:

@@ -1,4 +1,4 @@
-import { getInput, setFailed, info } from '@actions/core';
+import { getInput, setFailed, info, startGroup, endGroup } from '@actions/core';
 import { modifyPathContents } from './utils';
 import formatter from '@uiw/formatter';
 
@@ -21,7 +21,14 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
     }
     info(`👉 Body Content: ${body}`)
 
-    await modifyPathContents({ path: filepath }, body);
+    const result = await modifyPathContents({ path: filepath }, body);
+    result.data.content?.size
+
+    startGroup(`file result:`)
+      info(`👉 ${result.data.content?.path}`)
+      info(`👉 ${result.data.content?.size}`)
+      info(`👉 ${result.data.content?.sha}`)
+    endGroup()
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);

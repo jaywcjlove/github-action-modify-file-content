@@ -12,6 +12,7 @@ export const octokit = getOctokit(myToken);
 
 export const getInputs = () => {
   const body = getInput('body') || '';
+  const overwrite = getInput('overwrite') || 'true';
   const filepath = getInput('path') || '';
   const openDelimiter = getInput('openDelimiter') || '<!--GAMFC-->';
   const closeDelimiter = getInput('closeDelimiter') || '<!--GAMFC-END-->';
@@ -19,7 +20,8 @@ export const getInputs = () => {
     ...context.repo,
     body, filepath,
     openDelimiter,
-    closeDelimiter
+    closeDelimiter,
+    overwrite
   }
 }
 
@@ -34,7 +36,7 @@ export async function getReposPathContents(filePath: string) {
 
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const {owner, repo, openDelimiter, closeDelimiter } = getInputs();
+  const {owner, repo, openDelimiter, closeDelimiter, overwrite} = getInputs();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
@@ -62,6 +64,9 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
         info(`👉 ${reuslt}`)
       endGroup()
       setOutput('content', reuslt)
+      if (overwrite.toString() === 'true') {
+        await FS.writeFile(fullPath, reuslt);
+      }
       body.content = Buffer.from(reuslt).toString("base64");
     }
   }
