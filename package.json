@@ -1,6 +1,6 @@
 {
   "name": "github-action-modify-file-content",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Replace text content and submit content",
   "homepage": "https://github.com/jaywcjlove/github-action-modify-file-content#readme",
   "main": "dist/index.js",
