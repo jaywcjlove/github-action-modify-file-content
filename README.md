@@ -32,7 +32,18 @@ Here is the example: update time <!--GAMFC-->2022-10-26 14:32:34<!--GAMFC-END-->
 update time <!--GAMFC-->2022-10-26 14:32:34<!--GAMFC-END-->
 ```
 
-Replace the content between `<!--GAMFC-->2022-10-26 14:32:34<!--GAMFC-END-->`.
+Replace the content between `<!--GAMFC-->` and 
+`<!--GAMFC-END-->`.
+
+### format date
+
+```yml
+- name: Modify README.md
+  uses: github-action-modify-file-content@main
+  with:
+    filepath: README.md
+    body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+```
 
 ## See Also
 
