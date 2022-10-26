@@ -59,9 +59,9 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     if (fileResult.status === 200 && (fileResult.data as any).sha) {
       body.sha = (fileResult.data as any).sha;
       let fileContent: string = (fileResult.data as any).content || '';
-      let reuslt = fileContent.replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
-      info(`👉 Text Content: ${reuslt}`)
-      body.content = reuslt;
+      let reuslt = Buffer.from(fileContent, 'base64').toString().replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
+      info(`👉 Text Content: ${reuslt}`);
+      body.content = Buffer.from(reuslt).toString("base64");
     }
   }
   startGroup(`modifyPathContents Body:`)
