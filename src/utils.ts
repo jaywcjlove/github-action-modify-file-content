@@ -29,6 +29,7 @@ export async function getReposPathContents(filePath: string) {
   const result = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
     owner, repo,
     path: filePath,
+    // ref: ''
   });
   return result
 }

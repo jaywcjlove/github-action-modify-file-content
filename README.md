@@ -3,7 +3,7 @@ Modify File Content
 
 Replace text content and submit content
 
-update time <!--GAMFC-->what needs to be replaced<!--GAMFC-END-->
+update time <!--GAMFC-->what needs to be replaced1<!--GAMFC-END-->
 
 ## Example Usage
 
