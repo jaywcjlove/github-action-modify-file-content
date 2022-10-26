@@ -46,7 +46,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   const body: FilePutQuery = {
     owner, repo,
     path: options.path,
-    message: `doc: ${options.sha ? 'modify' : 'create'} ${options.path}.`,
+    message: `doc: ${isExists ? 'modify' : 'create'} ${options.path}.`,
     committer: {
       name: 'github-actions[bot]',
       email: 'github-actions[bot]@users.noreply.github.com'
@@ -60,7 +60,9 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       body.sha = (fileResult.data as any).sha;
       let fileContent: string = (fileResult.data as any).content || '';
       let reuslt = Buffer.from(fileContent, 'base64').toString().replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
-      info(`👉 Text Content: ${reuslt}`);
+      startGroup(`👉 Text Content: :`)
+        info(`👉 ${reuslt}`)
+      endGroup()
       body.content = Buffer.from(reuslt).toString("base64");
     }
   }
