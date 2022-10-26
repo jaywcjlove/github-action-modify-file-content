@@ -64,19 +64,17 @@ jobs:
           package-path: ./package.json
           release: true
           body: |
-            
             Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/github-action-modify-file-content/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
             Comparing Changes: ${{ steps.changelog.outputs.compareurl }} 
 
+            ${{ steps.changelog.outputs.changelog }}
+
             ```yml
             - name: Modify README.md
-              uses: github-action-modify-file-content@main
+              uses: jaywcjlove/github-action-modify-file-content@main
               with:
                 filepath: README.md
             ```
-
-            ${{ steps.changelog.outputs.changelog }}
-
 
             `README.md` file content
 

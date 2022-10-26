@@ -22,7 +22,7 @@ Here is the example: update time <!--GAMFC-->2022-10-26 15:18:04<!--GAMFC-END-->
 
 ```yml
 - name: Modify README.md
-  uses: github-action-modify-file-content@main
+  uses: jaywcjlove/github-action-modify-file-content@main
   with:
     filepath: README.md
 ```
@@ -40,7 +40,7 @@ Replace the content between `<!--GAMFC-->` and
 
 ```yml
 - name: Modify README.md
-  uses: github-action-modify-file-content@main
+  uses: jaywcjlove/github-action-modify-file-content@main
   with:
     filepath: README.md
     body: "{{date:YYYY-MM-DD HH:mm:ss}}"
