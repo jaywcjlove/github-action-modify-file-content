@@ -15,6 +15,7 @@ jobs:
 
       - run: npm install
       - run: npm run build
+      - run: mkdir -p build
 
       - name: Modify README.md
         # uses: github-action-modify-file-content@main
