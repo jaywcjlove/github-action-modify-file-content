@@ -1,33 +1,36 @@
-TW9kaWZ5IEZpbGUgQ29udGVudAo9PT0KClJlcGxhY2UgdGV4dCBjb250ZW50
-IGFuZCBzdWJtaXQgY29udGVudAoKdXBkYXRlIHRpbWUgPCEtLUdBTUZDLS0+
-d2hhdCBuZWVkcyB0byBiZSByZXBsYWNlZDwhLS1HQU1GQy1FTkQtLT4KCiMj
-IEV4YW1wbGUgVXNhZ2UKCmBgYHltbAotIG5hbWU6IE1vZGlmeSBSRUFETUUu
-bWQKICB1c2VzOiBnaXRodWItYWN0aW9uLW1vZGlmeS1maWxlLWNvbnRlbnRA
-bWFpbgogIHdpdGg6CiAgICBmaWxlcGF0aDogUkVBRE1FLm1kCiAgICBkYXRl
-OiAKYGBgCgpgUkVBRE1FLm1kYCBmaWxlIGNvbnRlbnQKCmBgYG1hcmtkb3du
-CnVwZGF0ZSB0aW1lIDwhLS1HQU1GQy0tPndoYXQgbmVlZHMgdG8gYmUgcmVw
-bGFjZWQ8IS0tR0FNRkMtRU5ELS0+CmBgYAoKIyMgU2VlIEFsc28KCi0gW0dp
-dGh1YiBSZWxlYXNlIENoYW5nZWxvZyBHZW5lcmF0b3JdKGh0dHBzOi8vZ2l0
-aHViLmNvbS9qYXl3Y2psb3ZlL2NoYW5nZWxvZy1nZW5lcmF0b3IpIEEgR2l0
-SHViIEFjdGlvbiB0aGF0IGNvbXBhcmVzIHRoZSBjb21taXQgZGlmZmVyZW5j
-ZXMgYmV0d2VlbiB0d28gYnJhbmNoZXMKLSBbQ3JlYXRlIFRhZ3MgRnJvbV0o
-aHR0cHM6Ly9naXRodWIuY29tL2pheXdjamxvdmUvY3JlYXRlLXRhZy1hY3Rp
-b24pIEF1dG8gY3JlYXRlIHRhZ3MgZnJvbSBjb21taXQgb3IgcGFja2FnZS5q
-c29uLgotIFtHaXRodWIgQWN0aW9uIENvbnRyaWJ1dG9yc10oaHR0cHM6Ly9n
-aXRodWIuY29tL2pheXdjamxvdmUvZ2l0aHViLWFjdGlvbi1jb250cmlidXRv
-cnMpIEdpdGh1YiBhY3Rpb24gZ2VuZXJhdGVzIGR5bmFtaWMgaW1hZ2UgVVJM
-IGZvciBjb250cmlidXRvciBsaXN0IHRvIGRpc3BsYXkgaXQhCi0gW0dlbmVy
-YXRlZCBCYWRnZXNdKGh0dHBzOi8vZ2l0aHViLmNvbS9qYXl3Y2psb3ZlL2dl
-bmVyYXRlZC1iYWRnZXMpIENyZWF0ZSBhIGJhZGdlIHVzaW5nIEdpdEh1YiBB
-Y3Rpb25zIGFuZCBHaXRIdWIgV29ya2Zsb3cgQ1BVIHRpbWUgKG5vIDNyZCBw
-YXJ0aWVzIHNlcnZlcnMpCi0gW0NyZWF0ZSBDb3ZlcmFnZSBCYWRnZXNdKGh0
-dHBzOi8vZ2l0aHViLmNvbS9qYXl3Y2psb3ZlL2NvdmVyYWdlLWJhZGdlcy1j
-bGkpIENyZWF0ZSBjb3ZlcmFnZSBiYWRnZXMgZnJvbSBjb3ZlcmFnZSByZXBv
-cnRzLiAobm8gM3JkIHBhcnRpZXMgc2VydmVycykKLSBbR2l0aHViIEFjdGlv
-biBwYWNrYWdlXShodHRwczovL2dpdGh1Yi5jb20vamF5d2NqbG92ZS9naXRo
-dWItYWN0aW9uLXBhY2thZ2UpIFJlYWQgYW5kIG1vZGlmeSB0aGUgY29udGVu
-dHMgb2YgYHBhY2thZ2UuanNvbmAuCi0gW0dpdGh1YiBBY3Rpb24gRUpTXSho
-dHRwczovL2dpdGh1Yi5jb20vamF5d2NqbG92ZS9naXRodWItYWN0aW9uLXBh
-Y2thZ2UpIEEgZ2l0aHViIGFjdGlvbiB0byByZW5kZXIgYSBlanMgdGVtcGxh
-dGUgdXNpbmcgZ2l0aHViIGNvbnRleHQuCgojIyBMaWNlbnNlCgpMaWNlbnNl
-ZCB1bmRlciB0aGUgTUlUIExpY2Vuc2UuCg==
+Modify File Content
+===
+
+Replace text content and submit content
+
+update time <!--GAMFC-->what needs to be replaced<!--GAMFC-END-->
+
+## Example Usage
+
+```yml
+- name: Modify README.md
+  uses: github-action-modify-file-content@main
+  with:
+    filepath: README.md
+    date: 
+```
+
+`README.md` file content
+
+```markdown
+update time <!--GAMFC-->what needs to be replaced<!--GAMFC-END-->
+```
+
+## See Also
+
+- [Github Release Changelog Generator](https://github.com/jaywcjlove/changelog-generator) A GitHub Action that compares the commit differences between two branches
+- [Create Tags From](https://github.com/jaywcjlove/create-tag-action) Auto create tags from commit or package.json.
+- [Github Action Contributors](https://github.com/jaywcjlove/github-action-contributors) Github action generates dynamic image URL for contributor list to display it!
+- [Generated Badges](https://github.com/jaywcjlove/generated-badges) Create a badge using GitHub Actions and GitHub Workflow CPU time (no 3rd parties servers)
+- [Create Coverage Badges](https://github.com/jaywcjlove/coverage-badges-cli) Create coverage badges from coverage reports. (no 3rd parties servers)
+- [Github Action package](https://github.com/jaywcjlove/github-action-package) Read and modify the contents of `package.json`.
+- [Github Action EJS](https://github.com/jaywcjlove/github-action-package) A github action to render a ejs template using github context.
+
+## License
+
+Licensed under the MIT License.
