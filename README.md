@@ -3,7 +3,19 @@ Modify File Content
 
 Replace text content and submit content
 
-update time <!--GAMFC-->2022/10/26 14:14:42<!--GAMFC-END-->
+Here is the example: update time <!--GAMFC-->2022/10/26 14:10:45<!--GAMFC-END-->
+
+## Inputs
+
+- `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
+- `body` what needs to be replaced
+- `path` file to be replaced
+- `openDelimiter` Character to use for opening delimiter, by default `<!--GAMFC-->`
+- `closeDelimiter` Character to use for closing delimiter, by default `<!--GAMFC-END-->`
+
+## Outputs
+
+- `content` text file content
 
 ## Example Usage
 
@@ -12,7 +24,6 @@ update time <!--GAMFC-->2022/10/26 14:14:42<!--GAMFC-END-->
   uses: github-action-modify-file-content@main
   with:
     filepath: README.md
-    date: 
 ```
 
 `README.md` file content
@@ -20,6 +31,8 @@ update time <!--GAMFC-->2022/10/26 14:14:42<!--GAMFC-END-->
 ```markdown
 update time <!--GAMFC-->2022/10/26 14:14:42<!--GAMFC-END-->
 ```
+
+Replace the content between `<!--GAMFC-->` and `<!--GAMFC-END-->`.
 
 ## See Also
 

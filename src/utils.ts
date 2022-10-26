@@ -1,11 +1,10 @@
 import FS from 'fs-extra';
 import path from 'path';
 import { context, getOctokit } from '@actions/github';
-import { getInput, setFailed, startGroup, info, endGroup,  } from '@actions/core';
+import { getInput, setOutput, startGroup, info, endGroup,  } from '@actions/core';
 import { paths, components,  } from '@octokit/openapi-types';
 import { OctokitResponse } from '@octokit/types';
 
-type Query = paths['/issues']['get']['parameters']['query'];
 export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
 
 export const myToken = getInput('token');
@@ -29,7 +28,6 @@ export async function getReposPathContents(filePath: string) {
   const result = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
     owner, repo,
     path: filePath,
-    // ref: ''
   });
   return result
 }
@@ -63,6 +61,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       startGroup(`👉 Text Content: :`)
         info(`👉 ${reuslt}`)
       endGroup()
+      setOutput('content', reuslt)
       body.content = Buffer.from(reuslt).toString("base64");
     }
   }

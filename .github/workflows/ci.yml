@@ -21,4 +21,4 @@ jobs:
         uses: ./
         with:
           path: README.md
-          body: "{{date}}"
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
