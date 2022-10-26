@@ -24,7 +24,7 @@ Here is the example: update time <!--GAMFC-->2022-10-26 15:38:41<!--GAMFC-END-->
 - name: Modify README.md
   uses: jaywcjlove/github-action-modify-file-content@main
   with:
-    filepath: README.md
+    path: README.md
 ```
 
 `README.md` file content
@@ -42,7 +42,7 @@ Replace the content between `<!--GAMFC-->` and
 - name: Modify README.md
   uses: jaywcjlove/github-action-modify-file-content@main
   with:
-    filepath: README.md
+    path: README.md
     body: "{{date:YYYY-MM-DD HH:mm:ss}}"
 ```
 
