@@ -9,7 +9,7 @@ inputs:
   body:
     description: 'what needs to be replaced'
     default: ''
-    required: false
+    required: true
   path:
     description: 'file to be replaced'
     default: ''

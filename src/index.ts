@@ -1,4 +1,4 @@
-import { getInput, setFailed, info, startGroup, endGroup } from '@actions/core';
+import { getInput, setFailed, info, warning, startGroup, endGroup } from '@actions/core';
 import { modifyPathContents } from './utils';
 import formatter from '@uiw/formatter';
 
@@ -8,6 +8,14 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
   try {
     let body = getInput('body') || '';
     const filepath = getInput('path') || '';
+    if (!body) {
+      warning(`👉 "body" input value does not exist.`)
+      return
+    }
+    if (!filepath) {
+      warning(`👉 "path" input value does not exist.`)
+      return
+    }
     if (REGEXP.test(body)) {
       const result = body.replace(REGEXP, (match, str2) => {
         const format = match.replace(REGEXP, '$1');
