@@ -11,6 +11,9 @@ Here is the example: update time <!--GAMFC-->2022-10-27 01:52:09<!--GAMFC-END-->
 - `body` what needs to be replaced
 - `path` file to be replaced
 - `overwrite` overwrite file, by default `true`
+- `message` The commit message. by default `doc: update <file path>.`
+- `committer_name` The name of the author or committer of the commit. by default `github-actions[bot]`
+- `committer_email` The email of the author or committer of the commit. by default `github-actions[bot]@users.noreply.github.com`
 - `openDelimiter` Character to use for opening delimiter, by default `<!--GAMFC-->`
 - `closeDelimiter` Character to use for closing delimiter, by default `<!--GAMFC-END-->`
 
