@@ -3,7 +3,7 @@ Modify File Content
 
 Replace text content and submit content
 
-Here is the example: update time <!--GAMFC-->2022-10-27 02:04:49<!--GAMFC-END-->
+Here is the example: update time <!--GAMFC-->2022-10-27 02:12:35<!--GAMFC-END-->
 
 ## Inputs
 
@@ -33,7 +33,7 @@ Here is the example: update time <!--GAMFC-->2022-10-27 02:04:49<!--GAMFC-END-->
 `README.md` file content
 
 ```markdown
-update time <!--GAMFC-->2022-10-27 02:04:49<!--GAMFC-END-->
+update time <!--GAMFC-->2022-10-27 02:12:35<!--GAMFC-END-->
 ```
 
 Replace the content between `<!--GAMFC-->` and 
