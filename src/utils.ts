@@ -14,11 +14,13 @@ export const getInputs = () => {
   const body = getInput('body') || '';
   const overwrite = getInput('overwrite') || 'true';
   const filepath = getInput('path') || '';
+  const message = getInput('message') || '';
   const openDelimiter = getInput('openDelimiter') || '<!--GAMFC-->';
   const closeDelimiter = getInput('closeDelimiter') || '<!--GAMFC-END-->';
   return {
     ...context.repo,
     body, filepath,
+    message,
     openDelimiter,
     closeDelimiter,
     overwrite
@@ -36,7 +38,7 @@ export async function getReposPathContents(filePath: string) {
 
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const {owner, repo, openDelimiter, closeDelimiter, overwrite} = getInputs();
+  const {owner, repo, openDelimiter, closeDelimiter, message, overwrite} = getInputs();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
@@ -46,7 +48,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   const body: FilePutQuery = {
     owner, repo,
     path: options.path,
-    message: `doc: ${isExists ? 'modify' : 'create'} ${options.path}.`,
+    message: message || `doc: ${isExists ? 'modify' : 'create'} ${options.path}.`,
     committer: {
       name: 'github-actions[bot]',
       email: 'github-actions[bot]@users.noreply.github.com'

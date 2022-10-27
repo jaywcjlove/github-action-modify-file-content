@@ -11,7 +11,11 @@ inputs:
     default: ''
     required: true
   path:
-    description: 'file to be replaced'
+    description: 'File to be replaced'
+    default: ''
+    required: false
+  message:
+    description: 'The commit message.'
     default: ''
     required: false
   openDelimiter:
