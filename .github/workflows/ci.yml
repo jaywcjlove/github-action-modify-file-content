@@ -23,6 +23,7 @@ jobs:
         with:
           path: test/overwrite.file.md
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+          overwrite: 'true'
 
       - name: Modify README.md
         # uses: github-action-modify-file-content@main
