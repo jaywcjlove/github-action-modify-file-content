@@ -10,7 +10,8 @@ Here is the example: update time <!--GAMFC-->2022-10-27 02:56:39<!--GAMFC-END-->
 - `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
 - `body` what needs to be replaced
 - `path` file to be replaced
-- `overwrite` overwrite file, by default `true`
+- `overwrite` Overwrite the entire file content, by default `false`
+- `sync_local_file` Sync local file content, by default `true`
 - `message` The commit message. by default `doc: update <file path>.`
 - `committer_name` The name of the author or committer of the commit. by default `github-actions[bot]`
 - `committer_email` The email of the author or committer of the commit. by default `github-actions[bot]@users.noreply.github.com`

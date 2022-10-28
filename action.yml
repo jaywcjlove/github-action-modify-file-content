@@ -36,6 +36,10 @@ inputs:
     required: false
   overwrite:
     description: 'overwrite file'
+    default: 'false'
+    required: false
+  sync_local_file:
+    description: 'Sync local file content'
     default: 'true'
     required: false
 
