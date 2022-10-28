@@ -50,6 +50,17 @@ Replace the content between `<!--GAMFC-->` and
     body: "{{date:YYYY-MM-DD HH:mm:ss}}"
 ```
 
+### overwrite file
+
+```yml
+- name: Modify README.md
+  uses: jaywcjlove/github-action-modify-file-content@main
+  with:
+    path: README.md
+    body: "overwrite file content {{date:YYYY-MM-DD HH:mm:ss}}",
+    overwrite: 'true'
+```
+
 ## See Also
 
 - [Github Release Changelog Generator](https://github.com/jaywcjlove/changelog-generator) A GitHub Action that compares the commit differences between two branches
