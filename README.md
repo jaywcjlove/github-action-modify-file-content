@@ -5,6 +5,8 @@ Replace text content and submit content
 
 Here is the example: update time <!--GAMFC-->2022-11-12 07:43:10<!--GAMFC-END-->
 
+Here is the different delimiter example: <!--GAMFC_TABEL--><!--GAMFC_TABEL-END-->
+
 ## Inputs
 
 - `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
@@ -17,8 +19,6 @@ Here is the example: update time <!--GAMFC-->2022-11-12 07:43:10<!--GAMFC-END-->
 - `committer_email` The email of the author or committer of the commit. by default `github-actions[bot]@users.noreply.github.com`
 - `openDelimiter` Character to use for opening delimiter, by default `<!--GAMFC-->`
 - `closeDelimiter` Character to use for closing delimiter, by default `<!--GAMFC-END-->`
-
-Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABEL` & `GAMFC_TABEL-END`<!--GAMFC_TABEL-END-->
 
 ## Outputs
 
