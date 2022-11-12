@@ -68,7 +68,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       body.sha = (fileResult.data as any).sha;
       const fileContent: string = (fileResult.data as any).content || '';
       const oldFileContent = Buffer.from(fileContent, 'base64').toString();
-      const REG = new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig')
+      const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
       const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
       const match = oldFileContent.match(REG);
       startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
