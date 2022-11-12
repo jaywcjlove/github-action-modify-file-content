@@ -39,7 +39,7 @@ jobs:
           openDelimiter: '<!--GAMFC_TABEL-->'
           closeDelimiter: '<!--GAMFC_TABEL-END-->'
           path: README.md
-          body: "different `GAMFC_TABEL` & `GAMFC_TABEL-END`"
+          body: "different `GAMFC_TABEL` & `GAMFC_TABEL-END` (test)"
 
       - name: Converts Markdown to HTML
         uses: jaywcjlove/markdown-to-html-cli@main

@@ -68,15 +68,18 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       body.sha = (fileResult.data as any).sha;
       const fileContent: string = (fileResult.data as any).content || '';
       const oldFileContent = Buffer.from(fileContent, 'base64').toString();
-      let reuslt = oldFileContent.replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
-      startGroup(`👉 Text new content: ${options.path}`)
-        info(`👉 ${JSON.stringify(fileResult.data, null, 2)}`)
-        info(`👉 ${reuslt}`)
-      endGroup()
-      startGroup(`👉 Text old content: ${options.path}`)
-        info(`👉 ${oldFileContent}`)
-      endGroup()
-      setOutput('content', reuslt)
+      const REG = new RegExp(`${openDelimiter}([\s\S]*?)${closeDelimiter}`, 'ig')
+      const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
+      const match = oldFileContent.match(REG);
+      startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
+        info(`👉 ${oldFileContent}`);
+        info(`👉 ${JSON.stringify(match, null, 2)}`);
+      endGroup();
+      startGroup(`👉 Text new content: ${options.path}`);
+        info(`👉 ${JSON.stringify(fileResult.data, null, 2)}`);
+        info(`👉 ${reuslt}`);
+      endGroup();
+      setOutput('content', reuslt);
       if (oldFileContent == reuslt) {
         warning(`👉 Content has not changed!!!!!`)
         return;
