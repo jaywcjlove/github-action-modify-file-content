@@ -32,6 +32,15 @@ jobs:
           path: README.md
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
 
+      - name: Modify README.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          openDelimiter: '<!--GAMFC_TABEL-->'
+          closeDelimiter: '<!--GAMFC_TABEL-END-->'
+          path: README.md
+          body: "different `GAMFC_TABEL` & `GAMFC_TABEL-END`"
+
       - name: Converts Markdown to HTML
         uses: jaywcjlove/markdown-to-html-cli@main
         with:

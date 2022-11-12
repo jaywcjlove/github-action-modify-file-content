@@ -18,6 +18,8 @@ Here is the example: update time <!--GAMFC-->2022-11-12 07:35:17<!--GAMFC-END-->
 - `openDelimiter` Character to use for opening delimiter, by default `<!--GAMFC-->`
 - `closeDelimiter` Character to use for closing delimiter, by default `<!--GAMFC-END-->`
 
+Here is the different delimiter example: <!--GAMFC_TABEL--><!--GAMFC_TABEL-END-->
+
 ## Outputs
 
 - `content` text file content
