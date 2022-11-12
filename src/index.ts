@@ -30,6 +30,9 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
     info(`👉 Body Content: ${body}`)
 
     const result = await modifyPathContents({ path: filepath }, body);
+    if (!result) {
+      return
+    }
     result.data.content?.size
 
     startGroup(`file result:`)
