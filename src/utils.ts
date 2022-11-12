@@ -1,7 +1,7 @@
 import FS from 'fs-extra';
 import path from 'path';
 import { context, getOctokit } from '@actions/github';
-import { getInput, setOutput, startGroup, info, endGroup,  } from '@actions/core';
+import { getInput, setOutput, startGroup, info, endGroup, warning } from '@actions/core';
 import { paths, components,  } from '@octokit/openapi-types';
 import { OctokitResponse } from '@octokit/types';
 
@@ -66,13 +66,18 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     const fileResult = await getReposPathContents(options.path)
     if (fileResult.status === 200 && (fileResult.data as any).sha) {
       body.sha = (fileResult.data as any).sha;
-      let fileContent: string = (fileResult.data as any).content || '';
-      let reuslt = Buffer.from(fileContent, 'base64').toString().replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
+      const fileContent: string = (fileResult.data as any).content || '';
+      const oldFileContent = Buffer.from(fileContent, 'base64').toString();
+      let reuslt = oldFileContent.replace(new RegExp(`${openDelimiter}(.*?)${closeDelimiter}`, 'ig'), `${openDelimiter}${content}${closeDelimiter}`);
       startGroup(`👉 Text Content:`)
         info(`👉 ${JSON.stringify(fileResult.data, null, 2)}`)
         info(`👉 ${reuslt}`)
       endGroup()
       setOutput('content', reuslt)
+      if (oldFileContent == reuslt) {
+        warning(`👉 Content has not changed!!!!!`)
+        return;
+      }
       let new_content = Buffer.from(content).toString("base64")
       if (overwrite.toString() === 'true') {
         body.content = new_content;
