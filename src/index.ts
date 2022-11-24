@@ -33,7 +33,6 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
     if (!result) {
       return
     }
-    result.data.content?.size
 
     startGroup(`file result:`)
       info(`👉 ${result.data.content?.path}`)

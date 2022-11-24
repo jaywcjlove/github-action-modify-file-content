@@ -14,6 +14,10 @@ inputs:
     description: 'File to be replaced'
     default: ''
     required: false
+  ref:
+    description: 'The fully-formed ref of the branch or tag that triggered the workflow run.'
+    default: ''
+    required: false
   message:
     description: 'The commit message.'
     default: ''
