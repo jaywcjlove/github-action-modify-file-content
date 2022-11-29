@@ -29,16 +29,7 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
     }
     info(`👉 Body Content: ${body}`)
 
-    const result = await modifyPathContents({ path: filepath }, body);
-    if (!result) {
-      return
-    }
-
-    startGroup(`file result:`)
-      info(`👉 ${result.data.content?.path}`)
-      info(`👉 ${result.data.content?.size}`)
-      info(`👉 ${result.data.content?.sha}`)
-    endGroup()
+    await modifyPathContents({ path: filepath }, body);
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);

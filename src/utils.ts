@@ -50,13 +50,13 @@ export async function getReposPathContents(filePath: string, options: { ref?: st
   return result
 }
 
-async function getBranch(): Promise<string> {
+async function getBranch(): Promise<string | undefined> {
   const { branch } = getInputs()
   if (branch !== null) {
     return Promise.resolve(branch);
   }
-  const { data } = await octokit.rest.repos.get(context.repo);
-  return data.default_branch;
+  // const { data } = await octokit.rest.repos.get(context.repo);
+  // return data.default_branch;
 }
 
 export async function createCommit(newTreeSha: string, baseCommitSha: string) {
@@ -168,22 +168,34 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     info(`👉 ${JSON.stringify(body, null, 2)}`)
   endGroup()
 
-  const lastRef = await getLastRef(branch);
-  startGroup(`getLastRef Body:`)
-  info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
-  endGroup()
-
   const { data } = await octokit.rest.git.createBlob({
     ...context.repo,
     content: body.content,
     encoding: 'base64',
   });
 
-  body.sha = lastRef.commitSha;
 
-  return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+  if (branch) {
+    const lastRef = await getLastRef(branch);
+    startGroup(`getLastRef Body:`)
+    info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
+    endGroup()
+    body.sha = lastRef.commitSha;
+    const result = await octokit.rest.git.updateRef({
+      owner, repo, ref: `heads/${branch}`, sha: data.sha
+    })
+    return
+  }
+
+  const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     ...body,
   });
+
+  startGroup(`file result:`)
+    info(`👉 ${result.data.content?.path}`)
+    info(`👉 ${result.data.content?.size}`)
+    info(`👉 ${result.data.content?.sha}`)
+  endGroup()
 }
 
 export type IssuesData = components["schemas"]["issue"][];
