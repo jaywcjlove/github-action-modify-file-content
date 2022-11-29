@@ -172,8 +172,14 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   startGroup(`getLastRef Body:`)
   info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
   endGroup()
-  // const baseTreeSha = lastRef.treeSha;
-  // const baseCommitSha = lastRef.commitSha;
+
+  const { data } = await octokit.rest.git.createBlob({
+    ...context.repo,
+    content: body.content,
+    encoding: 'base64',
+  });
+
+  body.sha = data.sha;
 
   return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     ...body,
