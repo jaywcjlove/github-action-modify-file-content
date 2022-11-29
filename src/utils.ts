@@ -6,6 +6,7 @@ import { paths, components,  } from '@octokit/openapi-types';
 import { OctokitResponse } from '@octokit/types';
 
 export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
+export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/json']
 
 export const myToken = getInput('token');
 export const octokit = getOctokit(myToken);
@@ -92,6 +93,14 @@ async function getLastRef(branch: string): Promise<RefInfo> {
   return { treeSha, commitSha };
 }
 
+async function getFileContents(branch: string): Promise<FilePutResult> {
+  const {owner, repo, filepath, committer_name, committer_email} = getInputs()
+  const { data } = await octokit.rest.repos.getContent({
+    owner, repo, ref: branch, path: filepath
+  })
+  return data;
+}
+
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
   const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
@@ -168,22 +177,23 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     info(`👉 ${JSON.stringify(body, null, 2)}`)
   endGroup()
 
-  const { data } = await octokit.rest.git.createBlob({
-    ...context.repo,
-    content: body.content,
-    encoding: 'base64',
-  });
-
-
   if (branch) {
+    const currentFile = await getFileContents(branch);
     const lastRef = await getLastRef(branch);
     startGroup(`getLastRef Body:`)
     info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
     endGroup()
-    body.sha = lastRef.commitSha;
-    const result = await octokit.rest.git.updateRef({
-      owner, repo, ref: `heads/${branch}`, sha: data.sha
-    })
+
+    
+
+    const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+      ...currentFile,
+      ...body,
+      sha: (currentFile as any).sha
+    });
+    // const result = await octokit.rest.git.updateRef({
+    //   owner, repo, ref: `heads/${branch}`, sha: data.sha
+    // })
     return
   }
 
