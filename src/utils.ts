@@ -179,7 +179,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     encoding: 'base64',
   });
 
-  body.sha = data.sha;
+  body.sha = lastRef.commitSha;
 
   return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     ...body,
