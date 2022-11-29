@@ -62,11 +62,12 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
   const fullPath = path.resolve(options.path);
-  const isExists = FS.existsSync(fullPath)
   info(`👉 Modify Path (${options.path})`)
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
   info(`👉 branch: (${branch})`);
+
+  let new_content = Buffer.from(content).toString("base64")
   let body: FilePutQuery = {
     owner, repo,
     path: options.path,
@@ -76,7 +77,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       email: committer_email || 'github-actions[bot]@users.noreply.github.com'
     },
     ...other,
-    content: Buffer.from(content).toString("base64"),
+    content: new_content,
   }
 
   const currentFile = await getFileContents(branch);
@@ -84,32 +85,33 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     const fileContent: string = (currentFile.data as any).content || '';
     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
     const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
-    const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
+    let reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
     const match = oldFileContent.match(REG);
     startGroup(`👉 Current File content: ${match?.length} ${options.path}`);
       info(`👉 ${JSON.stringify(match, null, 2)}`);
       info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`);
     endGroup();
-    setOutput('content', reuslt);
-    if (oldFileContent == reuslt) {
-      warning(`👉 Content has not changed!!!!!`)
-      return;
-    }
-    startGroup(`👉 Text old content:`);
-      info(`👉 ${oldFileContent}`);
-    endGroup();
-    startGroup(`👉 Text new content:`);
-      info(`👉 ${reuslt}`);
-    endGroup();
-    body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
-    let new_content = Buffer.from(content).toString("base64")
     if (overwrite.toString() === 'true') {
       body.content = new_content;
+      reuslt = new_content;
     } else {
       body.content = Buffer.from(reuslt).toString("base64");
       new_content = reuslt;
     }
-    if (sync_local_file.toString() === 'true' && ref === context.ref) {
+    setOutput('content', reuslt);
+    startGroup(`👉 Text OLD content:`);
+      info(`👉 ${oldFileContent}`);
+    endGroup();
+    startGroup(`👉 Text NEW content:`);
+      info(`👉 ${reuslt}`);
+    endGroup();
+    if (oldFileContent == reuslt) {
+      warning(`👉 Content has not changed!!!!!`)
+      return;
+    }
+    body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
+    const isExists = FS.existsSync(fullPath)
+    if (isExists && sync_local_file.toString() === 'true' && ref === context.ref) {
       await FS.writeFile(fullPath, new_content);
     }
     startGroup(`modifyPathContents Body:`)
