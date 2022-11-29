@@ -75,7 +75,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   if (branch) {
     body.branch = branch;
     const bh = await octokit.rest.repos.getBranch({ owner, repo, branch })
-    body.sha = sha || bh.data.commit.sha;
+    body.sha = bh.data.commit.sha;
     startGroup(`👉 Branch content: ${bh.data.commit.commit.message} ${bh.data.commit.commit.author?.name}`);
       info(`👉 ${JSON.stringify(bh, null, 2)}`);
     endGroup();
