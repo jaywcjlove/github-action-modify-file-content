@@ -17,6 +17,14 @@ jobs:
       - run: npm run build
       - run: mkdir -p build
 
+      - name: Overwrite test/overwrite.file.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          path: test/overwrite.file.md
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+          overwrite: 'true'
+
       - name: Modify gh-pages README.md
         # uses: github-action-modify-file-content@main
         uses: ./
