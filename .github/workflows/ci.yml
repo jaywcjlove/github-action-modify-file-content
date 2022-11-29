@@ -25,6 +25,15 @@ jobs:
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
           overwrite: 'true'
 
+      - name: Modify test test/overwrite.file.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          branch: test
+          path: test/overwrite.file.md
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+          overwrite: 'true'
+
       - name: Modify README.md
         # uses: github-action-modify-file-content@main
         uses: ./
@@ -75,14 +84,6 @@ jobs:
           commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-
-      - name: Modify gh-pages README.md
-        # uses: github-action-modify-file-content@main
-        uses: ./
-        with:
-          path: README.md
-          branch: gh-pages
-          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
 
       - name: Generate Changelog
         id: changelog
