@@ -86,19 +86,21 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
     const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
     const match = oldFileContent.match(REG);
-    startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
-      info(`👉 ${oldFileContent}`);
+    startGroup(`👉 Current File content: ${match?.length} ${options.path}`);
       info(`👉 ${JSON.stringify(match, null, 2)}`);
-    endGroup();
-    startGroup(`👉 Text new content: ${options.path}`);
       info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`);
-      info(`👉 ${reuslt}`);
     endGroup();
     setOutput('content', reuslt);
     if (oldFileContent == reuslt) {
       warning(`👉 Content has not changed!!!!!`)
       return;
     }
+    startGroup(`👉 Text old content:`);
+      info(`👉 ${oldFileContent}`);
+    endGroup();
+    startGroup(`👉 Text new content:`);
+      info(`👉 ${reuslt}`);
+    endGroup();
     body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
     let new_content = Buffer.from(content).toString("base64")
     if (overwrite.toString() === 'true') {
