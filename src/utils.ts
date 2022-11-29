@@ -59,6 +59,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   const fullPath = path.resolve(options.path);
   const isExists = FS.existsSync(fullPath)
   info(`👉 Modify Path (${options.path})`)
+  info(`👉 Context.ref: (${context.ref})`);
   const body: FilePutQuery = {
     owner, repo,
     path: options.path,
@@ -73,8 +74,8 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   if (branch) {
     body.branch = branch;
     const bh = await octokit.rest.repos.getBranch({ owner, repo, branch })
-    body.sha = bh.data.commit.sha;
-    startGroup(`👉 Branch content: ${bh.data.commit.commit} ${bh.data.commit.author?.name}`);
+    body.sha = sha || bh.data.commit.sha;
+    startGroup(`👉 Branch content: ${bh.data.commit.commit.message} ${bh.data.commit.commit.author}`);
       info(`👉 ${JSON.stringify(bh, null, 2)}`);
     endGroup();
   } else if (sha) {
@@ -111,7 +112,6 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
         body.content = Buffer.from(reuslt).toString("base64");
         new_content = reuslt;
       }
-      setOutput('context.ref', context.ref);
       if (sync_local_file.toString() === 'true' && ref === context.ref) {
         await FS.writeFile(fullPath, new_content);
       }
