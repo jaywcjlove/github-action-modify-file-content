@@ -46,26 +46,6 @@ async function getBranch(): Promise<string> {
   return data.default_branch;
 }
 
-export async function createCommit(newTreeSha: string, baseCommitSha: string) {
-  const {owner, message, repo, committer_name, committer_email} = getInputs()
-  
-  const { data } = await octokit.rest.git.createCommit({
-    owner, repo, message,
-    tree: newTreeSha,
-    parents: [baseCommitSha],
-    author: {
-      name: committer_name,
-      email: committer_email
-    }
-  })
-  return data.sha;
-}
-
-interface RefInfo {
-	treeSha: string;
-	commitSha: string;
-}
-
 async function getFileContents(branch: string) {
   const {owner, repo, filepath, committer_name, committer_email} = getInputs()
   const data = await octokit.rest.repos.getContent({
@@ -119,6 +99,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       warning(`👉 Content has not changed!!!!!`)
       return;
     }
+    body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
     let new_content = Buffer.from(content).toString("base64")
     if (overwrite.toString() === 'true') {
       body.content = new_content;
@@ -129,7 +110,6 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     if (sync_local_file.toString() === 'true' && ref === context.ref) {
       await FS.writeFile(fullPath, new_content);
     }
-    body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
     startGroup(`modifyPathContents Body:`)
       info(`👉 ${JSON.stringify(body, null, 2)}`)
     endGroup()
