@@ -87,7 +87,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
   info(`👉 branch: (${branch})`);
-  const body: FilePutQuery = {
+  let body: FilePutQuery = {
     owner, repo,
     path: options.path,
     message: message || `doc: update ${options.path}.`,
@@ -129,7 +129,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     if (sync_local_file.toString() === 'true' && ref === context.ref) {
       await FS.writeFile(fullPath, new_content);
     }
-
+    body = { ...body, ...currentFile.data, sha: (currentFile.data as any).sha }
     startGroup(`modifyPathContents Body:`)
       info(`👉 ${JSON.stringify(body, null, 2)}`)
     endGroup()
