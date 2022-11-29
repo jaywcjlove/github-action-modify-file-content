@@ -60,6 +60,15 @@ jobs:
         id: tag_version
         uses: jaywcjlove/changelog-generator@main
 
+      - name: gh-pages README.md
+        working-directory: build
+        run: |
+          cat > README.md << EOF
+          Website: https://jaywcjlove.github.io/github-action-modify-file-content  
+
+          TEST: <!--GAMFC-->2022-11-29 01:44:16<!--GAMFC-END-->
+          EOF
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
