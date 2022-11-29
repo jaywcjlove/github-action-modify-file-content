@@ -1,0 +1,36 @@
+name: fix issue
+on:
+  push:
+    branches:
+      - issue
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm install
+      - run: npm run build
+      - run: mkdir -p build
+
+      - name: Modify gh-pages README.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          path: README.md
+          branch: gh-pages
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+
+
+      - name: Overwrite test/overwrite.file.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          path: test/overwrite.file.md
+          branch: issue
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+          overwrite: 'true'

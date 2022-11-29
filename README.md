@@ -12,7 +12,6 @@ Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABE
 - `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
 - `body` what needs to be replaced
 - `path` file to be replaced
-- `sha` The blob SHA of the file being replaced
 - `branch` The person that committed the file. Default: the authenticated user
 - `ref` The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
 - `overwrite` Overwrite the entire file content, by default `false`
