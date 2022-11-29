@@ -134,9 +134,9 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       info(`👉 ${JSON.stringify(body, null, 2)}`)
     endGroup()
     const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-      ...currentFile,
+      ...currentFile.data,
       ...body,
-      sha: (currentFile as any).sha
+      sha: (currentFile.data as any).sha
     });
     startGroup(`file result:`)
       info(`👉 ${result.data.content?.path}`)
