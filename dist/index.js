@@ -14251,10 +14251,6 @@ var regeneratorRuntime = __webpack_require__(4165);
 var asyncToGenerator = __webpack_require__(5861);
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
 var core = __webpack_require__(8397);
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectDestructuringEmpty.js
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
-}
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__(1413);
 // EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
@@ -14266,7 +14262,148 @@ var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
 var github = __webpack_require__(1374);
 ;// CONCATENATED MODULE: ./src/utils.ts
-var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var sha=(0,core.getInput)('sha');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,sha:sha,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var _getInputs,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_getInputs=getInputs(),branch=_getInputs.branch;if(!(branch!==null)){_context.next=3;break;}return _context.abrupt("return",Promise.resolve(branch));case 3:_context.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context.sent;data=_yield$octokit$rest$r.data;return _context.abrupt("return",data.default_branch);case 8:case"end":return _context.stop();}}},_callee);}));return _getBranch.apply(this,arguments);}function createCommit(_x,_x2){return _createCommit.apply(this,arguments);}function _createCommit(){_createCommit=_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(newTreeSha,baseCommitSha){var _getInputs2,owner,message,repo,committer_name,committer_email,_yield$octokit$rest$g,data;return _regeneratorRuntime().wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_getInputs2=getInputs(),owner=_getInputs2.owner,message=_getInputs2.message,repo=_getInputs2.repo,committer_name=_getInputs2.committer_name,committer_email=_getInputs2.committer_email;_context2.next=3;return octokit.rest.git.createCommit({owner:owner,repo:repo,message:message,tree:newTreeSha,parents:[baseCommitSha],author:{name:committer_name,email:committer_email}});case 3:_yield$octokit$rest$g=_context2.sent;data=_yield$octokit$rest$g.data;return _context2.abrupt("return",data.sha);case 6:case"end":return _context2.stop();}}},_callee2);}));return _createCommit.apply(this,arguments);}function getFileContents(_x3){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3(branch){var _getInputs3,owner,repo,filepath,committer_name,committer_email,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,filepath=_getInputs3.filepath,committer_name=_getInputs3.committer_name,committer_email=_getInputs3.committer_email;_context3.next=3;return octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath});case 3:data=_context3.sent;return _context3.abrupt("return",data);case 5:case"end":return _context3.stop();}}},_callee3);}));return _getFileContents.apply(this,arguments);}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee4(){var options,content,other,_getInputs4,owner,repo,openDelimiter,closeDelimiter,message,committer_name,committer_email,overwrite,sync_local_file,ref,sha,branch,fullPath,isExists,body,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,REG,reuslt,match,new_content,result,_args4=arguments;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee4$(_context4){while(1){switch(_context4.prev=_context4.next){case 0:options=_args4.length>0&&_args4[0]!==undefined?_args4[0]:{};content=_args4.length>1?_args4[1]:undefined;other=Object.assign({},(_objectDestructuringEmpty(options),options));_getInputs4=getInputs(),owner=_getInputs4.owner,repo=_getInputs4.repo,openDelimiter=_getInputs4.openDelimiter,closeDelimiter=_getInputs4.closeDelimiter,message=_getInputs4.message,committer_name=_getInputs4.committer_name,committer_email=_getInputs4.committer_email,overwrite=_getInputs4.overwrite,sync_local_file=_getInputs4.sync_local_file,ref=_getInputs4.ref,sha=_getInputs4.sha;_context4.next=6;return getBranch();case 6:branch=_context4.sent;if(options.path){_context4.next=9;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 9:fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({owner:owner,repo:repo,path:options.path,message:message||"doc: update ".concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'}},other),{},{content:Buffer.from(content).toString("base64")});_context4.next=18;return getFileContents(branch);case 18:currentFile=_context4.sent;if(!(currentFile.status===200)){_context4.next=56;break;}fileContent=currentFile.data.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');reuslt=oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Text old content: ".concat(match===null||match===void 0?void 0:match.length," ").concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text new content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile.data,null,2)));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();(0,core.setOutput)('content',reuslt);if(!(oldFileContent==reuslt)){_context4.next=37;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context4.abrupt("return");case 37:new_content=Buffer.from(content).toString("base64");if(overwrite.toString()==='true'){body.content=new_content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}if(!(sync_local_file.toString()==='true'&&ref===github.context.ref)){_context4.next=42;break;}_context4.next=42;return lib_default().writeFile(fullPath,new_content);case 42:body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},body),currentFile.data),{},{sha:currentFile.data.sha});(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context4.next=48;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},currentFile.data),body),{},{sha:currentFile.data.sha}));case 48:result=_context4.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context4.next=60;break;case 56:(0,core.startGroup)("result error:");(0,core.info)("\uD83D\uDC49 ".concat(currentFile.status));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile.data,null,2)));(0,core.endGroup)();case 60:case"end":return _context4.stop();}}},_callee4);}));return _modifyPathContents.apply(this,arguments);}
+var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getFileContents(_x){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(branch){var _getInputs,owner,repo,filepath;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_getInputs=getInputs(),owner=_getInputs.owner,repo=_getInputs.repo,filepath=_getInputs.filepath;return _context.abrupt("return",octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath}));case 2:case"end":return _context.stop();}}},_callee);}));return _getFileContents.apply(this,arguments);}function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(){var _getInputs2,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_getInputs2=getInputs(),branch=_getInputs2.branch;if(!(branch!==null)){_context2.next=3;break;}return _context2.abrupt("return",Promise.resolve(branch));case 3:_context2.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context2.sent;data=_yield$octokit$rest$r.data;return _context2.abrupt("return",data.default_branch);case 8:case"end":return _context2.stop();}}},_callee2);}));return _getBranch.apply(this,arguments);}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}// import FS from 'fs-extra';
+// import path from 'path';
+// import { context, getOctokit } from '@actions/github';
+// import { getInput, setOutput, startGroup, info, endGroup, warning } from '@actions/core';
+// import { paths } from '@octokit/openapi-types';
+// export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
+// export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/json']
+// export const myToken = getInput('token');
+// export const octokit = getOctokit(myToken);
+// export const getInputs = () => {
+//   const body = getInput('body') || '';
+//   const ref = getInput('ref') || context.ref;
+//   const branch = getInput('branch');
+//   const sha = getInput('sha');
+//   const overwrite = getInput('overwrite') || 'false';
+//   const sync_local_file = getInput('sync_local_file') || 'true';
+//   const filepath = getInput('path') || '';
+//   const message = getInput('message') || '';
+//   const committer_name = getInput('committer_name') || '';
+//   const committer_email = getInput('committer_email') || '';
+//   const openDelimiter = getInput('openDelimiter') || '<!--GAMFC-->';
+//   const closeDelimiter = getInput('closeDelimiter') || '<!--GAMFC-END-->';
+//   return {
+//     ...context.repo,
+//     body, filepath, ref, branch, sha,
+//     message,
+//     committer_name,
+//     committer_email,
+//     openDelimiter,
+//     closeDelimiter,
+//     overwrite,
+//     sync_local_file
+//   }
+// }
+// async function getBranch(): Promise<string> {
+//   const { branch } = getInputs()
+//   if (branch !== null) {
+//     return Promise.resolve(branch);
+//   }
+//   const { data } = await octokit.rest.repos.get(context.repo);
+//   return data.default_branch;
+// }
+// export async function createCommit(newTreeSha: string, baseCommitSha: string) {
+//   const {owner, message, repo, committer_name, committer_email} = getInputs()
+//   const { data } = await octokit.rest.git.createCommit({
+//     owner, repo, message,
+//     tree: newTreeSha,
+//     parents: [baseCommitSha],
+//     author: {
+//       name: committer_name,
+//       email: committer_email
+//     }
+//   })
+//   return data.sha;
+// }
+// interface RefInfo {
+// 	treeSha: string;
+// 	commitSha: string;
+// }
+// async function getFileContents(branch: string) {
+//   const {owner, repo, filepath, committer_name, committer_email} = getInputs()
+//   const data = await octokit.rest.repos.getContent({
+//     owner, repo, ref: branch, path: filepath
+//   })
+//   return data;
+// }
+// export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
+//   const { ...other} = options;
+//   const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
+//   const branch = await getBranch();
+//   if (!options.path) {
+//     throw new Error(`modifyPathContents: file directory parameter does not exist`)
+//   }
+//   const fullPath = path.resolve(options.path);
+//   const isExists = FS.existsSync(fullPath)
+//   info(`👉 Modify Path (${options.path})`)
+//   info(`👉 Context.ref: (${context.ref})`);
+//   info(`👉 Context.sha: (${context.sha})`);
+//   info(`👉 branch: (${branch})`);
+//   let body: FilePutQuery = {
+//     owner, repo,
+//     path: options.path,
+//     message: message || `doc: update ${options.path}.`,
+//     committer: {
+//       name: committer_name || 'github-actions[bot]',
+//       email: committer_email || 'github-actions[bot]@users.noreply.github.com'
+//     },
+//     ...other,
+//     content: Buffer.from(content).toString("base64"),
+//   }
+//   const currentFile = await getFileContents(branch);
+//   if (currentFile.status === 200) {
+//     const fileContent: string = (currentFile.data as any).content || '';
+//     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
+//     const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
+//     const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
+//     const match = oldFileContent.match(REG);
+//     startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
+//       info(`👉 ${oldFileContent}`);
+//       info(`👉 ${JSON.stringify(match, null, 2)}`);
+//     endGroup();
+//     startGroup(`👉 Text new content: ${options.path}`);
+//       info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`);
+//       info(`👉 ${reuslt}`);
+//     endGroup();
+//     setOutput('content', reuslt);
+//     if (oldFileContent == reuslt) {
+//       warning(`👉 Content has not changed!!!!!`)
+//       return;
+//     }
+//     let new_content = Buffer.from(content).toString("base64")
+//     if (overwrite.toString() === 'true') {
+//       body.content = new_content;
+//     } else {
+//       body.content = Buffer.from(reuslt).toString("base64");
+//       new_content = reuslt;
+//     }
+//     if (sync_local_file.toString() === 'true' && ref === context.ref) {
+//       await FS.writeFile(fullPath, new_content);
+//     }
+//     body = { ...body, ...currentFile.data, sha: (currentFile.data as any).sha }
+//     startGroup(`modifyPathContents Body:`)
+//       info(`👉 ${JSON.stringify(body, null, 2)}`)
+//     endGroup()
+//     const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+//       ...currentFile.data,
+//       ...body,
+//       sha: (currentFile.data as any).sha
+//     });
+//     startGroup(`file result:`)
+//       info(`👉 ${result.data.content?.path}`)
+//       info(`👉 ${result.data.content?.size}`)
+//       info(`👉 ${result.data.content?.sha}`)
+//     endGroup()
+//   } else {
+//     startGroup(`result error:`)
+//       info(`👉 ${currentFile.status}`)
+//       info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`)
+//     endGroup()
+//   }
+// }
+function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3(){var options,content,_getInputs3,owner,repo,openDelimiter,closeDelimiter,message,committer_name,committer_email,overwrite,sync_local_file,ref,branch,fullPath,isExists,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,REG,reuslt,match,new_content,body,result,_args3=arguments;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:options=_args3.length>0&&_args3[0]!==undefined?_args3[0]:{};content=_args3.length>1?_args3[1]:undefined;_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,openDelimiter=_getInputs3.openDelimiter,closeDelimiter=_getInputs3.closeDelimiter,message=_getInputs3.message,committer_name=_getInputs3.committer_name,committer_email=_getInputs3.committer_email,overwrite=_getInputs3.overwrite,sync_local_file=_getInputs3.sync_local_file,ref=_getInputs3.ref;_context3.next=5;return getBranch();case 5:branch=_context3.sent;if(options.path){_context3.next=8;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 8:fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));_context3.next=16;return getFileContents(branch);case 16:currentFile=_context3.sent;if(!(currentFile.status===200&&currentFile.data.sha)){_context3.next=54;break;}fileContent=currentFile.data.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');reuslt=oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Text old content: ".concat(match===null||match===void 0?void 0:match.length," ").concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text new content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile.data,null,2)));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();(0,core.setOutput)('content',reuslt);if(!(oldFileContent==reuslt)){_context3.next=35;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context3.abrupt("return");case 35:new_content=Buffer.from(content).toString("base64");body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({owner:owner,repo:repo,path:options.path},currentFile.data),{},{sha:currentFile.data.sha,message:message||"doc: ".concat(isExists?'modify':'create'," ").concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'},content:new_content});if(overwrite.toString()==='true'){body.content=new_content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}if(!(sync_local_file.toString()==='true'&&ref===github.context.ref)){_context3.next=41;break;}_context3.next=41;return lib_default().writeFile(fullPath,new_content);case 41:(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},currentFile),body),{},{sha:currentFile.sha}),null,2)));(0,core.endGroup)();_context3.next=46;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},currentFile),body),{},{sha:currentFile.sha}));case 46:result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context3.next=58;break;case 54:(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat(currentFile.status));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile.data,null,2)));(0,core.endGroup)();case 58:case"end":return _context3.stop();}}},_callee3);}));return _modifyPathContents.apply(this,arguments);}
 ;// CONCATENATED MODULE: ./node_modules/@uiw/formatter/esm/index.js
 /**! 
  * @uiw/formatter v1.3.3 
