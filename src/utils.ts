@@ -13,6 +13,8 @@ export const octokit = getOctokit(myToken);
 export const getInputs = () => {
   const body = getInput('body') || '';
   const ref = getInput('ref') || context.ref;
+  const branch = getInput('branch');
+  const sha = getInput('sha');
   const overwrite = getInput('overwrite') || 'false';
   const sync_local_file = getInput('sync_local_file') || 'true';
   const filepath = getInput('path') || '';
@@ -24,7 +26,7 @@ export const getInputs = () => {
   
   return {
     ...context.repo,
-    body, filepath, ref,
+    body, filepath, ref, branch, sha,
     message,
     committer_name,
     committer_email,
@@ -40,6 +42,9 @@ export async function getReposPathContents(filePath: string) {
   const result = await octokit.rest.repos.getContent({
     owner, repo,
     path: filePath,
+    /**
+     * The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
+     */
     ref,
   })
   return result
@@ -47,7 +52,7 @@ export async function getReposPathContents(filePath: string) {
 
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const {owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref} = getInputs();
+  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha, branch} = getInputs();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
@@ -64,6 +69,12 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     },
     ...other,
     content: Buffer.from(content).toString("base64"),
+  }
+  if (sha) {
+    body.sha = sha;
+  }
+  if (branch) {
+    body.branch = branch;
   }
   if (isExists) {
     const fileResult = await getReposPathContents(options.path)
@@ -94,6 +105,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
         body.content = Buffer.from(reuslt).toString("base64");
         new_content = reuslt;
       }
+      setOutput('context.ref', context.ref);
       if (sync_local_file.toString() === 'true' && ref === context.ref) {
         await FS.writeFile(fullPath, new_content);
       }
