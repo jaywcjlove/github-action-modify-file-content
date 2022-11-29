@@ -74,6 +74,24 @@ export async function createCommit(newTreeSha: string, baseCommitSha: string) {
   return data.sha;
 }
 
+interface RefInfo {
+	treeSha: string;
+	commitSha: string;
+}
+
+async function getLastRef(branch: string): Promise<RefInfo> {
+  const { data } = await octokit.rest.repos.listCommits({
+    ...context.repo,
+    per_page: 1,
+    sha: branch,
+  });
+
+  const commitSha = data[0].sha;
+  const treeSha = data[0].commit.tree.sha;
+
+  return { treeSha, commitSha };
+}
+
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
   const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
@@ -149,6 +167,14 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   startGroup(`modifyPathContents Body:`)
     info(`👉 ${JSON.stringify(body, null, 2)}`)
   endGroup()
+
+  const lastRef = await getLastRef(branch);
+  startGroup(`getLastRef Body:`)
+  info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
+  endGroup()
+  // const baseTreeSha = lastRef.treeSha;
+  // const baseCommitSha = lastRef.commitSha;
+
   return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     ...body,
   });
