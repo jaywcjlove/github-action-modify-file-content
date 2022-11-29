@@ -50,9 +50,34 @@ export async function getReposPathContents(filePath: string, options: { ref?: st
   return result
 }
 
+async function getBranch(): Promise<string> {
+  const { branch } = getInputs()
+  if (branch !== null) {
+    return Promise.resolve(branch);
+  }
+  const { data } = await octokit.rest.repos.get(context.repo);
+  return data.default_branch;
+}
+
+export async function createCommit(newTreeSha: string, baseCommitSha: string) {
+  const {owner, message, repo, committer_name, committer_email} = getInputs()
+  
+  const { data } = await octokit.rest.git.createCommit({
+    owner, repo, message,
+    tree: newTreeSha,
+    parents: [baseCommitSha],
+    author: {
+      name: committer_name,
+      email: committer_email
+    }
+  })
+  return data.sha;
+}
+
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha, branch} = getInputs();
+  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
+  const branch = await getBranch();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
@@ -60,6 +85,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   const isExists = FS.existsSync(fullPath)
   info(`👉 Modify Path (${options.path})`)
   info(`👉 Context.ref: (${context.ref})`);
+  info(`👉 Context.sha: (${context.sha})`);
   info(`👉 Context.sha: (${context.sha})`);
   const body: FilePutQuery = {
     owner, repo,
