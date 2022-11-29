@@ -2,8 +2,7 @@ import FS from 'fs-extra';
 import path from 'path';
 import { context, getOctokit } from '@actions/github';
 import { getInput, setOutput, startGroup, info, endGroup, warning } from '@actions/core';
-import { paths, components,  } from '@octokit/openapi-types';
-import { OctokitResponse } from '@octokit/types';
+import { paths } from '@octokit/openapi-types';
 
 export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
 export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/json']
@@ -38,26 +37,13 @@ export const getInputs = () => {
   }
 }
 
-export async function getReposPathContents(filePath: string, options: { ref?: string; } = {}) {
-  const {owner, repo, ref} = getInputs()
-  const result = await octokit.rest.repos.getContent({
-    owner, repo,
-    path: filePath,
-    /**
-     * The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
-     */
-    ref: options.ref || ref,
-  })
-  return result
-}
-
-async function getBranch(): Promise<string | undefined> {
+async function getBranch(): Promise<string> {
   const { branch } = getInputs()
   if (branch !== null) {
     return Promise.resolve(branch);
   }
-  // const { data } = await octokit.rest.repos.get(context.repo);
-  // return data.default_branch;
+  const { data } = await octokit.rest.repos.get(context.repo);
+  return data.default_branch;
 }
 
 export async function createCommit(newTreeSha: string, baseCommitSha: string) {
@@ -80,22 +66,9 @@ interface RefInfo {
 	commitSha: string;
 }
 
-async function getLastRef(branch: string): Promise<RefInfo> {
-  const { data } = await octokit.rest.repos.listCommits({
-    ...context.repo,
-    per_page: 1,
-    sha: branch,
-  });
-
-  const commitSha = data[0].sha;
-  const treeSha = data[0].commit.tree.sha;
-
-  return { treeSha, commitSha };
-}
-
-async function getFileContents(branch: string): Promise<FilePutResult> {
+async function getFileContents(branch: string) {
   const {owner, repo, filepath, committer_name, committer_email} = getInputs()
-  const { data } = await octokit.rest.repos.getContent({
+  const data = await octokit.rest.repos.getContent({
     owner, repo, ref: branch, path: filepath
   })
   return data;
@@ -113,11 +86,11 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   info(`👉 Modify Path (${options.path})`)
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
-  info(`👉 Context.sha: (${context.sha})`);
+  info(`👉 branch: (${branch})`);
   const body: FilePutQuery = {
     owner, repo,
     path: options.path,
-    message: message || `doc: ${isExists ? 'modify' : 'create'} ${options.path}.`,
+    message: message || `doc: update ${options.path}.`,
     committer: {
       name: committer_name || 'github-actions[bot]',
       email: committer_email || 'github-actions[bot]@users.noreply.github.com'
@@ -125,83 +98,55 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     ...other,
     content: Buffer.from(content).toString("base64"),
   }
-  if (branch) {
-    body.branch = branch;
-    const bh = await octokit.rest.repos.getBranch({ owner, repo, branch })
-    body.sha = branch || bh.data.commit.sha;
-    startGroup(`👉 Branch content: ${bh.data.commit.commit.message} ${bh.data.commit.commit.author?.name}`);
-      info(`👉 body.sha: (${branch}) (${body.sha})`);
-      info(`👉 ${JSON.stringify(bh, null, 2)}`);
+
+  const currentFile = await getFileContents(branch);
+  if (currentFile.status === 200) {
+    const fileContent: string = (currentFile.data as any).content || '';
+    const oldFileContent = Buffer.from(fileContent, 'base64').toString();
+    const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
+    const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
+    const match = oldFileContent.match(REG);
+    startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
+      info(`👉 ${oldFileContent}`);
+      info(`👉 ${JSON.stringify(match, null, 2)}`);
     endGroup();
-  } else if (!branch && sha) {
-    body.sha = sha;
-  }
-  if (isExists) {
-    info(`👉 body.sha: (${branch}) (${body.sha})`);
-    const fileResult = await getReposPathContents(options.path, { ref: body.branch || body.sha });
-    if (fileResult.status === 200 && (fileResult.data as any).sha) {
-      if (!branch) {
-        body.sha = (fileResult.data as any).sha || sha;
-      }
-      const fileContent: string = (fileResult.data as any).content || '';
-      const oldFileContent = Buffer.from(fileContent, 'base64').toString();
-      const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
-      const reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
-      const match = oldFileContent.match(REG);
-      startGroup(`👉 Text old content: ${match?.length} ${options.path}`);
-        info(`👉 ${oldFileContent}`);
-        info(`👉 ${JSON.stringify(match, null, 2)}`);
-      endGroup();
-      startGroup(`👉 Text new content: ${options.path}`);
-        info(`👉 ${JSON.stringify(fileResult.data, null, 2)}`);
-        info(`👉 ${reuslt}`);
-      endGroup();
-      setOutput('content', reuslt);
-      if (oldFileContent == reuslt) {
-        warning(`👉 Content has not changed!!!!!`)
-        return;
-      }
-      let new_content = Buffer.from(content).toString("base64")
-      if (overwrite.toString() === 'true') {
-        body.content = new_content;
-      } else {
-        body.content = Buffer.from(reuslt).toString("base64");
-        new_content = reuslt;
-      }
-      if (sync_local_file.toString() === 'true' && ref === context.ref) {
-        await FS.writeFile(fullPath, new_content);
-      }
+    startGroup(`👉 Text new content: ${options.path}`);
+      info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`);
+      info(`👉 ${reuslt}`);
+    endGroup();
+    setOutput('content', reuslt);
+    if (oldFileContent == reuslt) {
+      warning(`👉 Content has not changed!!!!!`)
+      return;
     }
-  }
-  startGroup(`modifyPathContents Body:`)
-    info(`👉 ${JSON.stringify(body, null, 2)}`)
-  endGroup()
+    let new_content = Buffer.from(content).toString("base64")
+    if (overwrite.toString() === 'true') {
+      body.content = new_content;
+    } else {
+      body.content = Buffer.from(reuslt).toString("base64");
+      new_content = reuslt;
+    }
+    if (sync_local_file.toString() === 'true' && ref === context.ref) {
+      await FS.writeFile(fullPath, new_content);
+    }
 
-  if (branch) {
-    const currentFile = await getFileContents(branch);
-    const lastRef = await getLastRef(branch);
-    startGroup(`getLastRef Body:`)
-    info(`👉 ${JSON.stringify(lastRef, null, 2)}`);
+    startGroup(`modifyPathContents Body:`)
+      info(`👉 ${JSON.stringify(body, null, 2)}`)
     endGroup()
-
     const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
       ...currentFile,
       ...body,
       sha: (currentFile as any).sha
     });
-    // const result = await octokit.rest.git.updateRef({
-    //   owner, repo, ref: `heads/${branch}`, sha: data.sha
-    // })
-    return
+    startGroup(`file result:`)
+      info(`👉 ${result.data.content?.path}`)
+      info(`👉 ${result.data.content?.size}`)
+      info(`👉 ${result.data.content?.sha}`)
+    endGroup()
+  } else {
+    startGroup(`result error:`)
+      info(`👉 ${currentFile.status}`)
+      info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`)
+    endGroup()
   }
-
-  const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-    ...body,
-  });
-
-  startGroup(`file result:`)
-    info(`👉 ${result.data.content?.path}`)
-    info(`👉 ${result.data.content?.size}`)
-    info(`👉 ${result.data.content?.sha}`)
-  endGroup()
 }
