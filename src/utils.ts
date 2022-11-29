@@ -72,6 +72,8 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   }
   if (branch) {
     body.branch = branch;
+    const bh = await octokit.rest.repos.getBranch({ owner, repo, branch })
+    body.sha = bh.data.commit.sha;
   } else if (sha) {
     body.sha = sha;
   }
