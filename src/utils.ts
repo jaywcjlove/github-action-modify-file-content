@@ -88,7 +88,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     const body: FilePutQuery = {
       owner, repo,
       path: options.path,
-      ...currentFile,
+      ...currentFile.data,
       sha: (currentFile.data as any).sha,
       message: message || `doc: ${isExists ? 'modify' : 'create'} ${options.path}.`,
       committer: {
