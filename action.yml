@@ -20,7 +20,7 @@ inputs:
     required: false
   sha:
     description: 'The blob SHA of the file being replaced.'
-    default: ''
+    default: ${{ github.sha }}
     required: false
   branch:
     description: 'The person that committed the file. Default: the authenticated user.'

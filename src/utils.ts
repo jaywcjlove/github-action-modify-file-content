@@ -70,16 +70,17 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     ...other,
     content: Buffer.from(content).toString("base64"),
   }
-  if (sha) {
-    body.sha = sha;
-  }
   if (branch) {
     body.branch = branch;
+  } else if (sha) {
+    body.sha = sha;
   }
   if (isExists) {
     const fileResult = await getReposPathContents(options.path)
     if (fileResult.status === 200 && (fileResult.data as any).sha) {
-      body.sha = (fileResult.data as any).sha;
+      if (!branch) {
+        body.sha = sha || (fileResult.data as any).sha;
+      }
       const fileContent: string = (fileResult.data as any).content || '';
       const oldFileContent = Buffer.from(fileContent, 'base64').toString();
       const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
