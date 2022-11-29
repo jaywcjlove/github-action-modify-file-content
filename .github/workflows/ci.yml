@@ -69,13 +69,6 @@ jobs:
           TEST: <!--GAMFC-->2022-11-29 01:44:16<!--GAMFC-END-->
           EOF
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-
       - name: Modify README.md
         # uses: github-action-modify-file-content@main
         uses: ./
@@ -83,6 +76,13 @@ jobs:
           path: README.md
           branch: gh-pages
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
 
       - name: Generate Changelog
         id: changelog
