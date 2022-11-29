@@ -54,32 +54,6 @@ async function getFileContents(branch: string) {
   return data;
 }
 
-interface RefInfo {
-	treeSha: string;
-	commitSha: string;
-}
-
-async function getLastRef(branch: string): Promise<RefInfo> {
-  const { data } = await octokit.rest.repos.listCommits({
-    ...context.repo,
-    per_page: 1,
-    sha: branch,
-  });
-
-  const commitSha = data[0].sha;
-  const treeSha = data[0].commit.tree.sha;
-
-  return { treeSha, commitSha };
-}
-
-async function getFileContents(branch: string): Promise<FilePutResult> {
-  const {owner, repo, filepath, committer_name, committer_email} = getInputs()
-  const { data } = await octokit.rest.repos.getContent({
-    owner, repo, ref: branch, path: filepath
-  })
-  return data;
-}
-
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
   const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
