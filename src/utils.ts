@@ -13,7 +13,6 @@ export const getInputs = () => {
   const body = getInput('body') || '';
   const ref = getInput('ref') || context.ref;
   const branch = getInput('branch');
-  const sha = getInput('sha');
   const overwrite = getInput('overwrite') || 'false';
   const sync_local_file = getInput('sync_local_file') || 'true';
   const filepath = getInput('path') || '';
@@ -25,7 +24,7 @@ export const getInputs = () => {
   
   return {
     ...context.repo,
-    body, filepath, ref, branch, sha,
+    body, filepath, ref, branch,
     message,
     committer_name,
     committer_email,
@@ -63,7 +62,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   info(`👉 Modify Path (${options.path})`)
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
-  info(`👉 Context.sha: (${context.sha})`);
+  info(`👉 branch: (${branch})`);
   const currentFile = await getFileContents(branch);
   if (currentFile.status === 200 && (currentFile.data as any).sha) {
     const fileContent: string = (currentFile.data as any).content || '';
