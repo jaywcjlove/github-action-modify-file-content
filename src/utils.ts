@@ -37,7 +37,7 @@ export const getInputs = () => {
   }
 }
 
-export async function getReposPathContents(filePath: string) {
+export async function getReposPathContents(filePath: string, options: { ref?: string; } = {}) {
   const {owner, repo, ref} = getInputs()
   const result = await octokit.rest.repos.getContent({
     owner, repo,
@@ -45,7 +45,7 @@ export async function getReposPathContents(filePath: string) {
     /**
      * The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
-    ref,
+    ref: options.ref || ref,
   })
   return result
 }
@@ -83,7 +83,8 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     body.sha = sha;
   }
   if (isExists) {
-    const fileResult = await getReposPathContents(options.path)
+    info(`👉 body.sha: (${body.sha})`);
+    const fileResult = await getReposPathContents(options.path, { ref: body.branch || body.sha });
     if (fileResult.status === 200 && (fileResult.data as any).sha) {
       if (!branch) {
         body.sha = (fileResult.data as any).sha || sha;
