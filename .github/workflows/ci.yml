@@ -76,6 +76,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
 
+      - name: Modify README.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          path: README.md
+          branch: gh-pages
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+
       - name: Generate Changelog
         id: changelog
         uses: jaywcjlove/changelog-generator@main
