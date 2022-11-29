@@ -20,7 +20,7 @@ inputs:
     required: false
   branch:
     description: 'The person that committed the file. Default: the authenticated user.'
-    default: ${{ steps.default.outputs.default_branch }}
+    default: ${{ github.ref_name }}
     required: false
   message:
     description: 'The commit message.'
