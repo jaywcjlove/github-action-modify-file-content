@@ -69,7 +69,7 @@ jobs:
           TEST: <!--GAMFC-->2022-11-29 01:44:16<!--GAMFC-END-->
           EOF
 
-      - name: Modify README.md
+      - name: Modify gh-pages README.md
         # uses: github-action-modify-file-content@main
         uses: ./
         with:
