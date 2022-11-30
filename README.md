@@ -85,6 +85,8 @@ Replace the content between `<!--GAMFC-->2022-11-30 10:10:18<!--GAMFC-END-->`.
 - [Create Coverage Badges](https://github.com/jaywcjlove/coverage-badges-cli) Create coverage badges from coverage reports. (no 3rd parties servers)
 - [Github Action package](https://github.com/jaywcjlove/github-action-package) Read and modify the contents of `package.json`.
 - [Github Action EJS](https://github.com/jaywcjlove/github-action-package) A github action to render a ejs template using github context.
+- [Github Action Read File Content](https://github.com/jaywcjlove/github-action-read-file) 
+Read file contents. You can also get the file content in the branch.
 
 ## License
 
