@@ -120,17 +120,17 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       new_content = reuslt;
     }
     setOutput('content', Buffer.from(body.content, 'base64').toString());
-    startGroup(`👉 Text OLD content:`);
+    startGroup(`👉 Text OLD content: ${oldFileContent == reuslt}`);
       info(`👉 ${oldFileContent}`);
     endGroup();
-    startGroup(`👉 Text NEW content:`);
+    startGroup(`👉 Text NEW content: ${oldFileContent == reuslt}`);
       info(`👉 ${reuslt}`);
     endGroup();
     if (oldFileContent == reuslt) {
       warning(`👉 Content has not changed!!!!!`)
       return;
     }
-    body = { ...body, ...currentFile, sha: currentFile.sha }
+    body = { ...body, ...currentFile, content: body.content, sha: currentFile.sha }
     const fullPath = path.resolve(options.path);
     const isExists = FS.existsSync(fullPath);
     if (isExists && sync_local_file.toString() === 'true' && ref === context.ref) {
