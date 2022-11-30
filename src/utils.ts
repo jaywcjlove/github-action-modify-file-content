@@ -58,14 +58,27 @@ async function getFileContents(branch: string): Promise<GetContentResponseType['
     });
     return data;
   } catch (err) {
-    warning(`👉 Not Found -: ${err instanceof Error ? err.message : err}`);
+    warning(`👉 Get File Contents: ${err instanceof Error ? err.message : err}`);
     return;
   }
 }
 
+function getBodyContent(oldFileContent: string, content: string) {
+  const {openDelimiter, closeDelimiter, overwrite} = getInputs()
+  const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
+  const match = oldFileContent.match(REG);
+  startGroup(`👉 Current File content: ${match?.length}`);
+    info(`👉 ${JSON.stringify(match, null, 2)}`);
+  endGroup();
+  if (overwrite.toString() === 'true') {
+
+  }
+  return oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`)
+}
+
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref} = getInputs();
+  const { owner, repo, message, committer_name, committer_email, overwrite, sync_local_file, ref} = getInputs();
   const branch = await getBranch();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
@@ -94,16 +107,13 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   if (currentFile) {
     const fileContent: string = (currentFile as any).content || '';
     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
-    const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
-    let reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
-    const match = oldFileContent.match(REG);
-    startGroup(`👉 Current File content: ${match?.length} ${options.path}`);
-      info(`👉 ${JSON.stringify(match, null, 2)}`);
+    let reuslt = getBodyContent(oldFileContent, content)
+    startGroup(`👉 Current File content: ${options.path}`);
       info(`👉 ${JSON.stringify(currentFile, null, 2)}`);
     endGroup();
     if (overwrite.toString() === 'true') {
       body.content = new_content;
-      reuslt = new_content;
+      reuslt = content;
     } else {
       body.content = Buffer.from(reuslt).toString("base64");
       new_content = reuslt;
