@@ -48,19 +48,21 @@ async function getBranch(): Promise<string> {
 
 async function getFileContents(branch: string) {
   const {owner, repo, filepath} = getInputs()
-  return octokit.rest.repos.getContent({
-    owner, repo, ref: branch, path: filepath
-  })
+  try {
+    return octokit.rest.repos.getContent({
+      owner, repo, ref: branch, path: filepath
+    })
+  } catch (err) {
+  }
 }
 
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
   const { ...other} = options;
-  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref, sha} = getInputs();
+  const { owner, repo, openDelimiter, closeDelimiter, message, committer_name, committer_email, overwrite, sync_local_file, ref} = getInputs();
   const branch = await getBranch();
   if (!options.path) {
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
-  const fullPath = path.resolve(options.path);
   info(`👉 Modify Path (${options.path})`);
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
@@ -80,8 +82,8 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   }
 
   const currentFile = await getFileContents(branch);
-  info(`👉 getFileContents Result Status (${currentFile.status})`);
-  if (currentFile.status === 200) {
+  info(`👉 getFileContents Result Status (${currentFile?.status})`);
+  if (currentFile && currentFile?.status === 200) {
     const fileContent: string = (currentFile.data as any).content || '';
     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
     const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
@@ -110,7 +112,8 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       return;
     }
     body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
-    const isExists = FS.existsSync(fullPath)
+    const fullPath = path.resolve(options.path);
+    const isExists = FS.existsSync(fullPath);
     if (isExists && sync_local_file.toString() === 'true' && ref === context.ref) {
       await FS.writeFile(fullPath, new_content);
     }
@@ -127,9 +130,6 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       info(`👉 ${result.data.content?.sha}`)
     endGroup()
   } else {
-    startGroup(`result error:`)
-      info(`👉 ${currentFile.status}`)
-      info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`)
-    endGroup()
+    warning(`👉 Not Found - ${options.path}`)
   }
 }
