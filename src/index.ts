@@ -5,9 +5,9 @@ import formatter from '@uiw/formatter';
 const REGEXP = /\{\{date:?(.*?)\}\}/ig
 
 ;(async () => {
+  const filepath = getInput('path') || '';
   try {
     let body = getInput('body') || '';
-    const filepath = getInput('path') || '';
     if (!body) {
       warning(`👉 "body" input value does not exist.`)
       return
@@ -32,7 +32,7 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
     await modifyPathContents({ path: filepath }, body);
   } catch (error) {
     if (error instanceof Error) {
-      setFailed(error.message);
+      setFailed(`${error.message} - ${filepath}`);
     }
   }
 })();

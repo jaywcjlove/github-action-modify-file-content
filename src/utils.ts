@@ -62,7 +62,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     throw new Error(`modifyPathContents: file directory parameter does not exist`)
   }
   const fullPath = path.resolve(options.path);
-  info(`👉 Modify Path (${options.path})`)
+  info(`👉 Modify Path (${options.path})`);
   info(`👉 Context.ref: (${context.ref})`);
   info(`👉 Context.sha: (${context.sha})`);
   info(`👉 branch: (${branch})`);
@@ -81,6 +81,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   }
 
   const currentFile = await getFileContents(branch);
+  info(`👉 getFileContents Result Status (${currentFile.status})`);
   if (currentFile.status === 200) {
     const fileContent: string = (currentFile.data as any).content || '';
     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
