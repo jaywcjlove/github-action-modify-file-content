@@ -92,6 +92,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
   let body: FilePutQuery = {
     owner, repo,
     path: options.path,
+    branch,
     message: message || `doc: update ${options.path}.`,
     committer: {
       name: committer_name || 'github-actions[bot]',
@@ -129,7 +130,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       warning(`👉 Content has not changed!!!!!`)
       return;
     }
-    body = { ...body, ...currentFile, branch, sha: (currentFile as any).sha }
+    body = { ...body, ...currentFile, sha: (currentFile as any).sha }
     const fullPath = path.resolve(options.path);
     const isExists = FS.existsSync(fullPath);
     if (isExists && sync_local_file.toString() === 'true' && ref === context.ref) {
@@ -149,5 +150,13 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     endGroup()
   } else {
     warning(`👉 Not Found ::- ${options.path}`)
+    const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+      ...body,
+    });
+    startGroup(`file result:`)
+      info(`👉 ${result.data.content?.path}`)
+      info(`👉 ${result.data.content?.size}`)
+      info(`👉 ${result.data.content?.sha}`)
+    endGroup()
   }
 }
