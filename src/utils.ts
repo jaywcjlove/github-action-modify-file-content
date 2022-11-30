@@ -49,10 +49,12 @@ async function getBranch(): Promise<string> {
 async function getFileContents(branch: string) {
   const {owner, repo, filepath} = getInputs()
   try {
-    return octokit.rest.repos.getContent({
+    const result = octokit.rest.repos.getContent({
       owner, repo, ref: branch, path: filepath
-    })
+    });
+    return result;
   } catch (err) {
+    warning(`👉 Not Found -: ${err instanceof Error ? err.message : err}`);
   }
 }
 
@@ -80,7 +82,9 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     ...other,
     content: new_content,
   }
-
+  startGroup(`Init Body: (${branch})`)
+    info(`👉 ${JSON.stringify(body, null, 2)}`)
+  endGroup()
   const currentFile = await getFileContents(branch);
   info(`👉 getFileContents Result Status (${currentFile?.status})`);
   if (currentFile && currentFile?.status === 200) {
