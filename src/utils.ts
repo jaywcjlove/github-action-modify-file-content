@@ -2,10 +2,14 @@ import FS from 'fs-extra';
 import path from 'path';
 import { context, getOctokit } from '@actions/github';
 import { getInput, setOutput, startGroup, info, endGroup, warning } from '@actions/core';
-import { paths } from '@octokit/openapi-types';
+import { paths, components,  } from '@octokit/openapi-types';
+import { GetResponseTypeFromEndpointMethod  } from '@octokit/types';
 
 export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
-export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/json']
+// export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/vnd.github.v3.object']
+// export type FilePutResultData = components['schemas']['content-file']
+export type GetContentResponseType = GetResponseTypeFromEndpointMethod<typeof octokit.rest.repos.getContent>
+
 
 export const myToken = getInput('token');
 export const octokit = getOctokit(myToken);
@@ -46,15 +50,16 @@ async function getBranch(): Promise<string> {
   return data.default_branch;
 }
 
-async function getFileContents(branch: string) {
+async function getFileContents(branch: string): Promise<GetContentResponseType['data'] | undefined> {
   const {owner, repo, filepath} = getInputs()
   try {
-    const result = octokit.rest.repos.getContent({
+    const { data } = await octokit.rest.repos.getContent({
       owner, repo, ref: branch, path: filepath
     });
-    return result;
+    return data;
   } catch (err) {
     warning(`👉 Not Found -: ${err instanceof Error ? err.message : err}`);
+    return;
   }
 }
 
@@ -82,20 +87,19 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     ...other,
     content: new_content,
   }
-  startGroup(`Init Body: (${branch})`)
+  startGroup(`👉 Init Body: (${branch})`)
     info(`👉 ${JSON.stringify(body, null, 2)}`)
   endGroup()
   const currentFile = await getFileContents(branch);
-  info(`👉 getFileContents Result Status (${currentFile?.status})`);
-  if (currentFile && currentFile?.status === 200) {
-    const fileContent: string = (currentFile.data as any).content || '';
+  if (currentFile) {
+    const fileContent: string = (currentFile as any).content || '';
     const oldFileContent = Buffer.from(fileContent, 'base64').toString();
     const REG = new RegExp(`${openDelimiter}([\\s\\S]*?)${closeDelimiter}`, 'ig')
     let reuslt = oldFileContent.replace(REG, `${openDelimiter}${content}${closeDelimiter}`);
     const match = oldFileContent.match(REG);
     startGroup(`👉 Current File content: ${match?.length} ${options.path}`);
       info(`👉 ${JSON.stringify(match, null, 2)}`);
-      info(`👉 ${JSON.stringify(currentFile.data, null, 2)}`);
+      info(`👉 ${JSON.stringify(currentFile, null, 2)}`);
     endGroup();
     if (overwrite.toString() === 'true') {
       body.content = new_content;
@@ -104,7 +108,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       body.content = Buffer.from(reuslt).toString("base64");
       new_content = reuslt;
     }
-    setOutput('content', reuslt);
+    setOutput('content', Buffer.from(body.content, 'base64').toString());
     startGroup(`👉 Text OLD content:`);
       info(`👉 ${oldFileContent}`);
     endGroup();
@@ -115,7 +119,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       warning(`👉 Content has not changed!!!!!`)
       return;
     }
-    body = { ...body, ...currentFile.data, branch, sha: (currentFile.data as any).sha }
+    body = { ...body, ...currentFile, branch, sha: (currentFile as any).sha }
     const fullPath = path.resolve(options.path);
     const isExists = FS.existsSync(fullPath);
     if (isExists && sync_local_file.toString() === 'true' && ref === context.ref) {
@@ -126,7 +130,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
     endGroup()
     const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
       ...body,
-      sha: (currentFile.data as any).sha
+      sha: (currentFile as any).sha
     });
     startGroup(`file result:`)
       info(`👉 ${result.data.content?.path}`)
@@ -134,6 +138,6 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       info(`👉 ${result.data.content?.sha}`)
     endGroup()
   } else {
-    warning(`👉 Not Found - ${options.path}`)
+    warning(`👉 Not Found ::- ${options.path}`)
   }
 }
