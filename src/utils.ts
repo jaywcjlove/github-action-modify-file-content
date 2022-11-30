@@ -47,11 +47,10 @@ async function getBranch(): Promise<string> {
 }
 
 async function getFileContents(branch: string) {
-  const {owner, repo, filepath, committer_name, committer_email} = getInputs()
-  const data = await octokit.rest.repos.getContent({
+  const {owner, repo, filepath} = getInputs()
+  return octokit.rest.repos.getContent({
     owner, repo, ref: branch, path: filepath
   })
-  return data;
 }
 
 export async function modifyPathContents(options: Partial<FilePutQuery> = {}, content: string) {
