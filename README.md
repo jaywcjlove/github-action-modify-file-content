@@ -68,7 +68,7 @@ Replace the content between `<!--GAMFC-->2022-11-29 07:18:44<!--GAMFC-END-->`.
 
 ```yml
 - name: Modify test test/overwrite.file.md
-  uses: github-action-modify-file-content@main
+  uses: jaywcjlove/github-action-modify-file-content@main
   with:
     branch: test
     path: test/overwrite.file.md

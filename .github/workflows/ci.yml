@@ -26,7 +26,7 @@ jobs:
           overwrite: 'true'
 
       - name: Modify test test/overwrite.file.md
-        # uses: github-action-modify-file-content@main
+        # uses: jaywcjlove/github-action-modify-file-content@main
         uses: ./
         with:
           branch: test
@@ -35,14 +35,14 @@ jobs:
           overwrite: 'true'
 
       - name: Modify README.md
-        # uses: github-action-modify-file-content@main
+        # uses: jaywcjlove/github-action-modify-file-content@main
         uses: ./
         with:
           path: README.md
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
 
       - name: Modify README.md
-        # uses: github-action-modify-file-content@main
+        # uses: jaywcjlove/github-action-modify-file-content@main
         uses: ./
         with:
           openDelimiter: '<!--GAMFC_TABEL-->'
