@@ -34,3 +34,12 @@ jobs:
           branch: issue
           body: "{{date:YYYY-MM-DD HH:mm:ss}}"
           overwrite: 'true'
+
+      - name: Overwrite test/overwrite.file.md
+        # uses: github-action-modify-file-content@main
+        uses: ./
+        with:
+          path: test/overwrite.file2.md
+          branch: test
+          body: "{{date:YYYY-MM-DD HH:mm:ss}}"
+          overwrite: 'true'
