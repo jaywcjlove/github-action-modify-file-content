@@ -32,9 +32,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -141,9 +139,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -426,25 +422,23 @@ function group(name, fn) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var result;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            startGroup(name);
-            _context.prev = 1;
-            _context.next = 4;
-            return fn();
-          case 4:
-            result = _context.sent;
-          case 5:
-            _context.prev = 5;
-            endGroup();
-            return _context.finish(5);
-          case 8:
-            return _context.abrupt("return", result);
-          case 9:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          startGroup(name);
+          _context.prev = 1;
+          _context.next = 4;
+          return fn();
+        case 4:
+          result = _context.sent;
+        case 5:
+          _context.prev = 5;
+          endGroup();
+          return _context.finish(5);
+        case 8:
+          return _context.abrupt("return", result);
+        case 9:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[1,, 5, 8]]);
   }));
@@ -483,17 +477,15 @@ exports.getState = getState;
 function getIDToken(aud) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return oidc_utils_1.OidcClient.getIDToken(aud);
-          case 2:
-            return _context2.abrupt("return", _context2.sent);
-          case 3:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return oidc_utils_1.OidcClient.getIDToken(aud);
+        case 2:
+          return _context2.abrupt("return", _context2.sent);
+        case 3:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -574,9 +566,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -704,28 +694,26 @@ var OidcClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var httpclient, res, id_token;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                httpclient = OidcClient.createHttpClient();
-                _context.next = 3;
-                return httpclient.getJson(id_token_url)["catch"](function (error) {
-                  throw new Error("Failed to get ID Token. \n \n        Error Code : ".concat(error.statusCode, "\n \n        Error Message: ").concat(error.result.message));
-                });
-              case 3:
-                res = _context.sent;
-                id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
-                if (id_token) {
-                  _context.next = 7;
-                  break;
-                }
-                throw new Error('Response json body do not have ID Token field');
-              case 7:
-                return _context.abrupt("return", id_token);
-              case 8:
-              case "end":
-                return _context.stop();
-            }
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              httpclient = OidcClient.createHttpClient();
+              _context.next = 3;
+              return httpclient.getJson(id_token_url)["catch"](function (error) {
+                throw new Error("Failed to get ID Token. \n \n        Error Code : ".concat(error.statusCode, "\n \n        Error Message: ").concat(error.result.message));
+              });
+            case 3:
+              res = _context.sent;
+              id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
+              if (id_token) {
+                _context.next = 7;
+                break;
+              }
+              throw new Error('Response json body do not have ID Token field');
+            case 7:
+              return _context.abrupt("return", id_token);
+            case 8:
+            case "end":
+              return _context.stop();
           }
         }, _callee);
       }));
@@ -736,31 +724,29 @@ var OidcClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var id_token_url, encodedAudience, id_token;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                // New ID Token is requested from action service
-                id_token_url = OidcClient.getIDTokenUrl();
-                if (audience) {
-                  encodedAudience = encodeURIComponent(audience);
-                  id_token_url = "".concat(id_token_url, "&audience=").concat(encodedAudience);
-                }
-                core_1.debug("ID token url is ".concat(id_token_url));
-                _context2.next = 6;
-                return OidcClient.getCall(id_token_url);
-              case 6:
-                id_token = _context2.sent;
-                core_1.setSecret(id_token);
-                return _context2.abrupt("return", id_token);
-              case 11:
-                _context2.prev = 11;
-                _context2.t0 = _context2["catch"](0);
-                throw new Error("Error message: ".concat(_context2.t0.message));
-              case 14:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              // New ID Token is requested from action service
+              id_token_url = OidcClient.getIDTokenUrl();
+              if (audience) {
+                encodedAudience = encodeURIComponent(audience);
+                id_token_url = "".concat(id_token_url, "&audience=").concat(encodedAudience);
+              }
+              core_1.debug("ID token url is ".concat(id_token_url));
+              _context2.next = 6;
+              return OidcClient.getCall(id_token_url);
+            case 6:
+              id_token = _context2.sent;
+              core_1.setSecret(id_token);
+              return _context2.abrupt("return", id_token);
+            case 11:
+              _context2.prev = 11;
+              _context2.t0 = _context2["catch"](0);
+              throw new Error("Error message: ".concat(_context2.t0.message));
+            case 14:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2, null, [[0, 11]]);
       }));
@@ -801,9 +787,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -915,39 +899,37 @@ var Summary = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var pathFromEnv;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this._filePath) {
-                  _context.next = 2;
-                  break;
-                }
-                return _context.abrupt("return", this._filePath);
-              case 2:
-                pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
-                if (pathFromEnv) {
-                  _context.next = 5;
-                  break;
-                }
-                throw new Error("Unable to find environment variable for $".concat(exports.SUMMARY_ENV_VAR, ". Check if your runtime environment supports job summaries."));
-              case 5:
-                _context.prev = 5;
-                _context.next = 8;
-                return access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
-              case 8:
-                _context.next = 13;
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!this._filePath) {
+                _context.next = 2;
                 break;
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](5);
-                throw new Error("Unable to access summary file: '".concat(pathFromEnv, "'. Check if the file has correct read/write permissions."));
-              case 13:
-                this._filePath = pathFromEnv;
-                return _context.abrupt("return", this._filePath);
-              case 15:
-              case "end":
-                return _context.stop();
-            }
+              }
+              return _context.abrupt("return", this._filePath);
+            case 2:
+              pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+              if (pathFromEnv) {
+                _context.next = 5;
+                break;
+              }
+              throw new Error("Unable to find environment variable for $".concat(exports.SUMMARY_ENV_VAR, ". Check if your runtime environment supports job summaries."));
+            case 5:
+              _context.prev = 5;
+              _context.next = 8;
+              return access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+            case 8:
+              _context.next = 13;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](5);
+              throw new Error("Unable to access summary file: '".concat(pathFromEnv, "'. Check if the file has correct read/write permissions."));
+            case 13:
+              this._filePath = pathFromEnv;
+              return _context.abrupt("return", this._filePath);
+            case 15:
+            case "end":
+              return _context.stop();
           }
         }, _callee, this, [[5, 10]]);
       }));
@@ -989,25 +971,23 @@ var Summary = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var overwrite, filePath, writeFunc;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
-                _context2.next = 3;
-                return this.filePath();
-              case 3:
-                filePath = _context2.sent;
-                writeFunc = overwrite ? writeFile : appendFile;
-                _context2.next = 7;
-                return writeFunc(filePath, this._buffer, {
-                  encoding: 'utf8'
-                });
-              case 7:
-                return _context2.abrupt("return", this.emptyBuffer());
-              case 8:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+              _context2.next = 3;
+              return this.filePath();
+            case 3:
+              filePath = _context2.sent;
+              writeFunc = overwrite ? writeFile : appendFile;
+              _context2.next = 7;
+              return writeFunc(filePath, this._buffer, {
+                encoding: 'utf8'
+              });
+            case 7:
+              return _context2.abrupt("return", this.emptyBuffer());
+            case 8:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2, this);
       }));
@@ -1022,16 +1002,14 @@ var Summary = /*#__PURE__*/function () {
     value: function clear() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                return _context3.abrupt("return", this.emptyBuffer().write({
-                  overwrite: true
-                }));
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", this.emptyBuffer().write({
+                overwrite: true
+              }));
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3, this);
       }));
@@ -1444,9 +1422,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -1504,9 +1480,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -1565,9 +1539,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -1674,14 +1646,12 @@ var BasicCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context.stop();
-            }
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context.stop();
           }
         }, _callee);
       }));
@@ -1716,14 +1686,12 @@ var BearerCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2);
       }));
@@ -1758,14 +1726,12 @@ var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3);
       }));
@@ -1815,9 +1781,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -1935,35 +1899,31 @@ var HttpClientResponse = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var _this2 = this;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                return _context2.abrupt("return", new Promise(function (resolve) {
-                  return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-                    var output;
-                    return _regeneratorRuntime().wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            output = Buffer.alloc(0);
-                            this.message.on('data', function (chunk) {
-                              output = Buffer.concat([output, chunk]);
-                            });
-                            this.message.on('end', function () {
-                              resolve(output.toString());
-                            });
-                          case 3:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee, this);
-                  }));
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", new Promise(function (resolve) {
+                return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                  var output;
+                  return _regeneratorRuntime().wrap(function _callee$(_context) {
+                    while (1) switch (_context.prev = _context.next) {
+                      case 0:
+                        output = Buffer.alloc(0);
+                        this.message.on('data', function (chunk) {
+                          output = Buffer.concat([output, chunk]);
+                        });
+                        this.message.on('end', function () {
+                          resolve(output.toString());
+                        });
+                      case 3:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }, _callee, this);
                 }));
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
+              }));
+            case 1:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2);
       }));
@@ -2021,14 +1981,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function options(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                return _context3.abrupt("return", this.request('OPTIONS', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", this.request('OPTIONS', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3, this);
       }));
@@ -2038,14 +1996,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function get(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                return _context4.abrupt("return", this.request('GET', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context4.stop();
-            }
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              return _context4.abrupt("return", this.request('GET', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context4.stop();
           }
         }, _callee4, this);
       }));
@@ -2055,14 +2011,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function del(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                return _context5.abrupt("return", this.request('DELETE', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context5.stop();
-            }
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              return _context5.abrupt("return", this.request('DELETE', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context5.stop();
           }
         }, _callee5, this);
       }));
@@ -2072,14 +2026,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function post(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                return _context6.abrupt("return", this.request('POST', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context6.stop();
-            }
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              return _context6.abrupt("return", this.request('POST', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context6.stop();
           }
         }, _callee6, this);
       }));
@@ -2089,14 +2041,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function patch(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                return _context7.abrupt("return", this.request('PATCH', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context7.stop();
-            }
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              return _context7.abrupt("return", this.request('PATCH', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context7.stop();
           }
         }, _callee7, this);
       }));
@@ -2106,14 +2056,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function put(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                return _context8.abrupt("return", this.request('PUT', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context8.stop();
-            }
+          while (1) switch (_context8.prev = _context8.next) {
+            case 0:
+              return _context8.abrupt("return", this.request('PUT', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context8.stop();
           }
         }, _callee8, this);
       }));
@@ -2123,14 +2071,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function head(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
         return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                return _context9.abrupt("return", this.request('HEAD', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context9.stop();
-            }
+          while (1) switch (_context9.prev = _context9.next) {
+            case 0:
+              return _context9.abrupt("return", this.request('HEAD', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context9.stop();
           }
         }, _callee9, this);
       }));
@@ -2140,14 +2086,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function sendStream(verb, requestUrl, stream, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
         return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-          while (1) {
-            switch (_context10.prev = _context10.next) {
-              case 0:
-                return _context10.abrupt("return", this.request(verb, requestUrl, stream, additionalHeaders));
-              case 1:
-              case "end":
-                return _context10.stop();
-            }
+          while (1) switch (_context10.prev = _context10.next) {
+            case 0:
+              return _context10.abrupt("return", this.request(verb, requestUrl, stream, additionalHeaders));
+            case 1:
+            case "end":
+              return _context10.stop();
           }
         }, _callee10, this);
       }));
@@ -2163,19 +2107,17 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
         var res;
         return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-          while (1) {
-            switch (_context11.prev = _context11.next) {
-              case 0:
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                _context11.next = 3;
-                return this.get(requestUrl, additionalHeaders);
-              case 3:
-                res = _context11.sent;
-                return _context11.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 5:
-              case "end":
-                return _context11.stop();
-            }
+          while (1) switch (_context11.prev = _context11.next) {
+            case 0:
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              _context11.next = 3;
+              return this.get(requestUrl, additionalHeaders);
+            case 3:
+              res = _context11.sent;
+              return _context11.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 5:
+            case "end":
+              return _context11.stop();
           }
         }, _callee11, this);
       }));
@@ -2187,21 +2129,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-          while (1) {
-            switch (_context12.prev = _context12.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context12.next = 5;
-                return this.post(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context12.sent;
-                return _context12.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context12.stop();
-            }
+          while (1) switch (_context12.prev = _context12.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context12.next = 5;
+              return this.post(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context12.sent;
+              return _context12.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context12.stop();
           }
         }, _callee12, this);
       }));
@@ -2213,21 +2153,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee13$(_context13) {
-          while (1) {
-            switch (_context13.prev = _context13.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context13.next = 5;
-                return this.put(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context13.sent;
-                return _context13.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context13.stop();
-            }
+          while (1) switch (_context13.prev = _context13.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context13.next = 5;
+              return this.put(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context13.sent;
+              return _context13.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context13.stop();
           }
         }, _callee13, this);
       }));
@@ -2239,21 +2177,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee14$(_context14) {
-          while (1) {
-            switch (_context14.prev = _context14.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context14.next = 5;
-                return this.patch(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context14.sent;
-                return _context14.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context14.stop();
-            }
+          while (1) switch (_context14.prev = _context14.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context14.next = 5;
+              return this.patch(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context14.sent;
+              return _context14.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context14.stop();
           }
         }, _callee14, this);
       }));
@@ -2269,136 +2205,134 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
         var parsedUrl, info, maxTries, numTries, response, authenticationHandler, _iterator, _step, handler, redirectsRemaining, redirectUrl, parsedRedirectUrl, header;
         return _regeneratorRuntime().wrap(function _callee15$(_context15) {
-          while (1) {
-            switch (_context15.prev = _context15.next) {
-              case 0:
-                if (!this._disposed) {
-                  _context15.next = 2;
-                  break;
-                }
-                throw new Error('Client has already been disposed.');
-              case 2:
-                parsedUrl = new URL(requestUrl);
-                info = this._prepareRequest(verb, parsedUrl, headers); // Only perform retries on reads since writes may not be idempotent.
-                maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
-                numTries = 0;
-              case 6:
-                _context15.next = 8;
-                return this.requestRaw(info, data);
-              case 8:
-                response = _context15.sent;
-                if (!(response && response.message && response.message.statusCode === HttpCodes.Unauthorized)) {
-                  _context15.next = 34;
-                  break;
-                }
-                authenticationHandler = void 0;
-                _iterator = _createForOfIteratorHelper(this.handlers);
-                _context15.prev = 12;
-                _iterator.s();
-              case 14:
-                if ((_step = _iterator.n()).done) {
-                  _context15.next = 21;
-                  break;
-                }
-                handler = _step.value;
-                if (!handler.canHandleAuthentication(response)) {
-                  _context15.next = 19;
-                  break;
-                }
-                authenticationHandler = handler;
-                return _context15.abrupt("break", 21);
-              case 19:
-                _context15.next = 14;
+          while (1) switch (_context15.prev = _context15.next) {
+            case 0:
+              if (!this._disposed) {
+                _context15.next = 2;
                 break;
-              case 21:
-                _context15.next = 26;
+              }
+              throw new Error('Client has already been disposed.');
+            case 2:
+              parsedUrl = new URL(requestUrl);
+              info = this._prepareRequest(verb, parsedUrl, headers); // Only perform retries on reads since writes may not be idempotent.
+              maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
+              numTries = 0;
+            case 6:
+              _context15.next = 8;
+              return this.requestRaw(info, data);
+            case 8:
+              response = _context15.sent;
+              if (!(response && response.message && response.message.statusCode === HttpCodes.Unauthorized)) {
+                _context15.next = 34;
                 break;
-              case 23:
-                _context15.prev = 23;
-                _context15.t0 = _context15["catch"](12);
-                _iterator.e(_context15.t0);
-              case 26:
-                _context15.prev = 26;
-                _iterator.f();
-                return _context15.finish(26);
-              case 29:
-                if (!authenticationHandler) {
-                  _context15.next = 33;
-                  break;
-                }
-                return _context15.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
-              case 33:
-                return _context15.abrupt("return", response);
-              case 34:
-                redirectsRemaining = this._maxRedirects;
-              case 35:
-                if (!(response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0)) {
-                  _context15.next = 52;
-                  break;
-                }
-                redirectUrl = response.message.headers['location'];
-                if (redirectUrl) {
-                  _context15.next = 39;
-                  break;
-                }
-                return _context15.abrupt("break", 52);
-              case 39:
-                parsedRedirectUrl = new URL(redirectUrl);
-                if (!(parsedUrl.protocol === 'https:' && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
-                  _context15.next = 42;
-                  break;
-                }
-                throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
-              case 42:
-                _context15.next = 44;
-                return response.readBody();
-              case 44:
-                // strip authorization header if redirected to a different hostname
-                if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
-                  for (header in headers) {
-                    // header names are case insensitive
-                    if (header.toLowerCase() === 'authorization') {
-                      delete headers[header];
-                    }
+              }
+              authenticationHandler = void 0;
+              _iterator = _createForOfIteratorHelper(this.handlers);
+              _context15.prev = 12;
+              _iterator.s();
+            case 14:
+              if ((_step = _iterator.n()).done) {
+                _context15.next = 21;
+                break;
+              }
+              handler = _step.value;
+              if (!handler.canHandleAuthentication(response)) {
+                _context15.next = 19;
+                break;
+              }
+              authenticationHandler = handler;
+              return _context15.abrupt("break", 21);
+            case 19:
+              _context15.next = 14;
+              break;
+            case 21:
+              _context15.next = 26;
+              break;
+            case 23:
+              _context15.prev = 23;
+              _context15.t0 = _context15["catch"](12);
+              _iterator.e(_context15.t0);
+            case 26:
+              _context15.prev = 26;
+              _iterator.f();
+              return _context15.finish(26);
+            case 29:
+              if (!authenticationHandler) {
+                _context15.next = 33;
+                break;
+              }
+              return _context15.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
+            case 33:
+              return _context15.abrupt("return", response);
+            case 34:
+              redirectsRemaining = this._maxRedirects;
+            case 35:
+              if (!(response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0)) {
+                _context15.next = 52;
+                break;
+              }
+              redirectUrl = response.message.headers['location'];
+              if (redirectUrl) {
+                _context15.next = 39;
+                break;
+              }
+              return _context15.abrupt("break", 52);
+            case 39:
+              parsedRedirectUrl = new URL(redirectUrl);
+              if (!(parsedUrl.protocol === 'https:' && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
+                _context15.next = 42;
+                break;
+              }
+              throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
+            case 42:
+              _context15.next = 44;
+              return response.readBody();
+            case 44:
+              // strip authorization header if redirected to a different hostname
+              if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
+                for (header in headers) {
+                  // header names are case insensitive
+                  if (header.toLowerCase() === 'authorization') {
+                    delete headers[header];
                   }
                 }
-                // let's make the request with the new redirectUrl
-                info = this._prepareRequest(verb, parsedRedirectUrl, headers);
-                _context15.next = 48;
-                return this.requestRaw(info, data);
-              case 48:
-                response = _context15.sent;
-                redirectsRemaining--;
-                _context15.next = 35;
+              }
+              // let's make the request with the new redirectUrl
+              info = this._prepareRequest(verb, parsedRedirectUrl, headers);
+              _context15.next = 48;
+              return this.requestRaw(info, data);
+            case 48:
+              response = _context15.sent;
+              redirectsRemaining--;
+              _context15.next = 35;
+              break;
+            case 52:
+              if (!(!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode))) {
+                _context15.next = 54;
                 break;
-              case 52:
-                if (!(!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode))) {
-                  _context15.next = 54;
-                  break;
-                }
-                return _context15.abrupt("return", response);
-              case 54:
-                numTries += 1;
-                if (!(numTries < maxTries)) {
-                  _context15.next = 60;
-                  break;
-                }
-                _context15.next = 58;
-                return response.readBody();
-              case 58:
+              }
+              return _context15.abrupt("return", response);
+            case 54:
+              numTries += 1;
+              if (!(numTries < maxTries)) {
                 _context15.next = 60;
-                return this._performExponentialBackoff(numTries);
-              case 60:
-                if (numTries < maxTries) {
-                  _context15.next = 6;
-                  break;
-                }
-              case 61:
-                return _context15.abrupt("return", response);
-              case 62:
-              case "end":
-                return _context15.stop();
-            }
+                break;
+              }
+              _context15.next = 58;
+              return response.readBody();
+            case 58:
+              _context15.next = 60;
+              return this._performExponentialBackoff(numTries);
+            case 60:
+              if (numTries < maxTries) {
+                _context15.next = 6;
+                break;
+              }
+            case 61:
+              return _context15.abrupt("return", response);
+            case 62:
+            case "end":
+              return _context15.stop();
           }
         }, _callee15, this, [[12, 23, 26, 29]]);
       }));
@@ -2425,26 +2359,24 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
         var _this3 = this;
         return _regeneratorRuntime().wrap(function _callee16$(_context16) {
-          while (1) {
-            switch (_context16.prev = _context16.next) {
-              case 0:
-                return _context16.abrupt("return", new Promise(function (resolve, reject) {
-                  function callbackForResult(err, res) {
-                    if (err) {
-                      reject(err);
-                    } else if (!res) {
-                      // If `err` is not passed, then `res` must be passed.
-                      reject(new Error('Unknown error'));
-                    } else {
-                      resolve(res);
-                    }
+          while (1) switch (_context16.prev = _context16.next) {
+            case 0:
+              return _context16.abrupt("return", new Promise(function (resolve, reject) {
+                function callbackForResult(err, res) {
+                  if (err) {
+                    reject(err);
+                  } else if (!res) {
+                    // If `err` is not passed, then `res` must be passed.
+                    reject(new Error('Unknown error'));
+                  } else {
+                    resolve(res);
                   }
-                  _this3.requestRawWithCallback(info, data, callbackForResult);
-                }));
-              case 1:
-              case "end":
-                return _context16.stop();
-            }
+                }
+                _this3.requestRawWithCallback(info, data, callbackForResult);
+              }));
+            case 1:
+            case "end":
+              return _context16.stop();
           }
         }, _callee16);
       }));
@@ -2638,20 +2570,18 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
         var ms;
         return _regeneratorRuntime().wrap(function _callee17$(_context17) {
-          while (1) {
-            switch (_context17.prev = _context17.next) {
-              case 0:
-                retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
-                ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
-                return _context17.abrupt("return", new Promise(function (resolve) {
-                  return setTimeout(function () {
-                    return resolve();
-                  }, ms);
-                }));
-              case 3:
-              case "end":
-                return _context17.stop();
-            }
+          while (1) switch (_context17.prev = _context17.next) {
+            case 0:
+              retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
+              ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
+              return _context17.abrupt("return", new Promise(function (resolve) {
+                return setTimeout(function () {
+                  return resolve();
+                }, ms);
+              }));
+            case 3:
+            case "end":
+              return _context17.stop();
           }
         }, _callee17);
       }));
@@ -2662,84 +2592,80 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee19() {
         var _this4 = this;
         return _regeneratorRuntime().wrap(function _callee19$(_context19) {
-          while (1) {
-            switch (_context19.prev = _context19.next) {
-              case 0:
-                return _context19.abrupt("return", new Promise(function (resolve, reject) {
-                  return __awaiter(_this4, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
-                    var statusCode, response, dateTimeDeserializer, obj, contents, msg, err;
-                    return _regeneratorRuntime().wrap(function _callee18$(_context18) {
-                      while (1) {
-                        switch (_context18.prev = _context18.next) {
-                          case 0:
-                            dateTimeDeserializer = function _dateTimeDeserializer(key, value) {
-                              if (typeof value === 'string') {
-                                var a = new Date(value);
-                                if (!isNaN(a.valueOf())) {
-                                  return a;
-                                }
-                              }
-                              return value;
-                            };
-                            statusCode = res.message.statusCode || 0;
-                            response = {
-                              statusCode: statusCode,
-                              result: null,
-                              headers: {}
-                            }; // not found leads to null obj returned
-                            if (statusCode === HttpCodes.NotFound) {
-                              resolve(response);
+          while (1) switch (_context19.prev = _context19.next) {
+            case 0:
+              return _context19.abrupt("return", new Promise(function (resolve, reject) {
+                return __awaiter(_this4, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
+                  var statusCode, response, dateTimeDeserializer, obj, contents, msg, err;
+                  return _regeneratorRuntime().wrap(function _callee18$(_context18) {
+                    while (1) switch (_context18.prev = _context18.next) {
+                      case 0:
+                        dateTimeDeserializer = function _dateTimeDeserializer(key, value) {
+                          if (typeof value === 'string') {
+                            var a = new Date(value);
+                            if (!isNaN(a.valueOf())) {
+                              return a;
                             }
-                            // get the result from the body
-                            _context18.prev = 4;
-                            _context18.next = 7;
-                            return res.readBody();
-                          case 7:
-                            contents = _context18.sent;
-                            if (contents && contents.length > 0) {
-                              if (options && options.deserializeDates) {
-                                obj = JSON.parse(contents, dateTimeDeserializer);
-                              } else {
-                                obj = JSON.parse(contents);
-                              }
-                              response.result = obj;
-                            }
-                            response.headers = res.message.headers;
-                            _context18.next = 14;
-                            break;
-                          case 12:
-                            _context18.prev = 12;
-                            _context18.t0 = _context18["catch"](4);
-                          case 14:
-                            // note that 3xx redirects are handled by the http layer.
-                            if (statusCode > 299) {
-                              // if exception/error in body, attempt to get better error
-                              if (obj && obj.message) {
-                                msg = obj.message;
-                              } else if (contents && contents.length > 0) {
-                                // it may be the case that the exception is in the body message as string
-                                msg = contents;
-                              } else {
-                                msg = "Failed request: (".concat(statusCode, ")");
-                              }
-                              err = new HttpClientError(msg, statusCode);
-                              err.result = response.result;
-                              reject(err);
-                            } else {
-                              resolve(response);
-                            }
-                          case 15:
-                          case "end":
-                            return _context18.stop();
+                          }
+                          return value;
+                        };
+                        statusCode = res.message.statusCode || 0;
+                        response = {
+                          statusCode: statusCode,
+                          result: null,
+                          headers: {}
+                        }; // not found leads to null obj returned
+                        if (statusCode === HttpCodes.NotFound) {
+                          resolve(response);
                         }
-                      }
-                    }, _callee18, null, [[4, 12]]);
-                  }));
+                        // get the result from the body
+                        _context18.prev = 4;
+                        _context18.next = 7;
+                        return res.readBody();
+                      case 7:
+                        contents = _context18.sent;
+                        if (contents && contents.length > 0) {
+                          if (options && options.deserializeDates) {
+                            obj = JSON.parse(contents, dateTimeDeserializer);
+                          } else {
+                            obj = JSON.parse(contents);
+                          }
+                          response.result = obj;
+                        }
+                        response.headers = res.message.headers;
+                        _context18.next = 14;
+                        break;
+                      case 12:
+                        _context18.prev = 12;
+                        _context18.t0 = _context18["catch"](4);
+                      case 14:
+                        // note that 3xx redirects are handled by the http layer.
+                        if (statusCode > 299) {
+                          // if exception/error in body, attempt to get better error
+                          if (obj && obj.message) {
+                            msg = obj.message;
+                          } else if (contents && contents.length > 0) {
+                            // it may be the case that the exception is in the body message as string
+                            msg = contents;
+                          } else {
+                            msg = "Failed request: (".concat(statusCode, ")");
+                          }
+                          err = new HttpClientError(msg, statusCode);
+                          err.result = response.result;
+                          reject(err);
+                        } else {
+                          resolve(response);
+                        }
+                      case 15:
+                      case "end":
+                        return _context18.stop();
+                    }
+                  }, _callee18, null, [[4, 12]]);
                 }));
-              case 1:
-              case "end":
-                return _context19.stop();
-            }
+              }));
+            case 1:
+            case "end":
+              return _context19.stop();
           }
         }, _callee19);
       }));
@@ -4940,6 +4866,19 @@ var isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) {
 };
 
 /**
+ * isSameProtocol reports whether the two provided URLs use the same protocol.
+ *
+ * Both domains must already be in canonical form.
+ * @param {string|URL} original
+ * @param {string|URL} destination
+ */
+var isSameProtocol = function isSameProtocol(destination, original) {
+  var orig = new URL$1(original).protocol;
+  var dest = new URL$1(destination).protocol;
+  return orig === dest;
+};
+
+/**
  * Fetch function
  *
  * @param   Mixed    url   Absolute url or Request instance
@@ -4965,7 +4904,7 @@ function fetch(url, opts) {
       var error = new AbortError('The user aborted a request.');
       reject(error);
       if (request.body && request.body instanceof external_stream_.Readable) {
-        request.body.destroy(error);
+        destroyStream(request.body, error);
       }
       if (!response || !response.body) return;
       response.body.emit('error', error);
@@ -5000,8 +4939,38 @@ function fetch(url, opts) {
     }
     req.on('error', function (err) {
       reject(new FetchError("request to ".concat(request.url, " failed, reason: ").concat(err.message), 'system', err));
+      if (response && response.body) {
+        destroyStream(response.body, err);
+      }
       finalize();
     });
+    fixResponseChunkedTransferBadEnding(req, function (err) {
+      if (signal && signal.aborted) {
+        return;
+      }
+      if (response && response.body) {
+        destroyStream(response.body, err);
+      }
+    });
+
+    /* c8 ignore next 18 */
+    if (parseInt(process.version.substring(1)) < 14) {
+      // Before Node.js 14, pipeline() does not fully support async iterators and does not always
+      // properly handle when the socket close/end events are out of order.
+      req.on('socket', function (s) {
+        s.addListener('close', function (hadError) {
+          // if a data listener is still present we didn't end cleanly
+          var hasDataListener = s.listenerCount('data') > 0;
+
+          // if end happened before close but the socket didn't emit an error, do it now
+          if (response && hasDataListener && !hadError && !(signal && signal.aborted)) {
+            var err = new Error('Premature close');
+            err.code = 'ERR_STREAM_PREMATURE_CLOSE';
+            response.body.emit('error', err);
+          }
+        });
+      });
+    }
     req.on('response', function (res) {
       clearTimeout(reqTimeout);
       var headers = createHeadersLenient(res.headers);
@@ -5071,7 +5040,7 @@ function fetch(url, opts) {
               timeout: request.timeout,
               size: request.size
             };
-            if (!isDomainOrSubdomain(request.url, locationURL)) {
+            if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
               for (var _i5 = 0, _arr = ['authorization', 'www-authenticate', 'cookie', 'cookie2']; _i5 < _arr.length; _i5++) {
                 var name = _arr[_i5];
                 requestOpts.headers["delete"](name);
@@ -5164,6 +5133,13 @@ function fetch(url, opts) {
           response = new Response(body, response_options);
           resolve(response);
         });
+        raw.on('end', function () {
+          // some old IIS servers return zero-length OK deflate responses, so 'data' is never emitted.
+          if (!response) {
+            response = new Response(body, response_options);
+            resolve(response);
+          }
+        });
         return;
       }
 
@@ -5182,6 +5158,36 @@ function fetch(url, opts) {
     writeToStream(req, request);
   });
 }
+function fixResponseChunkedTransferBadEnding(request, errorCallback) {
+  var socket;
+  request.on('socket', function (s) {
+    socket = s;
+  });
+  request.on('response', function (response) {
+    var headers = response.headers;
+    if (headers['transfer-encoding'] === 'chunked' && !headers['content-length']) {
+      response.once('close', function (hadError) {
+        // if a data listener is still present we didn't end cleanly
+        var hasDataListener = socket.listenerCount('data') > 0;
+        if (hasDataListener && !hadError) {
+          var err = new Error('Premature close');
+          err.code = 'ERR_STREAM_PREMATURE_CLOSE';
+          errorCallback(err);
+        }
+      });
+    }
+  });
+}
+function destroyStream(stream, err) {
+  if (stream.destroy) {
+    stream.destroy(err);
+  } else {
+    // node < 8
+    stream.emit('error', err);
+    stream.end();
+  }
+}
+
 /**
  * Redirect code matching
  *
@@ -5385,103 +5391,101 @@ function fetchWrapper(requestOptions) {
     var _ref = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(response) {
       var _iterator, _step, keyAndValue, matches, deprecationLink, data, error;
       return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              url = response.url;
-              status = response.status;
-              _iterator = _createForOfIteratorHelper(response.headers);
-              try {
-                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                  keyAndValue = _step.value;
-                  headers[keyAndValue[0]] = keyAndValue[1];
-                }
-              } catch (err) {
-                _iterator.e(err);
-              } finally {
-                _iterator.f();
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            url = response.url;
+            status = response.status;
+            _iterator = _createForOfIteratorHelper(response.headers);
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                keyAndValue = _step.value;
+                headers[keyAndValue[0]] = keyAndValue[1];
               }
-              if ("deprecation" in headers) {
-                matches = headers.link && headers.link.match(/<([^>]+)>; rel="deprecation"/);
-                deprecationLink = matches && matches.pop();
-                log.warn("[@octokit/request] \"".concat(requestOptions.method, " ").concat(requestOptions.url, "\" is deprecated. It is scheduled to be removed on ").concat(headers.sunset).concat(deprecationLink ? ". See ".concat(deprecationLink) : ""));
-              }
-              if (!(status === 204 || status === 205)) {
-                _context.next = 7;
-                break;
-              }
-              return _context.abrupt("return");
-            case 7:
-              if (!(requestOptions.method === "HEAD")) {
-                _context.next = 11;
-                break;
-              }
-              if (!(status < 400)) {
-                _context.next = 10;
-                break;
-              }
-              return _context.abrupt("return");
-            case 10:
-              throw new RequestError(response.statusText, status, {
-                response: {
-                  url: url,
-                  status: status,
-                  headers: headers,
-                  data: undefined
-                },
-                request: requestOptions
-              });
-            case 11:
-              if (!(status === 304)) {
-                _context.next = 24;
-                break;
-              }
-              _context.t0 = RequestError;
-              _context.t1 = status;
-              _context.t2 = url;
-              _context.t3 = status;
-              _context.t4 = headers;
-              _context.next = 19;
-              return getResponseData(response);
-            case 19:
-              _context.t5 = _context.sent;
-              _context.t6 = {
-                url: _context.t2,
-                status: _context.t3,
-                headers: _context.t4,
-                data: _context.t5
-              };
-              _context.t7 = requestOptions;
-              _context.t8 = {
-                response: _context.t6,
-                request: _context.t7
-              };
-              throw new _context.t0("Not modified", _context.t1, _context.t8);
-            case 24:
-              if (!(status >= 400)) {
-                _context.next = 30;
-                break;
-              }
-              _context.next = 27;
-              return getResponseData(response);
-            case 27:
-              data = _context.sent;
-              error = new RequestError(toErrorMessage(data), status, {
-                response: {
-                  url: url,
-                  status: status,
-                  headers: headers,
-                  data: data
-                },
-                request: requestOptions
-              });
-              throw error;
-            case 30:
-              return _context.abrupt("return", getResponseData(response));
-            case 31:
-            case "end":
-              return _context.stop();
-          }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+            if ("deprecation" in headers) {
+              matches = headers.link && headers.link.match(/<([^>]+)>; rel="deprecation"/);
+              deprecationLink = matches && matches.pop();
+              log.warn("[@octokit/request] \"".concat(requestOptions.method, " ").concat(requestOptions.url, "\" is deprecated. It is scheduled to be removed on ").concat(headers.sunset).concat(deprecationLink ? ". See ".concat(deprecationLink) : ""));
+            }
+            if (!(status === 204 || status === 205)) {
+              _context.next = 7;
+              break;
+            }
+            return _context.abrupt("return");
+          case 7:
+            if (!(requestOptions.method === "HEAD")) {
+              _context.next = 11;
+              break;
+            }
+            if (!(status < 400)) {
+              _context.next = 10;
+              break;
+            }
+            return _context.abrupt("return");
+          case 10:
+            throw new RequestError(response.statusText, status, {
+              response: {
+                url: url,
+                status: status,
+                headers: headers,
+                data: undefined
+              },
+              request: requestOptions
+            });
+          case 11:
+            if (!(status === 304)) {
+              _context.next = 24;
+              break;
+            }
+            _context.t0 = RequestError;
+            _context.t1 = status;
+            _context.t2 = url;
+            _context.t3 = status;
+            _context.t4 = headers;
+            _context.next = 19;
+            return getResponseData(response);
+          case 19:
+            _context.t5 = _context.sent;
+            _context.t6 = {
+              url: _context.t2,
+              status: _context.t3,
+              headers: _context.t4,
+              data: _context.t5
+            };
+            _context.t7 = requestOptions;
+            _context.t8 = {
+              response: _context.t6,
+              request: _context.t7
+            };
+            throw new _context.t0("Not modified", _context.t1, _context.t8);
+          case 24:
+            if (!(status >= 400)) {
+              _context.next = 30;
+              break;
+            }
+            _context.next = 27;
+            return getResponseData(response);
+          case 27:
+            data = _context.sent;
+            error = new RequestError(toErrorMessage(data), status, {
+              response: {
+                url: url,
+                status: status,
+                headers: headers,
+                data: data
+              },
+              request: requestOptions
+            });
+            throw error;
+          case 30:
+            return _context.abrupt("return", getResponseData(response));
+          case 31:
+          case "end":
+            return _context.stop();
         }
       }, _callee);
     }));
@@ -5509,27 +5513,25 @@ function _getResponseData() {
   _getResponseData = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(response) {
     var contentType;
     return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            contentType = response.headers.get("content-type");
-            if (!/application\/json/.test(contentType)) {
-              _context2.next = 3;
-              break;
-            }
-            return _context2.abrupt("return", response.json());
-          case 3:
-            if (!(!contentType || /^text\/|charset=utf-8$/.test(contentType))) {
-              _context2.next = 5;
-              break;
-            }
-            return _context2.abrupt("return", response.text());
-          case 5:
-            return _context2.abrupt("return", getBufferResponse(response));
-          case 6:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          contentType = response.headers.get("content-type");
+          if (!/application\/json/.test(contentType)) {
+            _context2.next = 3;
+            break;
+          }
+          return _context2.abrupt("return", response.json());
+        case 3:
+          if (!(!contentType || /^text\/|charset=utf-8$/.test(contentType))) {
+            _context2.next = 5;
+            break;
+          }
+          return _context2.abrupt("return", response.text());
+        case 5:
+          return _context2.abrupt("return", getBufferResponse(response));
+        case 6:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -5699,22 +5701,20 @@ function _auth() {
   _auth = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(token) {
     var isApp, isInstallation, isUserToServer, tokenType;
     return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            isApp = token.split(/\./).length === 3;
-            isInstallation = REGEX_IS_INSTALLATION_LEGACY.test(token) || REGEX_IS_INSTALLATION.test(token);
-            isUserToServer = REGEX_IS_USER_TO_SERVER.test(token);
-            tokenType = isApp ? "app" : isInstallation ? "installation" : isUserToServer ? "user-to-server" : "oauth";
-            return _context.abrupt("return", {
-              type: "token",
-              token: token,
-              tokenType: tokenType
-            });
-          case 5:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          isApp = token.split(/\./).length === 3;
+          isInstallation = REGEX_IS_INSTALLATION_LEGACY.test(token) || REGEX_IS_INSTALLATION.test(token);
+          isUserToServer = REGEX_IS_USER_TO_SERVER.test(token);
+          tokenType = isApp ? "app" : isInstallation ? "installation" : isUserToServer ? "user-to-server" : "oauth";
+          return _context.abrupt("return", {
+            type: "token",
+            token: token,
+            tokenType: tokenType
+          });
+        case 5:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -5733,16 +5733,14 @@ function _hook() {
   _hook = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(token, request, route, parameters) {
     var endpoint;
     return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            endpoint = request.endpoint.merge(route, parameters);
-            endpoint.headers.authorization = withAuthorizationPrefix(token);
-            return _context2.abrupt("return", request(endpoint));
-          case 3:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          endpoint = request.endpoint.merge(route, parameters);
+          endpoint.headers.authorization = withAuthorizationPrefix(token);
+          return _context2.abrupt("return", request(endpoint));
+        case 3:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -5825,16 +5823,14 @@ var Octokit = /*#__PURE__*/function () {
         // (1)
         this.auth = /*#__PURE__*/(0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
           return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  return _context.abrupt("return", {
-                    type: "unauthenticated"
-                  });
-                case 1:
-                case "end":
-                  return _context.stop();
-              }
+            while (1) switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", {
+                  type: "unauthenticated"
+                });
+              case 1:
+              case "end":
+                return _context.stop();
             }
           }, _callee);
         }));
@@ -6006,54 +6002,52 @@ function iterator(octokit, route, parameters) {
         return (0,_Users_wangchujiang_git_project_actions_github_action_modify_file_content_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)( /*#__PURE__*/(0,_Users_wangchujiang_git_project_actions_github_action_modify_file_content_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)().mark(function _callee() {
           var response, normalizedResponse;
           return (0,_Users_wangchujiang_git_project_actions_github_action_modify_file_content_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  if (url) {
-                    _context.next = 2;
-                    break;
+            while (1) switch (_context.prev = _context.next) {
+              case 0:
+                if (url) {
+                  _context.next = 2;
+                  break;
+                }
+                return _context.abrupt("return", {
+                  done: true
+                });
+              case 2:
+                _context.prev = 2;
+                _context.next = 5;
+                return requestMethod({
+                  method: method,
+                  url: url,
+                  headers: headers
+                });
+              case 5:
+                response = _context.sent;
+                normalizedResponse = normalizePaginatedListResponse(response); // `response.headers.link` format:
+                // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
+                // sets `url` to undefined if "next" URL is not present or `link` header is not set
+                url = ((normalizedResponse.headers.link || "").match(/<([^>]+)>;\s*rel="next"/) || [])[1];
+                return _context.abrupt("return", {
+                  value: normalizedResponse
+                });
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](2);
+                if (!(_context.t0.status !== 409)) {
+                  _context.next = 15;
+                  break;
+                }
+                throw _context.t0;
+              case 15:
+                url = "";
+                return _context.abrupt("return", {
+                  value: {
+                    status: 200,
+                    headers: {},
+                    data: []
                   }
-                  return _context.abrupt("return", {
-                    done: true
-                  });
-                case 2:
-                  _context.prev = 2;
-                  _context.next = 5;
-                  return requestMethod({
-                    method: method,
-                    url: url,
-                    headers: headers
-                  });
-                case 5:
-                  response = _context.sent;
-                  normalizedResponse = normalizePaginatedListResponse(response); // `response.headers.link` format:
-                  // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
-                  // sets `url` to undefined if "next" URL is not present or `link` header is not set
-                  url = ((normalizedResponse.headers.link || "").match(/<([^>]+)>;\s*rel="next"/) || [])[1];
-                  return _context.abrupt("return", {
-                    value: normalizedResponse
-                  });
-                case 11:
-                  _context.prev = 11;
-                  _context.t0 = _context["catch"](2);
-                  if (!(_context.t0.status !== 409)) {
-                    _context.next = 15;
-                    break;
-                  }
-                  throw _context.t0;
-                case 15:
-                  url = "";
-                  return _context.abrupt("return", {
-                    value: {
-                      status: 200,
-                      headers: {},
-                      data: []
-                    }
-                  });
-                case 17:
-                case "end":
-                  return _context.stop();
-              }
+                });
+              case 17:
+              case "end":
+                return _context.stop();
             }
           }, _callee, null, [[2, 11]]);
         }))();
@@ -7347,16 +7341,9 @@ function copySync(src, dest, opts) {
     srcStat = _stat$checkPathsSync.srcStat,
     destStat = _stat$checkPathsSync.destStat;
   stat.checkParentPathsSync(src, srcStat, dest, 'copy');
-  return handleFilterAndCopy(destStat, src, dest, opts);
-}
-function handleFilterAndCopy(destStat, src, dest, opts) {
   if (opts.filter && !opts.filter(src, dest)) return;
   var destParent = path.dirname(dest);
   if (!fs.existsSync(destParent)) mkdirsSync(destParent);
-  return getStats(destStat, src, dest, opts);
-}
-function startCopy(destStat, src, dest, opts) {
-  if (opts.filter && !opts.filter(src, dest)) return;
   return getStats(destStat, src, dest, opts);
 }
 function getStats(destStat, src, dest, opts) {
@@ -7422,9 +7409,10 @@ function copyDir(src, dest, opts) {
 function copyDirItem(item, src, dest, opts) {
   var srcItem = path.join(src, item);
   var destItem = path.join(dest, item);
+  if (opts.filter && !opts.filter(srcItem, destItem)) return;
   var _stat$checkPathsSync2 = stat.checkPathsSync(srcItem, destItem, 'copy', opts),
     destStat = _stat$checkPathsSync2.destStat;
-  return startCopy(destStat, srcItem, destItem, opts);
+  return getStats(destStat, srcItem, destItem, opts);
 }
 function onLink(destStat, src, dest, opts) {
   var resolvedSrc = fs.readlinkSync(src);
@@ -7454,7 +7442,7 @@ function onLink(destStat, src, dest, opts) {
     // prevent copy if src is a subdir of dest since unlinking
     // dest in this case would result in removing src contents
     // and therefore a broken symlink would be created.
-    if (fs.statSync(dest).isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
+    if (stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
       throw new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'."));
     }
     return copyLink(resolvedSrc, dest);
@@ -7504,8 +7492,11 @@ function copy(src, dest, opts, cb) {
       destStat = stats.destStat;
     stat.checkParentPaths(src, srcStat, dest, 'copy', function (err) {
       if (err) return cb(err);
-      if (opts.filter) return handleFilter(checkParentDir, destStat, src, dest, opts, cb);
-      return checkParentDir(destStat, src, dest, opts, cb);
+      runFilter(src, dest, opts, function (err, include) {
+        if (err) return cb(err);
+        if (!include) return cb();
+        checkParentDir(destStat, src, dest, opts, cb);
+      });
     });
   });
 }
@@ -7520,17 +7511,13 @@ function checkParentDir(destStat, src, dest, opts, cb) {
     });
   });
 }
-function handleFilter(onInclude, destStat, src, dest, opts, cb) {
+function runFilter(src, dest, opts, cb) {
+  if (!opts.filter) return cb(null, true);
   Promise.resolve(opts.filter(src, dest)).then(function (include) {
-    if (include) return onInclude(destStat, src, dest, opts, cb);
-    return cb();
+    return cb(null, include);
   }, function (error) {
     return cb(error);
   });
-}
-function startCopy(destStat, src, dest, opts, cb) {
-  if (opts.filter) return handleFilter(getStats, destStat, src, dest, opts, cb);
-  return getStats(destStat, src, dest, opts, cb);
 }
 function getStats(destStat, src, dest, opts, cb) {
   var stat = opts.dereference ? fs.stat : fs.lstat;
@@ -7624,12 +7611,16 @@ function copyDirItems(items, src, dest, opts, cb) {
 function copyDirItem(items, item, src, dest, opts, cb) {
   var srcItem = path.join(src, item);
   var destItem = path.join(dest, item);
-  stat.checkPaths(srcItem, destItem, 'copy', opts, function (err, stats) {
+  runFilter(srcItem, destItem, opts, function (err, include) {
     if (err) return cb(err);
-    var destStat = stats.destStat;
-    startCopy(destStat, srcItem, destItem, opts, function (err) {
+    if (!include) return copyDirItems(items, src, dest, opts, cb);
+    stat.checkPaths(srcItem, destItem, 'copy', opts, function (err, stats) {
       if (err) return cb(err);
-      return copyDirItems(items, src, dest, opts, cb);
+      var destStat = stats.destStat;
+      getStats(destStat, srcItem, destItem, opts, function (err) {
+        if (err) return cb(err);
+        return copyDirItems(items, src, dest, opts, cb);
+      });
     });
   });
 }
@@ -7660,7 +7651,7 @@ function onLink(destStat, src, dest, opts, cb) {
         // do not copy if src is a subdir of dest since unlinking
         // dest in this case would result in removing src contents
         // and therefore a broken symlink would be created.
-        if (destStat.isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
+        if (stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
           return cb(new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'.")));
         }
         return copyLink(resolvedSrc, dest, cb);
@@ -7709,28 +7700,26 @@ var emptyDir = u( /*#__PURE__*/function () {
   var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir) {
     var items;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return fs.readdir(dir);
-          case 3:
-            items = _context.sent;
-            _context.next = 9;
-            break;
-          case 6:
-            _context.prev = 6;
-            _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", mkdir.mkdirs(dir));
-          case 9:
-            return _context.abrupt("return", Promise.all(items.map(function (item) {
-              return remove.remove(path.join(dir, item));
-            })));
-          case 10:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return fs.readdir(dir);
+        case 3:
+          items = _context.sent;
+          _context.next = 9;
+          break;
+        case 6:
+          _context.prev = 6;
+          _context.t0 = _context["catch"](0);
+          return _context.abrupt("return", mkdir.mkdirs(dir));
+        case 9:
+          return _context.abrupt("return", Promise.all(items.map(function (item) {
+            return remove.remove(path.join(dir, item));
+          })));
+        case 10:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[0, 6]]);
   }));
@@ -8158,8 +8147,7 @@ var u = (__webpack_require__(7385).fromCallback);
 var fs = __webpack_require__(4527);
 var api = ['access', 'appendFile', 'chmod', 'chown', 'close', 'copyFile', 'fchmod', 'fchown', 'fdatasync', 'fstat', 'fsync', 'ftruncate', 'futimes', 'lchmod', 'lchown', 'link', 'lstat', 'mkdir', 'mkdtemp', 'open', 'opendir', 'readdir', 'readFile', 'readlink', 'realpath', 'rename', 'rm', 'rmdir', 'stat', 'symlink', 'truncate', 'unlink', 'utimes', 'writeFile'].filter(function (key) {
   // Some commands are not available on some systems. Ex:
-  // fs.opendir was added in Node.js v12.12.0
-  // fs.rm was added in Node.js v14.14.0
+  // fs.cp was added in Node.js v16.7.0
   // fs.lchown is not available on at least some Linux
   return typeof fs[key] === 'function';
 });
@@ -8183,7 +8171,7 @@ exports.exists = function (filename, callback) {
   });
 };
 
-// fs.read(), fs.write(), & fs.writev() need special treatment due to multiple callback args
+// fs.read(), fs.write(), fs.readv(), & fs.writev() need special treatment due to multiple callback args
 
 exports.read = function (fd, buffer, offset, length, position, callback) {
   if (typeof callback === 'function') {
@@ -8223,29 +8211,47 @@ exports.write = function (fd, buffer) {
   });
 };
 
-// fs.writev only available in Node v12.9.0+
-if (typeof fs.writev === 'function') {
-  // Function signature is
-  // s.writev(fd, buffers[, position], callback)
-  // We need to handle the optional arg, so we use ...args
-  exports.writev = function (fd, buffers) {
-    for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-      args[_key2 - 2] = arguments[_key2];
-    }
-    if (typeof args[args.length - 1] === 'function') {
-      return fs.writev.apply(fs, [fd, buffers].concat(args));
-    }
-    return new Promise(function (resolve, reject) {
-      fs.writev.apply(fs, [fd, buffers].concat(args, [function (err, bytesWritten, buffers) {
-        if (err) return reject(err);
-        resolve({
-          bytesWritten: bytesWritten,
-          buffers: buffers
-        });
-      }]));
-    });
-  };
-}
+// Function signature is
+// s.readv(fd, buffers[, position], callback)
+// We need to handle the optional arg, so we use ...args
+exports.readv = function (fd, buffers) {
+  for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+    args[_key2 - 2] = arguments[_key2];
+  }
+  if (typeof args[args.length - 1] === 'function') {
+    return fs.readv.apply(fs, [fd, buffers].concat(args));
+  }
+  return new Promise(function (resolve, reject) {
+    fs.readv.apply(fs, [fd, buffers].concat(args, [function (err, bytesRead, buffers) {
+      if (err) return reject(err);
+      resolve({
+        bytesRead: bytesRead,
+        buffers: buffers
+      });
+    }]));
+  });
+};
+
+// Function signature is
+// s.writev(fd, buffers[, position], callback)
+// We need to handle the optional arg, so we use ...args
+exports.writev = function (fd, buffers) {
+  for (var _len3 = arguments.length, args = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+    args[_key3 - 2] = arguments[_key3];
+  }
+  if (typeof args[args.length - 1] === 'function') {
+    return fs.writev.apply(fs, [fd, buffers].concat(args));
+  }
+  return new Promise(function (resolve, reject) {
+    fs.writev.apply(fs, [fd, buffers].concat(args, [function (err, bytesWritten, buffers) {
+      if (err) return reject(err);
+      resolve({
+        bytesWritten: bytesWritten,
+        buffers: buffers
+      });
+    }]));
+  });
+};
 
 // fs.realpath.native sometimes not available if fs is monkey-patched
 if (typeof fs.realpath["native"] === 'function') {
@@ -8344,17 +8350,15 @@ function _outputJson() {
       str,
       _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
-            str = stringify(data, options);
-            _context.next = 4;
-            return outputFile(file, str, options);
-          case 4:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
+          str = stringify(data, options);
+          _context.next = 4;
+          return outputFile(file, str, options);
+        case 4:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -8409,18 +8413,16 @@ var getMode = function getMode(options) {
 module.exports.makeDir = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir, options) {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            checkPath(dir);
-            return _context.abrupt("return", fs.mkdir(dir, {
-              mode: getMode(options),
-              recursive: true
-            }));
-          case 2:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          checkPath(dir);
+          return _context.abrupt("return", fs.mkdir(dir, {
+            mode: getMode(options),
+            recursive: true
+          }));
+        case 2:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -8686,297 +8688,22 @@ module.exports = {
 
 var fs = __webpack_require__(4527);
 var u = (__webpack_require__(7385).fromCallback);
-var rimraf = __webpack_require__(2059);
 function remove(path, callback) {
-  // Node 14.14.0+
-  if (fs.rm) return fs.rm(path, {
+  fs.rm(path, {
     recursive: true,
     force: true
   }, callback);
-  rimraf(path, callback);
 }
 function removeSync(path) {
-  // Node 14.14.0+
-  if (fs.rmSync) return fs.rmSync(path, {
+  fs.rmSync(path, {
     recursive: true,
     force: true
   });
-  rimraf.sync(path);
 }
 module.exports = {
   remove: u(remove),
   removeSync: removeSync
 };
-
-/***/ }),
-
-/***/ 2059:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(4527);
-var path = __webpack_require__(1017);
-var assert = __webpack_require__(9491);
-var isWindows = process.platform === 'win32';
-function defaults(options) {
-  var methods = ['unlink', 'chmod', 'stat', 'lstat', 'rmdir', 'readdir'];
-  methods.forEach(function (m) {
-    options[m] = options[m] || fs[m];
-    m = m + 'Sync';
-    options[m] = options[m] || fs[m];
-  });
-  options.maxBusyTries = options.maxBusyTries || 3;
-}
-function rimraf(p, options, cb) {
-  var busyTries = 0;
-  if (typeof options === 'function') {
-    cb = options;
-    options = {};
-  }
-  assert(p, 'rimraf: missing path');
-  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
-  assert.strictEqual(typeof cb, 'function', 'rimraf: callback function required');
-  assert(options, 'rimraf: invalid options argument provided');
-  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
-  defaults(options);
-  rimraf_(p, options, function CB(er) {
-    if (er) {
-      if ((er.code === 'EBUSY' || er.code === 'ENOTEMPTY' || er.code === 'EPERM') && busyTries < options.maxBusyTries) {
-        busyTries++;
-        var time = busyTries * 100;
-        // try again, with the same exact callback as this one.
-        return setTimeout(function () {
-          return rimraf_(p, options, CB);
-        }, time);
-      }
-
-      // already gone
-      if (er.code === 'ENOENT') er = null;
-    }
-    cb(er);
-  });
-}
-
-// Two possible strategies.
-// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
-// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
-//
-// Both result in an extra syscall when you guess wrong.  However, there
-// are likely far more normal files in the world than directories.  This
-// is based on the assumption that a the average number of files per
-// directory is >= 1.
-//
-// If anyone ever complains about this, then I guess the strategy could
-// be made configurable somehow.  But until then, YAGNI.
-function rimraf_(p, options, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-
-  // sunos lets the root user unlink directories, which is... weird.
-  // so we have to lstat here and make sure it's not a dir.
-  options.lstat(p, function (er, st) {
-    if (er && er.code === 'ENOENT') {
-      return cb(null);
-    }
-
-    // Windows can EPERM on stat.  Life is suffering.
-    if (er && er.code === 'EPERM' && isWindows) {
-      return fixWinEPERM(p, options, er, cb);
-    }
-    if (st && st.isDirectory()) {
-      return rmdir(p, options, er, cb);
-    }
-    options.unlink(p, function (er) {
-      if (er) {
-        if (er.code === 'ENOENT') {
-          return cb(null);
-        }
-        if (er.code === 'EPERM') {
-          return isWindows ? fixWinEPERM(p, options, er, cb) : rmdir(p, options, er, cb);
-        }
-        if (er.code === 'EISDIR') {
-          return rmdir(p, options, er, cb);
-        }
-      }
-      return cb(er);
-    });
-  });
-}
-function fixWinEPERM(p, options, er, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-  options.chmod(p, 438, function (er2) {
-    if (er2) {
-      cb(er2.code === 'ENOENT' ? null : er);
-    } else {
-      options.stat(p, function (er3, stats) {
-        if (er3) {
-          cb(er3.code === 'ENOENT' ? null : er);
-        } else if (stats.isDirectory()) {
-          rmdir(p, options, er, cb);
-        } else {
-          options.unlink(p, cb);
-        }
-      });
-    }
-  });
-}
-function fixWinEPERMSync(p, options, er) {
-  var stats;
-  assert(p);
-  assert(options);
-  try {
-    options.chmodSync(p, 438);
-  } catch (er2) {
-    if (er2.code === 'ENOENT') {
-      return;
-    } else {
-      throw er;
-    }
-  }
-  try {
-    stats = options.statSync(p);
-  } catch (er3) {
-    if (er3.code === 'ENOENT') {
-      return;
-    } else {
-      throw er;
-    }
-  }
-  if (stats.isDirectory()) {
-    rmdirSync(p, options, er);
-  } else {
-    options.unlinkSync(p);
-  }
-}
-function rmdir(p, options, originalEr, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-
-  // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
-  // if we guessed wrong, and it's not a directory, then
-  // raise the original error.
-  options.rmdir(p, function (er) {
-    if (er && (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM')) {
-      rmkids(p, options, cb);
-    } else if (er && er.code === 'ENOTDIR') {
-      cb(originalEr);
-    } else {
-      cb(er);
-    }
-  });
-}
-function rmkids(p, options, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-  options.readdir(p, function (er, files) {
-    if (er) return cb(er);
-    var n = files.length;
-    var errState;
-    if (n === 0) return options.rmdir(p, cb);
-    files.forEach(function (f) {
-      rimraf(path.join(p, f), options, function (er) {
-        if (errState) {
-          return;
-        }
-        if (er) return cb(errState = er);
-        if (--n === 0) {
-          options.rmdir(p, cb);
-        }
-      });
-    });
-  });
-}
-
-// this looks simpler, and is strictly *faster*, but will
-// tie up the JavaScript thread and fail on excessively
-// deep directory trees.
-function rimrafSync(p, options) {
-  var st;
-  options = options || {};
-  defaults(options);
-  assert(p, 'rimraf: missing path');
-  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
-  assert(options, 'rimraf: missing options');
-  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
-  try {
-    st = options.lstatSync(p);
-  } catch (er) {
-    if (er.code === 'ENOENT') {
-      return;
-    }
-
-    // Windows can EPERM on stat.  Life is suffering.
-    if (er.code === 'EPERM' && isWindows) {
-      fixWinEPERMSync(p, options, er);
-    }
-  }
-  try {
-    // sunos lets the root user unlink directories, which is... weird.
-    if (st && st.isDirectory()) {
-      rmdirSync(p, options, null);
-    } else {
-      options.unlinkSync(p);
-    }
-  } catch (er) {
-    if (er.code === 'ENOENT') {
-      return;
-    } else if (er.code === 'EPERM') {
-      return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er);
-    } else if (er.code !== 'EISDIR') {
-      throw er;
-    }
-    rmdirSync(p, options, er);
-  }
-}
-function rmdirSync(p, options, originalEr) {
-  assert(p);
-  assert(options);
-  try {
-    options.rmdirSync(p);
-  } catch (er) {
-    if (er.code === 'ENOTDIR') {
-      throw originalEr;
-    } else if (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM') {
-      rmkidsSync(p, options);
-    } else if (er.code !== 'ENOENT') {
-      throw er;
-    }
-  }
-}
-function rmkidsSync(p, options) {
-  assert(p);
-  assert(options);
-  options.readdirSync(p).forEach(function (f) {
-    return rimrafSync(path.join(p, f), options);
-  });
-  if (isWindows) {
-    // We only end up here once we got ENOTEMPTY at least once, and
-    // at this point, we are guaranteed to have removed all the kids.
-    // So, we know that it won't be ENOENT or ENOTDIR or anything else.
-    // try really hard to delete stuff on windows, because it has a
-    // PROFOUNDLY annoying habit of not closing handles promptly when
-    // files are deleted, resulting in spurious ENOTEMPTY errors.
-    var startTime = Date.now();
-    do {
-      try {
-        var ret = options.rmdirSync(p, options);
-        return ret;
-      } catch (_unused) {}
-    } while (Date.now() - startTime < 500); // give up after 500ms
-  } else {
-    var _ret = options.rmdirSync(p, options);
-    return _ret;
-  }
-}
-module.exports = rimraf;
-rimraf.sync = rimrafSync;
 
 /***/ }),
 
@@ -10032,43 +9759,41 @@ function _readFile2() {
       obj,
       _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-            if (typeof options === 'string') {
-              options = {
-                encoding: options
-              };
-            }
-            fs = options.fs || _fs;
-            shouldThrow = 'throws' in options ? options["throws"] : true;
-            _context.next = 6;
-            return universalify.fromCallback(fs.readFile)(file, options);
-          case 6:
-            data = _context.sent;
-            data = stripBom(data);
-            _context.prev = 8;
-            obj = JSON.parse(data, options ? options.reviver : null);
-            _context.next = 20;
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+          if (typeof options === 'string') {
+            options = {
+              encoding: options
+            };
+          }
+          fs = options.fs || _fs;
+          shouldThrow = 'throws' in options ? options["throws"] : true;
+          _context.next = 6;
+          return universalify.fromCallback(fs.readFile)(file, options);
+        case 6:
+          data = _context.sent;
+          data = stripBom(data);
+          _context.prev = 8;
+          obj = JSON.parse(data, options ? options.reviver : null);
+          _context.next = 20;
+          break;
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](8);
+          if (!shouldThrow) {
+            _context.next = 19;
             break;
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](8);
-            if (!shouldThrow) {
-              _context.next = 19;
-              break;
-            }
-            _context.t0.message = "".concat(file, ": ").concat(_context.t0.message);
-            throw _context.t0;
-          case 19:
-            return _context.abrupt("return", null);
-          case 20:
-            return _context.abrupt("return", obj);
-          case 21:
-          case "end":
-            return _context.stop();
-        }
+          }
+          _context.t0.message = "".concat(file, ": ").concat(_context.t0.message);
+          throw _context.t0;
+        case 19:
+          return _context.abrupt("return", null);
+        case 20:
+          return _context.abrupt("return", obj);
+        case 21:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[8, 12]]);
   }));
@@ -10107,18 +9832,16 @@ function _writeFile2() {
       str,
       _args2 = arguments;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            options = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
-            fs = options.fs || _fs;
-            str = stringify(obj, options);
-            _context2.next = 5;
-            return universalify.fromCallback(fs.writeFile)(file, str, options);
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          options = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
+          fs = options.fs || _fs;
+          str = stringify(obj, options);
+          _context2.next = 5;
+          return universalify.fromCallback(fs.writeFile)(file, str, options);
+        case 5:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -12866,9 +12589,7 @@ module.exports = require("util");
 
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -13183,9 +12904,7 @@ function _iterableToArrayLimit(arr, i) {
       if (_x = (_i = _i.call(arr)).next, 0 === i) {
         if (Object(_i) !== _i) return;
         _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
-        ;
-      }
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
     } catch (err) {
       _d = !0, _e = err;
     } finally {
@@ -13429,9 +13148,7 @@ function _regeneratorRuntime() {
       if (!isNaN(iterable.length)) {
         var i = -1,
           next = function next() {
-            for (; ++i < iterable.length;) {
-              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-            }
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
             return next.value = undefined, next.done = !0, next;
           };
         return next.next = next;
@@ -13477,9 +13194,7 @@ function _regeneratorRuntime() {
   }), exports.keys = function (val) {
     var object = Object(val),
       keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
+    for (var key in object) keys.push(key);
     return keys.reverse(), function next() {
       for (; keys.length;) {
         var key = keys.pop();
@@ -13490,9 +13205,7 @@ function _regeneratorRuntime() {
   }, exports.values = values, Context.prototype = {
     constructor: Context,
     reset: function reset(skipTempReset) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
-        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      }
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
     },
     stop: function stop() {
       this.done = !0;
@@ -13977,9 +13690,7 @@ function _regeneratorRuntime() {
       if (!isNaN(iterable.length)) {
         var i = -1,
           next = function next() {
-            for (; ++i < iterable.length;) {
-              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-            }
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
             return next.value = undefined, next.done = !0, next;
           };
         return next.next = next;
@@ -14025,9 +13736,7 @@ function _regeneratorRuntime() {
   }), exports.keys = function (val) {
     var object = Object(val),
       keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
+    for (var key in object) keys.push(key);
     return keys.reverse(), function next() {
       for (; keys.length;) {
         var key = keys.pop();
@@ -14038,9 +13747,7 @@ function _regeneratorRuntime() {
   }, exports.values = values, Context.prototype = {
     constructor: Context,
     reset: function reset(skipTempReset) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
-        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      }
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
     },
     stop: function stop() {
       this.done = !0;
@@ -14150,9 +13857,7 @@ function _iterableToArrayLimit(arr, i) {
       if (_x = (_i = _i.call(arr)).next, 0 === i) {
         if (Object(_i) !== _i) return;
         _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
-        ;
-      }
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
     } catch (err) {
       _d = !0, _e = err;
     } finally {
@@ -14248,9 +13953,7 @@ __webpack_require__.d(__webpack_exports__, {
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
@@ -14370,10 +14073,10 @@ var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
 var github = __webpack_require__(1374);
 ;// CONCATENATED MODULE: ./src/utils.ts
-var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var sha=(0,core.getInput)('sha');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,sha:sha,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var _getInputs2,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_getInputs2=getInputs(),branch=_getInputs2.branch;if(!(branch!==null)){_context.next=3;break;}return _context.abrupt("return",Promise.resolve(branch));case 3:_context.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context.sent;data=_yield$octokit$rest$r.data;return _context.abrupt("return",data.default_branch);case 8:case"end":return _context.stop();}}},_callee);}));return _getBranch.apply(this,arguments);}function getFileContents(_x){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(branch){var _getInputs3,owner,repo,filepath,_yield$octokit$rest$r2,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,filepath=_getInputs3.filepath;_context2.prev=1;_context2.next=4;return octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath});case 4:_yield$octokit$rest$r2=_context2.sent;data=_yield$octokit$rest$r2.data;return _context2.abrupt("return",data);case 9:_context2.prev=9;_context2.t0=_context2["catch"](1);(0,core.warning)("\uD83D\uDC49 Get File Contents: ".concat(_context2.t0 instanceof Error?_context2.t0.message:_context2.t0));return _context2.abrupt("return");case 13:case"end":return _context2.stop();}}},_callee2,null,[[1,9]]);}));return _getFileContents.apply(this,arguments);}function getBodyContent(oldFileContent,content){var _getInputs=getInputs(),openDelimiter=_getInputs.openDelimiter,closeDelimiter=_getInputs.closeDelimiter,overwrite=_getInputs.overwrite;var REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');var match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(match===null||match===void 0?void 0:match.length));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){}return oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3(){var options,content,other,_getInputs4,owner,repo,message,committer_name,committer_email,overwrite,sync_local_file,ref,branch,new_content,body,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,reuslt,fullPath,isExists,result,_result$data$content4,_result$data$content5,_result$data$content6,_result,_args3=arguments;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:options=_args3.length>0&&_args3[0]!==undefined?_args3[0]:{};content=_args3.length>1?_args3[1]:undefined;other=Object.assign({},(_objectDestructuringEmpty(options),options));_getInputs4=getInputs(),owner=_getInputs4.owner,repo=_getInputs4.repo,message=_getInputs4.message,committer_name=_getInputs4.committer_name,committer_email=_getInputs4.committer_email,overwrite=_getInputs4.overwrite,sync_local_file=_getInputs4.sync_local_file,ref=_getInputs4.ref;_context3.next=6;return getBranch();case 6:branch=_context3.sent;if(options.path){_context3.next=9;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 9:(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));new_content=Buffer.from(content).toString("base64");body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({owner:owner,repo:repo,path:options.path,branch:branch,message:message||"doc: update ".concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'}},other),{},{content:new_content});(0,core.startGroup)("\uD83D\uDC49 Init Body: (".concat(branch,")"));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=20;return getFileContents(branch);case 20:currentFile=_context3.sent;if(!(currentFile&&'content'in currentFile)){_context3.next=58;break;}fileContent=currentFile.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();reuslt=getBodyContent(oldFileContent,content);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){body.content=new_content;reuslt=content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}(0,core.setOutput)('content',Buffer.from(body.content,'base64').toString());(0,core.startGroup)("\uD83D\uDC49 Text OLD content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text NEW content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();if(!(oldFileContent==reuslt)){_context3.next=39;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context3.abrupt("return");case 39:body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},body),currentFile),{},{content:body.content,sha:currentFile.sha});fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);if(!(isExists&&sync_local_file.toString()==='true'&&ref===github.context.ref)){_context3.next=45;break;}_context3.next=45;return lib_default().writeFile(fullPath,new_content);case 45:(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=50;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},body),{},{sha:currentFile.sha}));case 50:result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context3.next=67;break;case 58:(0,core.warning)("\uD83D\uDC49 Not Found ::- ".concat(options.path));_context3.next=61;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)({},body));case 61:_result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content4=_result.data.content)===null||_result$data$content4===void 0?void 0:_result$data$content4.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content5=_result.data.content)===null||_result$data$content5===void 0?void 0:_result$data$content5.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content6=_result.data.content)===null||_result$data$content6===void 0?void 0:_result$data$content6.sha));(0,core.endGroup)();case 67:case"end":return _context3.stop();}}},_callee3);}));return _modifyPathContents.apply(this,arguments);}
+var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var sha=(0,core.getInput)('sha');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,sha:sha,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var _getInputs2,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_getInputs2=getInputs(),branch=_getInputs2.branch;if(!(branch!==null)){_context.next=3;break;}return _context.abrupt("return",Promise.resolve(branch));case 3:_context.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context.sent;data=_yield$octokit$rest$r.data;return _context.abrupt("return",data.default_branch);case 8:case"end":return _context.stop();}},_callee);}));return _getBranch.apply(this,arguments);}function getFileContents(_x){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(branch){var _getInputs3,owner,repo,filepath,_yield$octokit$rest$r2,data;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2){while(1)switch(_context2.prev=_context2.next){case 0:_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,filepath=_getInputs3.filepath;_context2.prev=1;_context2.next=4;return octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath});case 4:_yield$octokit$rest$r2=_context2.sent;data=_yield$octokit$rest$r2.data;return _context2.abrupt("return",data);case 9:_context2.prev=9;_context2.t0=_context2["catch"](1);(0,core.warning)("\uD83D\uDC49 Get File Contents: ".concat(_context2.t0 instanceof Error?_context2.t0.message:_context2.t0));return _context2.abrupt("return");case 13:case"end":return _context2.stop();}},_callee2,null,[[1,9]]);}));return _getFileContents.apply(this,arguments);}function getBodyContent(oldFileContent,content){var _getInputs=getInputs(),openDelimiter=_getInputs.openDelimiter,closeDelimiter=_getInputs.closeDelimiter,overwrite=_getInputs.overwrite;var REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');var match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(match===null||match===void 0?void 0:match.length));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){}return oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3(){var options,content,other,_getInputs4,owner,repo,message,committer_name,committer_email,overwrite,sync_local_file,ref,branch,new_content,body,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,reuslt,fullPath,isExists,result,_result$data$content4,_result$data$content5,_result$data$content6,_result,_args3=arguments;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3){while(1)switch(_context3.prev=_context3.next){case 0:options=_args3.length>0&&_args3[0]!==undefined?_args3[0]:{};content=_args3.length>1?_args3[1]:undefined;other=Object.assign({},(_objectDestructuringEmpty(options),options));_getInputs4=getInputs(),owner=_getInputs4.owner,repo=_getInputs4.repo,message=_getInputs4.message,committer_name=_getInputs4.committer_name,committer_email=_getInputs4.committer_email,overwrite=_getInputs4.overwrite,sync_local_file=_getInputs4.sync_local_file,ref=_getInputs4.ref;_context3.next=6;return getBranch();case 6:branch=_context3.sent;if(options.path){_context3.next=9;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 9:(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));new_content=Buffer.from(content).toString("base64");body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({owner:owner,repo:repo,path:options.path,branch:branch,message:message||"doc: update ".concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'}},other),{},{content:new_content});(0,core.startGroup)("\uD83D\uDC49 Init Body: (".concat(branch,")"));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=20;return getFileContents(branch);case 20:currentFile=_context3.sent;if(!(currentFile&&'content'in currentFile)){_context3.next=58;break;}fileContent=currentFile.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();reuslt=getBodyContent(oldFileContent,content);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){body.content=new_content;reuslt=content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}(0,core.setOutput)('content',Buffer.from(body.content,'base64').toString());(0,core.startGroup)("\uD83D\uDC49 Text OLD content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text NEW content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();if(!(oldFileContent==reuslt)){_context3.next=39;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context3.abrupt("return");case 39:body=(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},body),currentFile),{},{content:body.content,sha:currentFile.sha});fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);if(!(isExists&&sync_local_file.toString()==='true'&&ref===github.context.ref)){_context3.next=45;break;}_context3.next=45;return lib_default().writeFile(fullPath,new_content);case 45:(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=50;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({},body),{},{sha:currentFile.sha}));case 50:result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context3.next=67;break;case 58:(0,core.warning)("\uD83D\uDC49 Not Found ::- ".concat(options.path));_context3.next=61;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.Z)({},body));case 61:_result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content4=_result.data.content)===null||_result$data$content4===void 0?void 0:_result$data$content4.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content5=_result.data.content)===null||_result$data$content5===void 0?void 0:_result$data$content5.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content6=_result.data.content)===null||_result$data$content6===void 0?void 0:_result$data$content6.sha));(0,core.endGroup)();case 67:case"end":return _context3.stop();}},_callee3);}));return _modifyPathContents.apply(this,arguments);}
 ;// CONCATENATED MODULE: ./node_modules/@uiw/formatter/esm/index.js
 /**! 
- * @uiw/formatter v1.3.5 
+ * @uiw/formatter v2.0.1 
  * Get a formatted date. 
  * 
  * Copyright (c) 2022 Kenny Wang <wowohoo@qq.com> 
@@ -14416,7 +14119,7 @@ formatter.utc = function (str, date) {
 };
 
 ;// CONCATENATED MODULE: ./src/index.ts
-var REGEXP=/\{\{date:?(.*?)\}\}/ig;(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var filepath,body,result;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:filepath=(0,core.getInput)('path')||'';_context.prev=1;body=(0,core.getInput)('body')||'';if(body){_context.next=6;break;}(0,core.warning)("\uD83D\uDC49 \"body\" input value does not exist.");return _context.abrupt("return");case 6:if(filepath){_context.next=9;break;}(0,core.warning)("\uD83D\uDC49 \"path\" input value does not exist.");return _context.abrupt("return");case 9:if(REGEXP.test(body)){result=body.replace(REGEXP,function(match,str2){var format=match.replace(REGEXP,'$1');var str=formatter(format||'YYYY/MM/DD HH:mm:ss',new Date());return str;});if(result){body=result;}}(0,core.info)("\uD83D\uDC49 Body Content: ".concat(body));_context.next=13;return modifyPathContents({path:filepath},body);case 13:_context.next=18;break;case 15:_context.prev=15;_context.t0=_context["catch"](1);if(_context.t0 instanceof Error){(0,core.setFailed)("".concat(_context.t0.message," - ").concat(filepath));}case 18:case"end":return _context.stop();}}},_callee,null,[[1,15]]);}))();
+var REGEXP=/\{\{date:?(.*?)\}\}/ig;(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var filepath,body,result;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:filepath=(0,core.getInput)('path')||'';_context.prev=1;body=(0,core.getInput)('body')||'';if(body){_context.next=6;break;}(0,core.warning)("\uD83D\uDC49 \"body\" input value does not exist.");return _context.abrupt("return");case 6:if(filepath){_context.next=9;break;}(0,core.warning)("\uD83D\uDC49 \"path\" input value does not exist.");return _context.abrupt("return");case 9:if(REGEXP.test(body)){result=body.replace(REGEXP,function(match,str2){var format=match.replace(REGEXP,'$1');var str=formatter(format||'YYYY/MM/DD HH:mm:ss',new Date());return str;});if(result){body=result;}}(0,core.info)("\uD83D\uDC49 Body Content: ".concat(body));_context.next=13;return modifyPathContents({path:filepath},body);case 13:_context.next=18;break;case 15:_context.prev=15;_context.t0=_context["catch"](1);if(_context.t0 instanceof Error){(0,core.setFailed)("".concat(_context.t0.message," - ").concat(filepath));}case 18:case"end":return _context.stop();}},_callee,null,[[1,15]]);}))();
 })();
 
 module.exports = __webpack_exports__;
