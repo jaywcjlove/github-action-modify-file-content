@@ -3,7 +3,7 @@ Modify File Content
 
 Replace text content and submit content
 
-Here is the example: update time <!--GAMFC-->2022-11-30 15:45:12<!--GAMFC-END-->
+Here is the example: update time <!--GAMFC-->2023-02-23 05:27:38<!--GAMFC-END-->
 
 Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABEL` & `GAMFC_TABEL-END` (test)<!--GAMFC_TABEL-END-->
 
@@ -38,10 +38,10 @@ Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABE
 `README.md` file content
 
 ```markdown
-update time <!--GAMFC-->2022-11-30 15:45:12<!--GAMFC-END-->
+update time <!--GAMFC-->2023-02-23 05:27:38<!--GAMFC-END-->
 ```
 
-Replace the content between `<!--GAMFC-->2022-11-30 15:45:12<!--GAMFC-END-->`.
+Replace the content between `<!--GAMFC-->2023-02-23 05:27:38<!--GAMFC-END-->`.
 
 ### format date
 
