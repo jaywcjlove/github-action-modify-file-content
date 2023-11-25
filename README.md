@@ -1,6 +1,9 @@
 Modify File Content
 ===
 
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor)
+[![test](https://github.com/jaywcjlove/github-action-modify-file-content/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/github-action-modify-file-content/actions/workflows/ci.yml)
+
 Replace text content and submit content
 
 Here is the example: update time <!--GAMFC-->2023-06-24 01:57:03<!--GAMFC-END-->
