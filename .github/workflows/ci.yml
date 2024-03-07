@@ -63,7 +63,12 @@ jobs:
           site: "Modify File Content {{version}}"
           menus:
             Home: index.html
-            Sponsor: https://jaywcjlove.github.io/#/sponsor
+            Apps: 
+              url: https://jaywcjlove.github.io/#/app
+              target: __blank
+            Sponsor: 
+              url: https://jaywcjlove.github.io/#/sponsor
+              target: __blank
           footer: |
             <a href="https://jaywcjlove.github.io/#/sponsor" target="_blank">Sponsor</a> • 
             <a href="https://jaywcjlove.github.io/create-tag-action" target="_blank">Create Tag</a> • 
@@ -76,7 +81,7 @@ jobs:
           
           EOF
   
-      - run: npm install idoc@1.27.2 -g
+      - run: npm install idoc@1 -g
       - run: idoc
   
       - name: Is a tag/release created auto? 
