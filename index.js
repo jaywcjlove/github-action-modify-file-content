@@ -2637,7 +2637,7 @@ var HttpClient = /*#__PURE__*/function () {
       if (this._keepAlive && useProxy) {
         agent = this._proxyAgent;
       }
-      if (this._keepAlive && !useProxy) {
+      if (!useProxy) {
         agent = this._agent;
       }
       // if agent is already assigned use that agent.
@@ -2671,18 +2671,14 @@ var HttpClient = /*#__PURE__*/function () {
         agent = tunnelAgent(agentOptions);
         this._proxyAgent = agent;
       }
-      // if reusing agent across request and tunneling agent isn't assigned create a new agent
-      if (this._keepAlive && !agent) {
+      // if tunneling agent isn't assigned create a new agent
+      if (!agent) {
         var options = {
           keepAlive: this._keepAlive,
           maxSockets: maxSockets
         };
         agent = usingSsl ? new https.Agent(options) : new http.Agent(options);
         this._agent = agent;
-      }
-      // if not using private agent and tunnel agent isn't setup then use global agent
-      if (!agent) {
-        agent = usingSsl ? https.globalAgent : http.globalAgent;
       }
       if (usingSsl && this._ignoreSslError) {
         // we don't want to set NODE_TLS_REJECT_UNAUTHORIZED=0 since that will affect request for entire process
@@ -4267,7 +4263,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // pkg/dist-src/version.js
-var VERSION = "9.2.0";
+var VERSION = "9.2.1";
 
 // pkg/dist-src/normalize-paginated-list-response.js
 function normalizePaginatedListResponse(response) {
@@ -4433,7 +4429,7 @@ __webpack_require__.d(__webpack_exports__, {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__(9379);
 ;// CONCATENATED MODULE: ./node_modules/@octokit/plugin-rest-endpoint-methods/dist-src/version.js
-var VERSION = "10.4.0";
+var VERSION = "10.4.1";
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__(4467);
@@ -11569,9 +11565,9 @@ var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classPrivateMethodInitSpec = (__webpack_require__(3312)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateMethodGet = (__webpack_require__(137)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
+var _assertClassBrand = (__webpack_require__(1756)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
 var _require = __webpack_require__(1568),
   kConstruct = _require.kConstruct;
 var _require2 = __webpack_require__(2465),
@@ -11618,47 +11614,25 @@ var _require11 = __webpack_require__(4397),
  * @typedef {[any, any][]} requestResponseList
  */
 var _relevantRequestResponseList = /*#__PURE__*/new WeakMap();
-var _batchCacheOperations = /*#__PURE__*/new WeakSet();
-var _queryCache = /*#__PURE__*/new WeakSet();
-var _requestMatchesCachedItem = /*#__PURE__*/new WeakSet();
+var _Cache_brand = /*#__PURE__*/new WeakSet();
 var Cache = /*#__PURE__*/function () {
   function Cache() {
     _classCallCheck(this, Cache);
-    /**
-     * @see https://w3c.github.io/ServiceWorker/#request-matches-cached-item-algorithm
-     * @param {any} requestQuery
-     * @param {any} request
-     * @param {any | null} response
-     * @param {import('../../types/cache').CacheQueryOptions | undefined} options
-     * @returns {boolean}
-     */
-    _classPrivateMethodInitSpec(this, _requestMatchesCachedItem);
-    /**
-     * @see https://w3c.github.io/ServiceWorker/#query-cache
-     * @param {any} requestQuery
-     * @param {import('../../types/cache').CacheQueryOptions} options
-     * @param {requestResponseList} targetStorage
-     * @returns {requestResponseList}
-     */
-    _classPrivateMethodInitSpec(this, _queryCache);
     /**
      * @see https://w3c.github.io/ServiceWorker/#batch-cache-operations-algorithm
      * @param {CacheBatchOperation[]} operations
      * @returns {requestResponseList}
      */
-    _classPrivateMethodInitSpec(this, _batchCacheOperations);
+    _classPrivateMethodInitSpec(this, _Cache_brand);
     /**
      * @see https://w3c.github.io/ServiceWorker/#dfn-relevant-request-response-list
      * @type {requestResponseList}
      */
-    _classPrivateFieldInitSpec(this, _relevantRequestResponseList, {
-      writable: true,
-      value: void 0
-    });
+    _classPrivateFieldInitSpec(this, _relevantRequestResponseList, void 0);
     if (arguments[0] !== kConstruct) {
       webidl.illegalConstructor();
     }
-    _classPrivateFieldSet(this, _relevantRequestResponseList, arguments[1]);
+    _classPrivateFieldSet(_relevantRequestResponseList, this, arguments[1]);
   }
   _createClass(Cache, [{
     key: "match",
@@ -11765,7 +11739,7 @@ var Cache = /*#__PURE__*/function () {
               responses = []; // 5.2
               if (request === undefined) {
                 // 5.2.1
-                _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _relevantRequestResponseList));
+                _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_relevantRequestResponseList, this));
                 try {
                   for (_iterator.s(); !(_step = _iterator.n()).done;) {
                     requestResponse = _step.value;
@@ -11779,7 +11753,7 @@ var Cache = /*#__PURE__*/function () {
               } else {
                 // 5.3
                 // 5.3.1
-                requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, r, options); // 5.3.2
+                requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, r, options); // 5.3.2
                 _iterator2 = _createForOfIteratorHelper(requestResponses);
                 try {
                   for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -12084,7 +12058,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise(); // 7.6.1
               errorData = null; // 7.6.2
               try {
-                _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12259,7 +12233,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise(); // 19.2.1
               errorData = null; // 19.2.2
               try {
-                _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12342,7 +12316,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise();
               errorData = null;
               try {
-                requestResponses = _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                requestResponses = _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12432,7 +12406,7 @@ var Cache = /*#__PURE__*/function () {
               requests = []; // 5.2
               if (request === undefined) {
                 // 5.2.1
-                _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _relevantRequestResponseList));
+                _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(_relevantRequestResponseList, this));
                 try {
                   for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
                     requestResponse = _step8.value;
@@ -12447,7 +12421,7 @@ var Cache = /*#__PURE__*/function () {
               } else {
                 // 5.3
                 // 5.3.1
-                requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, r, options); // 5.3.2
+                requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, r, options); // 5.3.2
                 _iterator9 = _createForOfIteratorHelper(requestResponses);
                 try {
                   for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
@@ -12498,9 +12472,9 @@ var Cache = /*#__PURE__*/function () {
   }]);
   return Cache;
 }();
-function _batchCacheOperations2(operations) {
+function _batchCacheOperations(operations) {
   // 1.
-  var cache = _classPrivateFieldGet(this, _relevantRequestResponseList);
+  var cache = _classPrivateFieldGet(_relevantRequestResponseList, this);
 
   // 2.
   var backupCache = _toConsumableArray(cache);
@@ -12534,7 +12508,7 @@ function _batchCacheOperations2(operations) {
         }
 
         // 4.2.3
-        if (_classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request, operation.options, addedItems).length) {
+        if (_assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request, operation.options, addedItems).length) {
           throw new DOMException('???', 'InvalidStateError');
         }
 
@@ -12544,7 +12518,7 @@ function _batchCacheOperations2(operations) {
         // 4.2.5
         if (operation.type === 'delete') {
           // 4.2.5.1
-          requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request, operation.options);
+          requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request, operation.options);
 
           // TODO: the spec is wrong, this is needed to pass WPTs
           if (requestResponses.length === 0) {
@@ -12606,7 +12580,7 @@ function _batchCacheOperations2(operations) {
           }
 
           // 4.2.6.6
-          requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request);
+          requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request);
 
           // 4.2.6.7
           var _iterator12 = _createForOfIteratorHelper(requestResponses),
@@ -12647,19 +12621,26 @@ function _batchCacheOperations2(operations) {
   } catch (e) {
     // 5.
     // 5.1
-    _classPrivateFieldGet(this, _relevantRequestResponseList).length = 0;
+    _classPrivateFieldGet(_relevantRequestResponseList, this).length = 0;
 
     // 5.2
-    _classPrivateFieldSet(this, _relevantRequestResponseList, backupCache);
+    _classPrivateFieldSet(_relevantRequestResponseList, this, backupCache);
 
     // 5.3
     throw e;
   }
 }
-function _queryCache2(requestQuery, options, targetStorage) {
+/**
+ * @see https://w3c.github.io/ServiceWorker/#query-cache
+ * @param {any} requestQuery
+ * @param {import('../../types/cache').CacheQueryOptions} options
+ * @param {requestResponseList} targetStorage
+ * @returns {requestResponseList}
+ */
+function _queryCache(requestQuery, options, targetStorage) {
   /** @type {requestResponseList} */
   var resultList = [];
-  var storage = targetStorage !== null && targetStorage !== void 0 ? targetStorage : _classPrivateFieldGet(this, _relevantRequestResponseList);
+  var storage = targetStorage !== null && targetStorage !== void 0 ? targetStorage : _classPrivateFieldGet(_relevantRequestResponseList, this);
   var _iterator13 = _createForOfIteratorHelper(storage),
     _step13;
   try {
@@ -12668,7 +12649,7 @@ function _queryCache2(requestQuery, options, targetStorage) {
       var _requestResponse4 = _slicedToArray(requestResponse, 2),
         cachedRequest = _requestResponse4[0],
         cachedResponse = _requestResponse4[1];
-      if (_classPrivateMethodGet(this, _requestMatchesCachedItem, _requestMatchesCachedItem2).call(this, requestQuery, cachedRequest, cachedResponse, options)) {
+      if (_assertClassBrand(_Cache_brand, this, _requestMatchesCachedItem).call(this, requestQuery, cachedRequest, cachedResponse, options)) {
         resultList.push(requestResponse);
       }
     }
@@ -12679,7 +12660,15 @@ function _queryCache2(requestQuery, options, targetStorage) {
   }
   return resultList;
 }
-function _requestMatchesCachedItem2(requestQuery, request) {
+/**
+ * @see https://w3c.github.io/ServiceWorker/#request-matches-cached-item-algorithm
+ * @param {any} requestQuery
+ * @param {any} request
+ * @param {any | null} response
+ * @param {import('../../types/cache').CacheQueryOptions | undefined} options
+ * @returns {boolean}
+ */
+function _requestMatchesCachedItem(requestQuery, request) {
   var response = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var options = arguments.length > 3 ? arguments[3] : undefined;
   // if (options?.ignoreMethod === false && request.method === 'GET') {
@@ -12767,7 +12756,7 @@ var _asyncToGenerator = (__webpack_require__(9293)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
 var _require = __webpack_require__(1568),
   kConstruct = _require.kConstruct;
 var _require2 = __webpack_require__(9319),
@@ -12784,10 +12773,7 @@ var CacheStorage = /*#__PURE__*/function () {
      * @see https://w3c.github.io/ServiceWorker/#dfn-relevant-name-to-cache-map
      * @type {Map<string, import('./cache').requestResponseList}
      */
-    _classPrivateFieldInitSpec(this, _caches, {
-      writable: true,
-      value: new Map()
-    });
+    _classPrivateFieldInitSpec(this, _caches, new Map());
     if (arguments[0] !== kConstruct) {
       webidl.illegalConstructor();
     }
@@ -12821,12 +12807,12 @@ var CacheStorage = /*#__PURE__*/function () {
                 _context.next = 14;
                 break;
               }
-              if (!_classPrivateFieldGet(this, _caches).has(options.cacheName)) {
+              if (!_classPrivateFieldGet(_caches, this).has(options.cacheName)) {
                 _context.next = 12;
                 break;
               }
               // 1.1.1.1.1
-              cacheList = _classPrivateFieldGet(this, _caches).get(options.cacheName);
+              cacheList = _classPrivateFieldGet(_caches, this).get(options.cacheName);
               cache = new Cache(kConstruct, cacheList);
               _context.next = 11;
               return cache.match(request, options);
@@ -12838,7 +12824,7 @@ var CacheStorage = /*#__PURE__*/function () {
             case 14:
               // 2.
               // 2.2
-              _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _caches).values());
+              _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_caches, this).values());
               _context.prev = 15;
               _iterator.s();
             case 17:
@@ -12903,7 +12889,7 @@ var CacheStorage = /*#__PURE__*/function () {
 
               // 2.1.1
               // 2.2
-              return _context2.abrupt("return", _classPrivateFieldGet(this, _caches).has(cacheName));
+              return _context2.abrupt("return", _classPrivateFieldGet(_caches, this).has(cacheName));
             case 4:
             case "end":
               return _context2.stop();
@@ -12938,18 +12924,18 @@ var CacheStorage = /*#__PURE__*/function () {
               cacheName = webidl.converters.DOMString(cacheName);
 
               // 2.1
-              if (!_classPrivateFieldGet(this, _caches).has(cacheName)) {
+              if (!_classPrivateFieldGet(_caches, this).has(cacheName)) {
                 _context3.next = 6;
                 break;
               }
               // await caches.open('v1') !== await caches.open('v1')
               // 2.1.1
-              _cache2 = _classPrivateFieldGet(this, _caches).get(cacheName); // 2.1.1.1
+              _cache2 = _classPrivateFieldGet(_caches, this).get(cacheName); // 2.1.1.1
               return _context3.abrupt("return", new Cache(kConstruct, _cache2));
             case 6:
               // 2.2
               cache = []; // 2.3
-              _classPrivateFieldGet(this, _caches).set(cacheName, cache);
+              _classPrivateFieldGet(_caches, this).set(cacheName, cache);
 
               // 2.4
               return _context3.abrupt("return", new Cache(kConstruct, cache));
@@ -12983,7 +12969,7 @@ var CacheStorage = /*#__PURE__*/function () {
                 header: 'CacheStorage.delete'
               });
               cacheName = webidl.converters.DOMString(cacheName);
-              return _context4.abrupt("return", _classPrivateFieldGet(this, _caches)["delete"](cacheName));
+              return _context4.abrupt("return", _classPrivateFieldGet(_caches, this)["delete"](cacheName));
             case 4:
             case "end":
               return _context4.stop();
@@ -13011,7 +12997,7 @@ var CacheStorage = /*#__PURE__*/function () {
               webidl.brandCheck(this, CacheStorage);
 
               // 2.1
-              keys = _classPrivateFieldGet(this, _caches).keys(); // 2.2
+              keys = _classPrivateFieldGet(_caches, this).keys(); // 2.2
               return _context5.abrupt("return", _toConsumableArray(keys));
             case 3:
             case "end":
@@ -31670,8 +31656,8 @@ var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
 var _require = __webpack_require__(3702),
   webidl = _require.webidl;
 var _require2 = __webpack_require__(6632),
@@ -31695,45 +31681,42 @@ var MessageEvent = /*#__PURE__*/function (_Event) {
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.MessageEventInit(eventInitDict);
     _this = _callSuper(this, MessageEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _eventInit, {
-      writable: true,
-      value: void 0
-    });
-    _classPrivateFieldSet(_assertThisInitialized(_this), _eventInit, eventInitDict);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _eventInit, void 0);
+    _classPrivateFieldSet(_eventInit, _assertThisInitialized(_this), eventInitDict);
     return _this;
   }
   _createClass(MessageEvent, [{
     key: "data",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).data;
+      return _classPrivateFieldGet(_eventInit, this).data;
     }
   }, {
     key: "origin",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).origin;
+      return _classPrivateFieldGet(_eventInit, this).origin;
     }
   }, {
     key: "lastEventId",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).lastEventId;
+      return _classPrivateFieldGet(_eventInit, this).lastEventId;
     }
   }, {
     key: "source",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).source;
+      return _classPrivateFieldGet(_eventInit, this).source;
     }
   }, {
     key: "ports",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      if (!Object.isFrozen(_classPrivateFieldGet(this, _eventInit).ports)) {
-        Object.freeze(_classPrivateFieldGet(this, _eventInit).ports);
+      if (!Object.isFrozen(_classPrivateFieldGet(_eventInit, this).ports)) {
+        Object.freeze(_classPrivateFieldGet(_eventInit, this).ports);
       }
-      return _classPrivateFieldGet(this, _eventInit).ports;
+      return _classPrivateFieldGet(_eventInit, this).ports;
     }
   }, {
     key: "initMessageEvent",
@@ -31778,30 +31761,27 @@ var CloseEvent = /*#__PURE__*/function (_Event2) {
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.CloseEventInit(eventInitDict);
     _this2 = _callSuper(this, CloseEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this2), _eventInit2, {
-      writable: true,
-      value: void 0
-    });
-    _classPrivateFieldSet(_assertThisInitialized(_this2), _eventInit2, eventInitDict);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this2), _eventInit2, void 0);
+    _classPrivateFieldSet(_eventInit2, _assertThisInitialized(_this2), eventInitDict);
     return _this2;
   }
   _createClass(CloseEvent, [{
     key: "wasClean",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).wasClean;
+      return _classPrivateFieldGet(_eventInit2, this).wasClean;
     }
   }, {
     key: "code",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).code;
+      return _classPrivateFieldGet(_eventInit2, this).code;
     }
   }, {
     key: "reason",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).reason;
+      return _classPrivateFieldGet(_eventInit2, this).reason;
     }
   }]);
   return CloseEvent;
@@ -31817,44 +31797,41 @@ var ErrorEvent = /*#__PURE__*/function (_Event3) {
       header: 'ErrorEvent constructor'
     });
     _this3 = _callSuper(this, ErrorEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this3), _eventInit3, {
-      writable: true,
-      value: void 0
-    });
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this3), _eventInit3, void 0);
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.ErrorEventInit((_eventInitDict = eventInitDict) !== null && _eventInitDict !== void 0 ? _eventInitDict : {});
-    _classPrivateFieldSet(_assertThisInitialized(_this3), _eventInit3, eventInitDict);
+    _classPrivateFieldSet(_eventInit3, _assertThisInitialized(_this3), eventInitDict);
     return _this3;
   }
   _createClass(ErrorEvent, [{
     key: "message",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).message;
+      return _classPrivateFieldGet(_eventInit3, this).message;
     }
   }, {
     key: "filename",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).filename;
+      return _classPrivateFieldGet(_eventInit3, this).filename;
     }
   }, {
     key: "lineno",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).lineno;
+      return _classPrivateFieldGet(_eventInit3, this).lineno;
     }
   }, {
     key: "colno",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).colno;
+      return _classPrivateFieldGet(_eventInit3, this).colno;
     }
   }, {
     key: "error",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).error;
+      return _classPrivateFieldGet(_eventInit3, this).error;
     }
   }]);
   return ErrorEvent;
@@ -32042,8 +32019,8 @@ var _callSuper = (__webpack_require__(8336)["default"]);
 var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
 var _require = __webpack_require__(2203),
   Writable = _require.Writable;
 var diagnosticsChannel = __webpack_require__(1637);
@@ -32083,26 +32060,11 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
     var _this;
     _classCallCheck(this, ByteParser);
     _this = _callSuper(this, ByteParser);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _buffers, {
-      writable: true,
-      value: []
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _byteOffset, {
-      writable: true,
-      value: 0
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _state, {
-      writable: true,
-      value: parserStates.INFO
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _info, {
-      writable: true,
-      value: {}
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _fragments, {
-      writable: true,
-      value: []
-    });
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _buffers, []);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _byteOffset, 0);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _state, parserStates.INFO);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _info, {});
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _fragments, []);
     _this.ws = ws;
     return _this;
   }
@@ -32114,8 +32076,8 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
   _createClass(ByteParser, [{
     key: "_write",
     value: function _write(chunk, _, callback) {
-      _classPrivateFieldGet(this, _buffers).push(chunk);
-      _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) + chunk.length);
+      _classPrivateFieldGet(_buffers, this).push(chunk);
+      _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) + chunk.length);
       this.run(callback);
     }
 
@@ -32129,56 +32091,56 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
     value: function run(callback) {
       var _this2 = this;
       while (true) {
-        if (_classPrivateFieldGet(this, _state) === parserStates.INFO) {
+        if (_classPrivateFieldGet(_state, this) === parserStates.INFO) {
           var _classPrivateFieldGet2, _classPrivateFieldGet3;
           // If there aren't enough bytes to parse the payload length, etc.
-          if (_classPrivateFieldGet(this, _byteOffset) < 2) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 2) {
             return callback();
           }
           var buffer = this.consume(2);
-          _classPrivateFieldGet(this, _info).fin = (buffer[0] & 0x80) !== 0;
-          _classPrivateFieldGet(this, _info).opcode = buffer[0] & 0x0F;
+          _classPrivateFieldGet(_info, this).fin = (buffer[0] & 0x80) !== 0;
+          _classPrivateFieldGet(_info, this).opcode = buffer[0] & 0x0F;
 
           // If we receive a fragmented message, we use the type of the first
           // frame to parse the full message as binary/text, when it's terminated
-          (_classPrivateFieldGet3 = (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _info)).originalOpcode) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : _classPrivateFieldGet2.originalOpcode = _classPrivateFieldGet(this, _info).opcode;
-          _classPrivateFieldGet(this, _info).fragmented = !_classPrivateFieldGet(this, _info).fin && _classPrivateFieldGet(this, _info).opcode !== opcodes.CONTINUATION;
-          if (_classPrivateFieldGet(this, _info).fragmented && _classPrivateFieldGet(this, _info).opcode !== opcodes.BINARY && _classPrivateFieldGet(this, _info).opcode !== opcodes.TEXT) {
+          (_classPrivateFieldGet3 = (_classPrivateFieldGet2 = _classPrivateFieldGet(_info, this)).originalOpcode) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : _classPrivateFieldGet2.originalOpcode = _classPrivateFieldGet(_info, this).opcode;
+          _classPrivateFieldGet(_info, this).fragmented = !_classPrivateFieldGet(_info, this).fin && _classPrivateFieldGet(_info, this).opcode !== opcodes.CONTINUATION;
+          if (_classPrivateFieldGet(_info, this).fragmented && _classPrivateFieldGet(_info, this).opcode !== opcodes.BINARY && _classPrivateFieldGet(_info, this).opcode !== opcodes.TEXT) {
             // Only text and binary frames can be fragmented
             failWebsocketConnection(this.ws, 'Invalid frame type was fragmented.');
             return;
           }
           var payloadLength = buffer[1] & 0x7F;
           if (payloadLength <= 125) {
-            _classPrivateFieldGet(this, _info).payloadLength = payloadLength;
-            _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
+            _classPrivateFieldGet(_info, this).payloadLength = payloadLength;
+            _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
           } else if (payloadLength === 126) {
-            _classPrivateFieldSet(this, _state, parserStates.PAYLOADLENGTH_16);
+            _classPrivateFieldSet(_state, this, parserStates.PAYLOADLENGTH_16);
           } else if (payloadLength === 127) {
-            _classPrivateFieldSet(this, _state, parserStates.PAYLOADLENGTH_64);
+            _classPrivateFieldSet(_state, this, parserStates.PAYLOADLENGTH_64);
           }
-          if (_classPrivateFieldGet(this, _info).fragmented && payloadLength > 125) {
+          if (_classPrivateFieldGet(_info, this).fragmented && payloadLength > 125) {
             // A fragmented frame can't be fragmented itself
             failWebsocketConnection(this.ws, 'Fragmented frame exceeded 125 bytes.');
             return;
-          } else if ((_classPrivateFieldGet(this, _info).opcode === opcodes.PING || _classPrivateFieldGet(this, _info).opcode === opcodes.PONG || _classPrivateFieldGet(this, _info).opcode === opcodes.CLOSE) && payloadLength > 125) {
+          } else if ((_classPrivateFieldGet(_info, this).opcode === opcodes.PING || _classPrivateFieldGet(_info, this).opcode === opcodes.PONG || _classPrivateFieldGet(_info, this).opcode === opcodes.CLOSE) && payloadLength > 125) {
             // Control frames can have a payload length of 125 bytes MAX
             failWebsocketConnection(this.ws, 'Payload length for control frame exceeded 125 bytes.');
             return;
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.CLOSE) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.CLOSE) {
             if (payloadLength === 1) {
               failWebsocketConnection(this.ws, 'Received close frame with a 1-byte body.');
               return;
             }
             var body = this.consume(payloadLength);
-            _classPrivateFieldGet(this, _info).closeInfo = this.parseCloseBody(false, body);
+            _classPrivateFieldGet(_info, this).closeInfo = this.parseCloseBody(false, body);
             if (!this.ws[kSentClose]) {
               // If an endpoint receives a Close frame and did not previously send a
               // Close frame, the endpoint MUST send a Close frame in response.  (When
               // sending a Close frame in response, the endpoint typically echos the
               // status code it received.)
               var _body = Buffer.allocUnsafe(2);
-              _body.writeUInt16BE(_classPrivateFieldGet(this, _info).closeInfo.code, 0);
+              _body.writeUInt16BE(_classPrivateFieldGet(_info, this).closeInfo.code, 0);
               var closeFrame = new WebsocketFrameSend(_body);
               this.ws[kResponse].socket.write(closeFrame.createFrame(opcodes.CLOSE), function (err) {
                 if (!err) {
@@ -32194,7 +32156,7 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
             this.ws[kReceivedClose] = true;
             this.end();
             return;
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.PING) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.PING) {
             // Upon receipt of a Ping frame, an endpoint MUST send a Pong frame in
             // response, unless it already received a Close frame.
             // A Pong frame sent in response to a Ping frame must have identical
@@ -32210,14 +32172,14 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
                 });
               }
             }
-            _classPrivateFieldSet(this, _state, parserStates.INFO);
-            if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+            _classPrivateFieldSet(_state, this, parserStates.INFO);
+            if (_classPrivateFieldGet(_byteOffset, this) > 0) {
               continue;
             } else {
               callback();
               return;
             }
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.PONG) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.PONG) {
             // A Pong frame MAY be sent unsolicited.  This serves as a
             // unidirectional heartbeat.  A response to an unsolicited Pong frame is
             // not expected.
@@ -32228,22 +32190,22 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
                 payload: _body3
               });
             }
-            if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+            if (_classPrivateFieldGet(_byteOffset, this) > 0) {
               continue;
             } else {
               callback();
               return;
             }
           }
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.PAYLOADLENGTH_16) {
-          if (_classPrivateFieldGet(this, _byteOffset) < 2) {
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.PAYLOADLENGTH_16) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 2) {
             return callback();
           }
           var _buffer = this.consume(2);
-          _classPrivateFieldGet(this, _info).payloadLength = _buffer.readUInt16BE(0);
-          _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.PAYLOADLENGTH_64) {
-          if (_classPrivateFieldGet(this, _byteOffset) < 8) {
+          _classPrivateFieldGet(_info, this).payloadLength = _buffer.readUInt16BE(0);
+          _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.PAYLOADLENGTH_64) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 8) {
             return callback();
           }
           var _buffer2 = this.consume(8);
@@ -32260,30 +32222,30 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
             return;
           }
           var lower = _buffer2.readUInt32BE(4);
-          _classPrivateFieldGet(this, _info).payloadLength = (upper << 8) + lower;
-          _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.READ_DATA) {
-          if (_classPrivateFieldGet(this, _byteOffset) < _classPrivateFieldGet(this, _info).payloadLength) {
+          _classPrivateFieldGet(_info, this).payloadLength = (upper << 8) + lower;
+          _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.READ_DATA) {
+          if (_classPrivateFieldGet(_byteOffset, this) < _classPrivateFieldGet(_info, this).payloadLength) {
             // If there is still more data in this chunk that needs to be read
             return callback();
-          } else if (_classPrivateFieldGet(this, _byteOffset) >= _classPrivateFieldGet(this, _info).payloadLength) {
+          } else if (_classPrivateFieldGet(_byteOffset, this) >= _classPrivateFieldGet(_info, this).payloadLength) {
             // If the server sent multiple frames in a single chunk
 
-            var _body4 = this.consume(_classPrivateFieldGet(this, _info).payloadLength);
-            _classPrivateFieldGet(this, _fragments).push(_body4);
+            var _body4 = this.consume(_classPrivateFieldGet(_info, this).payloadLength);
+            _classPrivateFieldGet(_fragments, this).push(_body4);
 
             // If the frame is unfragmented, or a fragmented frame was terminated,
             // a message was received
-            if (!_classPrivateFieldGet(this, _info).fragmented || _classPrivateFieldGet(this, _info).fin && _classPrivateFieldGet(this, _info).opcode === opcodes.CONTINUATION) {
-              var fullMessage = Buffer.concat(_classPrivateFieldGet(this, _fragments));
-              websocketMessageReceived(this.ws, _classPrivateFieldGet(this, _info).originalOpcode, fullMessage);
-              _classPrivateFieldSet(this, _info, {});
-              _classPrivateFieldGet(this, _fragments).length = 0;
+            if (!_classPrivateFieldGet(_info, this).fragmented || _classPrivateFieldGet(_info, this).fin && _classPrivateFieldGet(_info, this).opcode === opcodes.CONTINUATION) {
+              var fullMessage = Buffer.concat(_classPrivateFieldGet(_fragments, this));
+              websocketMessageReceived(this.ws, _classPrivateFieldGet(_info, this).originalOpcode, fullMessage);
+              _classPrivateFieldSet(_info, this, {});
+              _classPrivateFieldGet(_fragments, this).length = 0;
             }
-            _classPrivateFieldSet(this, _state, parserStates.INFO);
+            _classPrivateFieldSet(_state, this, parserStates.INFO);
           }
         }
-        if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+        if (_classPrivateFieldGet(_byteOffset, this) > 0) {
           continue;
         } else {
           callback();
@@ -32300,33 +32262,33 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
   }, {
     key: "consume",
     value: function consume(n) {
-      if (n > _classPrivateFieldGet(this, _byteOffset)) {
+      if (n > _classPrivateFieldGet(_byteOffset, this)) {
         return null;
       } else if (n === 0) {
         return emptyBuffer;
       }
-      if (_classPrivateFieldGet(this, _buffers)[0].length === n) {
-        _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) - _classPrivateFieldGet(this, _buffers)[0].length);
-        return _classPrivateFieldGet(this, _buffers).shift();
+      if (_classPrivateFieldGet(_buffers, this)[0].length === n) {
+        _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) - _classPrivateFieldGet(_buffers, this)[0].length);
+        return _classPrivateFieldGet(_buffers, this).shift();
       }
       var buffer = Buffer.allocUnsafe(n);
       var offset = 0;
       while (offset !== n) {
-        var next = _classPrivateFieldGet(this, _buffers)[0];
+        var next = _classPrivateFieldGet(_buffers, this)[0];
         var length = next.length;
         if (length + offset === n) {
-          buffer.set(_classPrivateFieldGet(this, _buffers).shift(), offset);
+          buffer.set(_classPrivateFieldGet(_buffers, this).shift(), offset);
           break;
         } else if (length + offset > n) {
           buffer.set(next.subarray(0, n - offset), offset);
-          _classPrivateFieldGet(this, _buffers)[0] = next.subarray(n - offset);
+          _classPrivateFieldGet(_buffers, this)[0] = next.subarray(n - offset);
           break;
         } else {
-          buffer.set(_classPrivateFieldGet(this, _buffers).shift(), offset);
+          buffer.set(_classPrivateFieldGet(_buffers, this).shift(), offset);
           offset += next.length;
         }
       }
-      _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) - n);
+      _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) - n);
       return buffer;
     }
   }, {
@@ -32377,7 +32339,7 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
   }, {
     key: "closingInfo",
     get: function get() {
-      return _classPrivateFieldGet(this, _info).closeInfo;
+      return _classPrivateFieldGet(_info, this).closeInfo;
     }
   }]);
   return ByteParser;
@@ -32626,9 +32588,9 @@ var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var _classPrivateMethodInitSpec = (__webpack_require__(3312)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateMethodGet = (__webpack_require__(137)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _assertClassBrand = (__webpack_require__(1756)["default"]);
 var _require = __webpack_require__(3702),
   webidl = _require.webidl;
 var _require2 = __webpack_require__(8422),
@@ -32676,7 +32638,7 @@ var _events = /*#__PURE__*/new WeakMap();
 var _bufferedAmount = /*#__PURE__*/new WeakMap();
 var _protocol = /*#__PURE__*/new WeakMap();
 var _extensions = /*#__PURE__*/new WeakMap();
-var _onConnectionEstablished = /*#__PURE__*/new WeakSet();
+var _WebSocket_brand = /*#__PURE__*/new WeakSet();
 var WebSocket = /*#__PURE__*/function (_EventTarget) {
   _inherits(WebSocket, _EventTarget);
   /**
@@ -32691,28 +32653,16 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     /**
      * @see https://websockets.spec.whatwg.org/#feedback-from-the-protocol
      */
-    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _onConnectionEstablished);
+    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _WebSocket_brand);
     _classPrivateFieldInitSpec(_assertThisInitialized(_this), _events, {
-      writable: true,
-      value: {
-        open: null,
-        error: null,
-        close: null,
-        message: null
-      }
+      open: null,
+      error: null,
+      close: null,
+      message: null
     });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _bufferedAmount, {
-      writable: true,
-      value: 0
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _protocol, {
-      writable: true,
-      value: ''
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _extensions, {
-      writable: true,
-      value: ''
-    });
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _bufferedAmount, 0);
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _protocol, '');
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _extensions, '');
     webidl.argumentLengthCheck(arguments, 1, {
       header: 'WebSocket constructor'
     });
@@ -32788,7 +32738,7 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     //    1. Establish a WebSocket connection given urlRecord, protocols,
     //       and client.
     _this[kController] = establishWebSocketConnection(urlRecord, protocols, _assertThisInitialized(_this), function (response) {
-      return _classPrivateMethodGet(_assertThisInitialized(_this), _onConnectionEstablished, _onConnectionEstablished2).call(_assertThisInitialized(_this), response);
+      return _assertClassBrand(_WebSocket_brand, _assertThisInitialized(_this), _onConnectionEstablished).call(_assertThisInitialized(_this), response);
     }, options);
 
     // Each WebSocket object has an associated ready state, which is a
@@ -32956,9 +32906,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var value = Buffer.from(data);
         var frame = new WebsocketFrameSend(value);
         var buffer = frame.createFrame(opcodes.TEXT);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + value.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + value.byteLength);
         socket.write(buffer, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - value.byteLength);
         });
       } else if (types.isArrayBuffer(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -32976,9 +32926,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var _value = Buffer.from(data);
         var _frame = new WebsocketFrameSend(_value);
         var _buffer = _frame.createFrame(opcodes.BINARY);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + _value.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + _value.byteLength);
         socket.write(_buffer, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - _value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - _value.byteLength);
         });
       } else if (ArrayBuffer.isView(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -32996,9 +32946,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var ab = Buffer.from(data, data.byteOffset, data.byteLength);
         var _frame2 = new WebsocketFrameSend(ab);
         var _buffer2 = _frame2.createFrame(opcodes.BINARY);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + ab.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + ab.byteLength);
         socket.write(_buffer2, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - ab.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - ab.byteLength);
         });
       } else if (isBlobLike(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -33017,9 +32967,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
           var value = Buffer.from(ab);
           _frame3.frameData = value;
           var buffer = _frame3.createFrame(opcodes.BINARY);
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) + value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) + value.byteLength);
           socket.write(buffer, function () {
-            _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - value.byteLength);
+            _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - value.byteLength);
           });
         });
       }
@@ -33036,7 +32986,7 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     key: "bufferedAmount",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _bufferedAmount);
+      return _classPrivateFieldGet(_bufferedAmount, this);
     }
   }, {
     key: "url",
@@ -33050,84 +33000,84 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     key: "extensions",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _extensions);
+      return _classPrivateFieldGet(_extensions, this);
     }
   }, {
     key: "protocol",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _protocol);
+      return _classPrivateFieldGet(_protocol, this);
     }
   }, {
     key: "onopen",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).open;
+      return _classPrivateFieldGet(_events, this).open;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).open) {
-        this.removeEventListener('open', _classPrivateFieldGet(this, _events).open);
+      if (_classPrivateFieldGet(_events, this).open) {
+        this.removeEventListener('open', _classPrivateFieldGet(_events, this).open);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).open = fn;
+        _classPrivateFieldGet(_events, this).open = fn;
         this.addEventListener('open', fn);
       } else {
-        _classPrivateFieldGet(this, _events).open = null;
+        _classPrivateFieldGet(_events, this).open = null;
       }
     }
   }, {
     key: "onerror",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).error;
+      return _classPrivateFieldGet(_events, this).error;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).error) {
-        this.removeEventListener('error', _classPrivateFieldGet(this, _events).error);
+      if (_classPrivateFieldGet(_events, this).error) {
+        this.removeEventListener('error', _classPrivateFieldGet(_events, this).error);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).error = fn;
+        _classPrivateFieldGet(_events, this).error = fn;
         this.addEventListener('error', fn);
       } else {
-        _classPrivateFieldGet(this, _events).error = null;
+        _classPrivateFieldGet(_events, this).error = null;
       }
     }
   }, {
     key: "onclose",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).close;
+      return _classPrivateFieldGet(_events, this).close;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).close) {
-        this.removeEventListener('close', _classPrivateFieldGet(this, _events).close);
+      if (_classPrivateFieldGet(_events, this).close) {
+        this.removeEventListener('close', _classPrivateFieldGet(_events, this).close);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).close = fn;
+        _classPrivateFieldGet(_events, this).close = fn;
         this.addEventListener('close', fn);
       } else {
-        _classPrivateFieldGet(this, _events).close = null;
+        _classPrivateFieldGet(_events, this).close = null;
       }
     }
   }, {
     key: "onmessage",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).message;
+      return _classPrivateFieldGet(_events, this).message;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).message) {
-        this.removeEventListener('message', _classPrivateFieldGet(this, _events).message);
+      if (_classPrivateFieldGet(_events, this).message) {
+        this.removeEventListener('message', _classPrivateFieldGet(_events, this).message);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).message = fn;
+        _classPrivateFieldGet(_events, this).message = fn;
         this.addEventListener('message', fn);
       } else {
-        _classPrivateFieldGet(this, _events).message = null;
+        _classPrivateFieldGet(_events, this).message = null;
       }
     }
   }, {
@@ -33147,7 +33097,7 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
   }]);
   return WebSocket;
 }( /*#__PURE__*/_wrapNativeSuper(EventTarget)); // https://websockets.spec.whatwg.org/#dom-websocket-connecting
-function _onConnectionEstablished2(response) {
+function _onConnectionEstablished(response) {
   // processResponse is called when the "response’s header list has been received and initialized."
   // once this happens, the connection is open
   this[kResponse] = response;
@@ -33166,7 +33116,7 @@ function _onConnectionEstablished2(response) {
   // https://datatracker.ietf.org/doc/html/rfc6455#section-9.1
   var extensions = response.headersList.get('sec-websocket-extensions');
   if (extensions !== null) {
-    _classPrivateFieldSet(this, _extensions, extensions);
+    _classPrivateFieldSet(_extensions, this, extensions);
   }
 
   // 3. Change the protocol attribute’s value to the subprotocol in use, if
@@ -33174,7 +33124,7 @@ function _onConnectionEstablished2(response) {
   // https://datatracker.ietf.org/doc/html/rfc6455#section-1.9
   var protocol = response.headersList.get('sec-websocket-protocol');
   if (protocol !== null) {
-    _classPrivateFieldSet(this, _protocol, protocol);
+    _classPrivateFieldSet(_protocol, this, protocol);
   }
 
   // 4. Fire an event named open at the WebSocket object.
@@ -34009,6 +33959,17 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
+/***/ 1756:
+/***/ ((module) => {
+
+function _assertClassBrand(e, t, n) {
+  if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n;
+  throw new TypeError("Private element is not present on this object");
+}
+module.exports = _assertClassBrand, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ 2475:
 /***/ ((module) => {
 
@@ -34176,36 +34137,6 @@ module.exports = _checkPrivateRedeclaration, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 5764:
-/***/ ((module) => {
-
-function _classApplyDescriptorGet(receiver, descriptor) {
-  if (descriptor.get) {
-    return descriptor.get.call(receiver);
-  }
-  return descriptor.value;
-}
-module.exports = _classApplyDescriptorGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 9056:
-/***/ ((module) => {
-
-function _classApplyDescriptorSet(receiver, descriptor, value) {
-  if (descriptor.set) {
-    descriptor.set.call(receiver, value);
-  } else {
-    if (!descriptor.writable) {
-      throw new TypeError("attempted to set read only private field");
-    }
-    descriptor.value = value;
-  }
-}
-module.exports = _classApplyDescriptorSet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
 /***/ 7383:
 /***/ ((module) => {
 
@@ -34218,29 +34149,14 @@ module.exports = _classCallCheck, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 1413:
-/***/ ((module) => {
-
-function _classExtractFieldDescriptor(receiver, privateMap, action) {
-  if (!privateMap.has(receiver)) {
-    throw new TypeError("attempted to " + action + " private field on non-instance");
-  }
-  return privateMap.get(receiver);
-}
-module.exports = _classExtractFieldDescriptor, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 4972:
+/***/ 6668:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorGet = __webpack_require__(5764);
-var classExtractFieldDescriptor = __webpack_require__(1413);
-function _classPrivateFieldGet(receiver, privateMap) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
-  return classApplyDescriptorGet(receiver, descriptor);
+var assertClassBrand = __webpack_require__(1756);
+function _classPrivateFieldGet2(s, a) {
+  return s.get(assertClassBrand(s, a));
 }
-module.exports = _classPrivateFieldGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _classPrivateFieldGet2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -34256,30 +34172,14 @@ module.exports = _classPrivateFieldInitSpec, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 2808:
+/***/ 7088:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorSet = __webpack_require__(9056);
-var classExtractFieldDescriptor = __webpack_require__(1413);
-function _classPrivateFieldSet(receiver, privateMap, value) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
-  classApplyDescriptorSet(receiver, descriptor, value);
-  return value;
+var assertClassBrand = __webpack_require__(1756);
+function _classPrivateFieldSet2(s, a, r) {
+  return s.set(assertClassBrand(s, a), r), r;
 }
-module.exports = _classPrivateFieldSet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 137:
-/***/ ((module) => {
-
-function _classPrivateMethodGet(receiver, privateSet, fn) {
-  if (!privateSet.has(receiver)) {
-    throw new TypeError("attempted to get private field on non-instance");
-  }
-  return fn;
-}
-module.exports = _classPrivateMethodGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _classPrivateFieldSet2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -35296,7 +35196,7 @@ Dicer.prototype._write = function (data, encoding, cb) {
   if (this._headerFirst && this._isPreamble) {
     if (!this._part) {
       this._part = new PartStream(this._partOpts);
-      if (this._events.preamble) {
+      if (this.listenerCount('preamble') !== 0) {
         this.emit('preamble', this._part);
       } else {
         this._ignore();
@@ -35364,7 +35264,7 @@ Dicer.prototype._oninfo = function (isMatch, data, start, end) {
       }
     }
     if (this._dashes === 2) {
-      if (start + i < end && this._events.trailer) {
+      if (start + i < end && this.listenerCount('trailer') !== 0) {
         this.emit('trailer', data.slice(start + i, end));
       }
       this.reset();
@@ -35388,9 +35288,9 @@ Dicer.prototype._oninfo = function (isMatch, data, start, end) {
     this._part._read = function (n) {
       self._unpause();
     };
-    if (this._isPreamble && this._events.preamble) {
+    if (this._isPreamble && this.listenerCount('preamble') !== 0) {
       this.emit('preamble', this._part);
-    } else if (this._isPreamble !== true && this._events.part) {
+    } else if (this._isPreamble !== true && this.listenerCount('part') !== 0) {
       this.emit('part', this._part);
     } else {
       this._ignore();
@@ -36041,7 +35941,7 @@ function Multipart(boy, cfg) {
           return skipPart(part);
         }
         ++nfiles;
-        if (!boy._events.file) {
+        if (boy.listenerCount('file') === 0) {
           self.parser._ignore();
           return;
         }
@@ -36550,7 +36450,7 @@ var decoders = {
     if (textDecoders.has(_this.toString())) {
       try {
         return textDecoders.get(_this).decode(data);
-      } catch (e) {}
+      } catch (_unused) {}
     }
     return typeof data === 'string' ? data : data.toString();
   }
@@ -37881,24 +37781,6 @@ var regeneratorRuntime = __webpack_require__(675);
 var asyncToGenerator = __webpack_require__(467);
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
 var core = __webpack_require__(3716);
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectDestructuringEmpty.js
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
-var objectSpread2 = __webpack_require__(9379);
-// EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
-var lib = __webpack_require__(9184);
-var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
-// EXTERNAL MODULE: external "path"
-var external_path_ = __webpack_require__(6928);
-var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
-// EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
-var github = __webpack_require__(8340);
-;// CONCATENATED MODULE: ./src/utils.ts
-// export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/vnd.github.v3.object']
-// export type FilePutResultData = components['schemas']['content-file']
-var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var sha=(0,core.getInput)('sha');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,sha:sha,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee(){var _getInputs2,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_getInputs2=getInputs(),branch=_getInputs2.branch;if(!(branch!==null)){_context.next=3;break;}return _context.abrupt("return",Promise.resolve(branch));case 3:_context.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context.sent;data=_yield$octokit$rest$r.data;return _context.abrupt("return",data.default_branch);case 8:case"end":return _context.stop();}},_callee);}));return _getBranch.apply(this,arguments);}function getFileContents(_x){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee2(branch){var _getInputs3,owner,repo,filepath,_yield$octokit$rest$r2,data;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee2$(_context2){while(1)switch(_context2.prev=_context2.next){case 0:_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,filepath=_getInputs3.filepath;_context2.prev=1;_context2.next=4;return octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath});case 4:_yield$octokit$rest$r2=_context2.sent;data=_yield$octokit$rest$r2.data;return _context2.abrupt("return",data);case 9:_context2.prev=9;_context2.t0=_context2["catch"](1);(0,core.warning)("\uD83D\uDC49 Get File Contents: ".concat(_context2.t0 instanceof Error?_context2.t0.message:_context2.t0));return _context2.abrupt("return");case 13:case"end":return _context2.stop();}},_callee2,null,[[1,9]]);}));return _getFileContents.apply(this,arguments);}function getBodyContent(oldFileContent,content){var _getInputs=getInputs(),openDelimiter=_getInputs.openDelimiter,closeDelimiter=_getInputs.closeDelimiter,overwrite=_getInputs.overwrite;var REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');var match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(match===null||match===void 0?void 0:match.length));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){}return oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee3(){var options,content,other,_getInputs4,owner,repo,message,committer_name,committer_email,overwrite,sync_local_file,ref,branch,new_content,body,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,reuslt,fullPath,isExists,result,_result$data$content4,_result$data$content5,_result$data$content6,_result,_args3=arguments;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee3$(_context3){while(1)switch(_context3.prev=_context3.next){case 0:options=_args3.length>0&&_args3[0]!==undefined?_args3[0]:{};content=_args3.length>1?_args3[1]:undefined;other=Object.assign({},(_objectDestructuringEmpty(options),options));_getInputs4=getInputs(),owner=_getInputs4.owner,repo=_getInputs4.repo,message=_getInputs4.message,committer_name=_getInputs4.committer_name,committer_email=_getInputs4.committer_email,overwrite=_getInputs4.overwrite,sync_local_file=_getInputs4.sync_local_file,ref=_getInputs4.ref;_context3.next=6;return getBranch();case 6:branch=_context3.sent;if(options.path){_context3.next=9;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 9:(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));new_content=Buffer.from(content).toString("base64");body=(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({owner:owner,repo:repo,path:options.path,branch:branch,message:message||"doc: update ".concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'}},other),{},{content:new_content});(0,core.startGroup)("\uD83D\uDC49 Init Body: (".concat(branch,")"));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=20;return getFileContents(branch);case 20:currentFile=_context3.sent;if(!(currentFile&&'content'in currentFile)){_context3.next=58;break;}fileContent=currentFile.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();reuslt=getBodyContent(oldFileContent,content);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){body.content=new_content;reuslt=content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}(0,core.setOutput)('content',Buffer.from(body.content,'base64').toString());(0,core.startGroup)("\uD83D\uDC49 Text OLD content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text NEW content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();if(!(oldFileContent==reuslt)){_context3.next=39;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context3.abrupt("return");case 39:body=(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},body),currentFile),{},{content:body.content,sha:currentFile.sha});fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);if(!(isExists&&sync_local_file.toString()==='true'&&ref===github.context.ref)){_context3.next=45;break;}_context3.next=45;return lib_default().writeFile(fullPath,new_content);case 45:(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=50;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},body),{},{sha:currentFile.sha}));case 50:result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context3.next=67;break;case 58:(0,core.warning)("\uD83D\uDC49 Not Found ::- ".concat(options.path));_context3.next=61;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.A)({},body));case 61:_result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content4=_result.data.content)===null||_result$data$content4===void 0?void 0:_result$data$content4.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content5=_result.data.content)===null||_result$data$content5===void 0?void 0:_result$data$content5.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content6=_result.data.content)===null||_result$data$content6===void 0?void 0:_result$data$content6.sha));(0,core.endGroup)();case 67:case"end":return _context3.stop();}},_callee3);}));return _modifyPathContents.apply(this,arguments);}
 ;// CONCATENATED MODULE: ./node_modules/@uiw/formatter/esm/index.js
 /**! 
  * @uiw/formatter v2.0.2 
@@ -37947,8 +37829,26 @@ formatter.utc = function (str, date) {
 };
 
 //# sourceMappingURL=index.js.map
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectDestructuringEmpty.js
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
+var objectSpread2 = __webpack_require__(9379);
+// EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
+var lib = __webpack_require__(9184);
+var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
+// EXTERNAL MODULE: external "path"
+var external_path_ = __webpack_require__(6928);
+var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
+// EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
+var github = __webpack_require__(8340);
+;// CONCATENATED MODULE: ./src/utils.ts
+// export type FilePutResult = paths['/repos/{owner}/{repo}/contents/{path}']['get']['responses']['200']['content']['application/vnd.github.v3.object']
+// export type FilePutResultData = components['schemas']['content-file']
+var myToken=(0,core.getInput)('token');var octokit=(0,github.getOctokit)(myToken);var getInputs=function getInputs(){var body=(0,core.getInput)('body')||'';var ref=(0,core.getInput)('ref')||github.context.ref;var branch=(0,core.getInput)('branch');var sha=(0,core.getInput)('sha');var overwrite=(0,core.getInput)('overwrite')||'false';var sync_local_file=(0,core.getInput)('sync_local_file')||'true';var filepath=(0,core.getInput)('path')||'';var message=(0,core.getInput)('message')||'';var committer_name=(0,core.getInput)('committer_name')||'';var committer_email=(0,core.getInput)('committer_email')||'';var openDelimiter=(0,core.getInput)('openDelimiter')||'<!--GAMFC-->';var closeDelimiter=(0,core.getInput)('closeDelimiter')||'<!--GAMFC-END-->';return (0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},github.context.repo),{},{body:body,filepath:filepath,ref:ref,branch:branch,sha:sha,message:message,committer_name:committer_name,committer_email:committer_email,openDelimiter:openDelimiter,closeDelimiter:closeDelimiter,overwrite:overwrite,sync_local_file:sync_local_file});};function getBranch(){return _getBranch.apply(this,arguments);}function _getBranch(){_getBranch=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee(){var _getInputs2,branch,_yield$octokit$rest$r,data;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_getInputs2=getInputs(),branch=_getInputs2.branch;if(!(branch!==null)){_context.next=3;break;}return _context.abrupt("return",Promise.resolve(branch));case 3:_context.next=5;return octokit.rest.repos.get(github.context.repo);case 5:_yield$octokit$rest$r=_context.sent;data=_yield$octokit$rest$r.data;return _context.abrupt("return",data.default_branch);case 8:case"end":return _context.stop();}},_callee);}));return _getBranch.apply(this,arguments);}function getFileContents(_x){return _getFileContents.apply(this,arguments);}function _getFileContents(){_getFileContents=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee2(branch){var _getInputs3,owner,repo,filepath,_yield$octokit$rest$r2,data;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee2$(_context2){while(1)switch(_context2.prev=_context2.next){case 0:_getInputs3=getInputs(),owner=_getInputs3.owner,repo=_getInputs3.repo,filepath=_getInputs3.filepath;_context2.prev=1;_context2.next=4;return octokit.rest.repos.getContent({owner:owner,repo:repo,ref:branch,path:filepath});case 4:_yield$octokit$rest$r2=_context2.sent;data=_yield$octokit$rest$r2.data;return _context2.abrupt("return",data);case 9:_context2.prev=9;_context2.t0=_context2["catch"](1);(0,core.warning)("\uD83D\uDC49 Get File Contents: ".concat(_context2.t0 instanceof Error?_context2.t0.message:_context2.t0));return _context2.abrupt("return");case 13:case"end":return _context2.stop();}},_callee2,null,[[1,9]]);}));return _getFileContents.apply(this,arguments);}function getBodyContent(oldFileContent,content){var _getInputs=getInputs(),openDelimiter=_getInputs.openDelimiter,closeDelimiter=_getInputs.closeDelimiter,overwrite=_getInputs.overwrite;var REG=new RegExp("".concat(openDelimiter,"([\\s\\S]*?)").concat(closeDelimiter),'ig');var match=oldFileContent.match(REG);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(match===null||match===void 0?void 0:match.length));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(match,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){}return oldFileContent.replace(REG,"".concat(openDelimiter).concat(content).concat(closeDelimiter));}function modifyPathContents(){return _modifyPathContents.apply(this,arguments);}function _modifyPathContents(){_modifyPathContents=(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee3(){var options,content,other,_getInputs4,owner,repo,message,committer_name,committer_email,overwrite,sync_local_file,ref,branch,new_content,body,currentFile,_result$data$content,_result$data$content2,_result$data$content3,fileContent,oldFileContent,reuslt,fullPath,isExists,result,_result$data$content4,_result$data$content5,_result$data$content6,_result,_args3=arguments;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee3$(_context3){while(1)switch(_context3.prev=_context3.next){case 0:options=_args3.length>0&&_args3[0]!==undefined?_args3[0]:{};content=_args3.length>1?_args3[1]:undefined;other=Object.assign({},(_objectDestructuringEmpty(options),options));_getInputs4=getInputs(),owner=_getInputs4.owner,repo=_getInputs4.repo,message=_getInputs4.message,committer_name=_getInputs4.committer_name,committer_email=_getInputs4.committer_email,overwrite=_getInputs4.overwrite,sync_local_file=_getInputs4.sync_local_file,ref=_getInputs4.ref;_context3.next=6;return getBranch();case 6:branch=_context3.sent;if(options.path){_context3.next=9;break;}throw new Error("modifyPathContents: file directory parameter does not exist");case 9:(0,core.info)("\uD83D\uDC49 Modify Path (".concat(options.path,")"));(0,core.info)("\uD83D\uDC49 Context.ref: (".concat(github.context.ref,")"));(0,core.info)("\uD83D\uDC49 Context.sha: (".concat(github.context.sha,")"));(0,core.info)("\uD83D\uDC49 branch: (".concat(branch,")"));new_content=Buffer.from(content).toString("base64");body=(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({owner:owner,repo:repo,path:options.path,branch:branch,message:message||"doc: update ".concat(options.path,"."),committer:{name:committer_name||'github-actions[bot]',email:committer_email||'github-actions[bot]@users.noreply.github.com'}},other),{},{content:new_content});(0,core.startGroup)("\uD83D\uDC49 Init Body: (".concat(branch,")"));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=20;return getFileContents(branch);case 20:currentFile=_context3.sent;if(!(currentFile&&'content'in currentFile)){_context3.next=58;break;}fileContent=currentFile.content||'';oldFileContent=Buffer.from(fileContent,'base64').toString();reuslt=getBodyContent(oldFileContent,content);(0,core.startGroup)("\uD83D\uDC49 Current File content: ".concat(options.path));(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(currentFile,null,2)));(0,core.endGroup)();if(overwrite.toString()==='true'){body.content=new_content;reuslt=content;}else{body.content=Buffer.from(reuslt).toString("base64");new_content=reuslt;}(0,core.setOutput)('content',Buffer.from(body.content,'base64').toString());(0,core.startGroup)("\uD83D\uDC49 Text OLD content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(oldFileContent));(0,core.endGroup)();(0,core.startGroup)("\uD83D\uDC49 Text NEW content: ".concat(oldFileContent==reuslt));(0,core.info)("\uD83D\uDC49 ".concat(reuslt));(0,core.endGroup)();if(!(oldFileContent==reuslt)){_context3.next=39;break;}(0,core.warning)("\uD83D\uDC49 Content has not changed!!!!!");return _context3.abrupt("return");case 39:body=(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},body),currentFile),{},{content:body.content,sha:currentFile.sha});fullPath=external_path_default().resolve(options.path);isExists=lib_default().existsSync(fullPath);if(!(isExists&&sync_local_file.toString()==='true'&&ref===github.context.ref)){_context3.next=45;break;}_context3.next=45;return lib_default().writeFile(fullPath,new_content);case 45:(0,core.startGroup)("modifyPathContents Body:");(0,core.info)("\uD83D\uDC49 ".concat(JSON.stringify(body,null,2)));(0,core.endGroup)();_context3.next=50;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.A)((0,objectSpread2/* default */.A)({},body),{},{sha:currentFile.sha}));case 50:result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content=result.data.content)===null||_result$data$content===void 0?void 0:_result$data$content.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content2=result.data.content)===null||_result$data$content2===void 0?void 0:_result$data$content2.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content3=result.data.content)===null||_result$data$content3===void 0?void 0:_result$data$content3.sha));(0,core.endGroup)();_context3.next=67;break;case 58:(0,core.warning)("\uD83D\uDC49 Not Found ::- ".concat(options.path));_context3.next=61;return octokit.request('PUT /repos/{owner}/{repo}/contents/{path}',(0,objectSpread2/* default */.A)({},body));case 61:_result=_context3.sent;(0,core.startGroup)("file result:");(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content4=_result.data.content)===null||_result$data$content4===void 0?void 0:_result$data$content4.path));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content5=_result.data.content)===null||_result$data$content5===void 0?void 0:_result$data$content5.size));(0,core.info)("\uD83D\uDC49 ".concat((_result$data$content6=_result.data.content)===null||_result$data$content6===void 0?void 0:_result$data$content6.sha));(0,core.endGroup)();case 67:case"end":return _context3.stop();}},_callee3);}));return _modifyPathContents.apply(this,arguments);}
 ;// CONCATENATED MODULE: ./src/index.ts
-var REGEXP=/\{\{date:?(.*?)\}\}/ig;(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee(){var filepath,body,result;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:filepath=(0,core.getInput)('path')||'';_context.prev=1;body=(0,core.getInput)('body')||'';if(body){_context.next=6;break;}(0,core.warning)("\uD83D\uDC49 \"body\" input value does not exist.");return _context.abrupt("return");case 6:if(filepath){_context.next=9;break;}(0,core.warning)("\uD83D\uDC49 \"path\" input value does not exist.");return _context.abrupt("return");case 9:if(REGEXP.test(body)){result=body.replace(REGEXP,function(match,str2){var format=match.replace(REGEXP,'$1');var str=formatter(format||'YYYY/MM/DD HH:mm:ss',new Date());return str;});if(result){body=result;}}(0,core.info)("\uD83D\uDC49 Body Content: ".concat(body));_context.next=13;return modifyPathContents({path:filepath},body);case 13:_context.next=18;break;case 15:_context.prev=15;_context.t0=_context["catch"](1);if(_context.t0 instanceof Error){(0,core.setFailed)("".concat(_context.t0.message," - ").concat(filepath));}case 18:case"end":return _context.stop();}},_callee,null,[[1,15]]);}))();
+var REGEXP=/\{\{date:?(.*?)\}\}/ig;(0,asyncToGenerator/* default */.A)(/*#__PURE__*/(0,regeneratorRuntime/* default */.A)().mark(function _callee(){var filepath,body,result;return (0,regeneratorRuntime/* default */.A)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:filepath=(0,core.getInput)('path')||'';_context.prev=1;body=(0,core.getInput)('body')||'';if(body){_context.next=6;break;}(0,core.warning)("\uD83D\uDC49 \"body\" input value does not exist.");return _context.abrupt("return");case 6:if(filepath){_context.next=9;break;}(0,core.warning)("\uD83D\uDC49 \"path\" input value does not exist.");return _context.abrupt("return");case 9:if(REGEXP.test(body)){result=body.replace(REGEXP,function(match,str2){var format=match.replace(REGEXP,'$1');var str=formatter(format||'YYYY/MM/DD HH:mm:ss',new Date());return str;});if(result){body=result;}}(0,core.startGroup)("\uD83D\uDC49 Body input content:");(0,core.info)(body);(0,core.endGroup)();_context.next=15;return modifyPathContents({path:filepath},body);case 15:_context.next=20;break;case 17:_context.prev=17;_context.t0=_context["catch"](1);if(_context.t0 instanceof Error){(0,core.setFailed)("".concat(_context.t0.message," - ").concat(filepath));}case 20:case"end":return _context.stop();}},_callee,null,[[1,17]]);}))();
 })();
 
 module.exports = __webpack_exports__;
