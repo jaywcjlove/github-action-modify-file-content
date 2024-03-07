@@ -2,7 +2,7 @@ import FS from 'fs-extra';
 import path from 'path';
 import { context, getOctokit } from '@actions/github';
 import { getInput, setOutput, startGroup, info, endGroup, warning } from '@actions/core';
-import { paths, components,  } from '@octokit/openapi-types';
+import { paths } from '@octokit/openapi-types';
 import { GetResponseTypeFromEndpointMethod  } from '@octokit/types';
 
 export type FilePutQuery = paths['/repos/{owner}/{repo}/contents/{path}']['put']['requestBody']['content']['application/json'] & paths['/repos/{owner}/{repo}/contents/{path}']['put']['parameters']['path'];
