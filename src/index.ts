@@ -9,11 +9,11 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
   try {
     let body = getInput('body') || '';
     if (!body) {
-      warning(`👉 "body" input value does not exist.`)
+      warning(`👉 [github-action-modify-file-content]: "body" input value does not exist.`)
       return
     }
     if (!filepath) {
-      warning(`👉 "path" input value does not exist.`)
+      warning(`👉 [github-action-modify-file-content]: "path" input value does not exist.`)
       return
     }
     if (REGEXP.test(body)) {
