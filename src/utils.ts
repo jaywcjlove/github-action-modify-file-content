@@ -58,7 +58,7 @@ async function getFileContents(branch: string): Promise<GetContentResponseType |
     });
     return data;
   } catch (err) {
-    warning(`👉 Get File Contents: ${err instanceof Error ? err.message : err}`);
+    warning(`👉 [github-action-modify-file-content]: Get File Contents: ${err instanceof Error ? err.message : err}`);
     return;
   }
 }
@@ -127,7 +127,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       info(`👉 ${reuslt}`);
     endGroup();
     if (oldFileContent == reuslt) {
-      warning(`👉 Content has not changed!!!!!`)
+      warning(`👉 [github-action-modify-file-content]: Content has not changed!!!!!`)
       return;
     }
     body = { ...body, ...currentFile, content: body.content, sha: currentFile.sha }
@@ -149,7 +149,7 @@ export async function modifyPathContents(options: Partial<FilePutQuery> = {}, co
       info(`👉 ${result.data.content?.sha}`)
     endGroup()
   } else {
-    warning(`👉 Not Found ::- ${options.path}`)
+    warning(`👉 [github-action-modify-file-content]: Not Found ::- ${options.path}`)
     const result = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
       ...body,
     });
