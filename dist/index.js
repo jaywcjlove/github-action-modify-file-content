@@ -73,7 +73,7 @@ var Command = /*#__PURE__*/function () {
     this.properties = properties;
     this.message = message;
   }
-  _createClass(Command, [{
+  return _createClass(Command, [{
     key: "toString",
     value: function toString() {
       var cmdStr = CMD_STRING + this.command;
@@ -98,7 +98,6 @@ var Command = /*#__PURE__*/function () {
       return cmdStr;
     }
   }]);
-  return Command;
 }();
 function escapeData(s) {
   return utils_1.toCommandValue(s).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
@@ -661,7 +660,7 @@ var OidcClient = /*#__PURE__*/function () {
   function OidcClient() {
     _classCallCheck(this, OidcClient);
   }
-  _createClass(OidcClient, null, [{
+  return _createClass(OidcClient, null, [{
     key: "createHttpClient",
     value: function createHttpClient() {
       var allowRetry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
@@ -755,7 +754,6 @@ var OidcClient = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return OidcClient;
 }();
 exports.OidcClient = OidcClient;
 //# sourceMappingURL=oidc-utils.js.map
@@ -898,7 +896,7 @@ var Summary = /*#__PURE__*/function () {
    *
    * @returns step summary file path
    */
-  _createClass(Summary, [{
+  return _createClass(Summary, [{
     key: "filePath",
     value: function filePath() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -1257,7 +1255,6 @@ var Summary = /*#__PURE__*/function () {
       return this.addRaw(element).addEOL();
     }
   }]);
-  return Summary;
 }();
 var _summary = new Summary();
 /**
@@ -1364,7 +1361,7 @@ var Context = /*#__PURE__*/function () {
     this.serverUrl = (_b = process.env.GITHUB_SERVER_URL) !== null && _b !== void 0 ? _b : "https://github.com";
     this.graphqlUrl = (_c = process.env.GITHUB_GRAPHQL_URL) !== null && _c !== void 0 ? _c : "https://api.github.com/graphql";
   }
-  _createClass(Context, [{
+  return _createClass(Context, [{
     key: "issue",
     get: function get() {
       var payload = this.payload;
@@ -1394,7 +1391,6 @@ var Context = /*#__PURE__*/function () {
       throw new Error("context.repo requires a GITHUB_REPOSITORY environment variable like 'owner/repo'");
     }
   }]);
-  return Context;
 }();
 exports.Context = Context;
 //# sourceMappingURL=context.js.map
@@ -1706,7 +1702,7 @@ var BasicCredentialHandler = /*#__PURE__*/function () {
     this.username = username;
     this.password = password;
   }
-  _createClass(BasicCredentialHandler, [{
+  return _createClass(BasicCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
       if (!options.headers) {
@@ -1736,7 +1732,6 @@ var BasicCredentialHandler = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return BasicCredentialHandler;
 }();
 exports.BasicCredentialHandler = BasicCredentialHandler;
 var BearerCredentialHandler = /*#__PURE__*/function () {
@@ -1746,7 +1741,7 @@ var BearerCredentialHandler = /*#__PURE__*/function () {
   }
   // currently implements pre-authorization
   // TODO: support preAuth = false where it hooks on 401
-  _createClass(BearerCredentialHandler, [{
+  return _createClass(BearerCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
       if (!options.headers) {
@@ -1776,7 +1771,6 @@ var BearerCredentialHandler = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return BearerCredentialHandler;
 }();
 exports.BearerCredentialHandler = BearerCredentialHandler;
 var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
@@ -1786,7 +1780,7 @@ var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
   }
   // currently implements pre-authorization
   // TODO: support preAuth = false where it hooks on 401
-  _createClass(PersonalAccessTokenCredentialHandler, [{
+  return _createClass(PersonalAccessTokenCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
       if (!options.headers) {
@@ -1816,7 +1810,6 @@ var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return PersonalAccessTokenCredentialHandler;
 }();
 exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
 //# sourceMappingURL=auth.js.map
@@ -1835,7 +1828,6 @@ var _regeneratorRuntime = (__webpack_require__(4633)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
@@ -1959,16 +1951,16 @@ var RetryableHttpVerbs = ['OPTIONS', 'GET', 'DELETE', 'HEAD'];
 var ExponentialBackoffCeiling = 10;
 var ExponentialBackoffTimeSlice = 5;
 var HttpClientError = /*#__PURE__*/function (_Error) {
-  _inherits(HttpClientError, _Error);
   function HttpClientError(message, statusCode) {
     var _this;
     _classCallCheck(this, HttpClientError);
     _this = _callSuper(this, HttpClientError, [message]);
     _this.name = 'HttpClientError';
     _this.statusCode = statusCode;
-    Object.setPrototypeOf(_assertThisInitialized(_this), HttpClientError.prototype);
+    Object.setPrototypeOf(_this, HttpClientError.prototype);
     return _this;
   }
+  _inherits(HttpClientError, _Error);
   return _createClass(HttpClientError);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 exports.HttpClientError = HttpClientError;
@@ -1977,7 +1969,7 @@ var HttpClientResponse = /*#__PURE__*/function () {
     _classCallCheck(this, HttpClientResponse);
     this.message = message;
   }
-  _createClass(HttpClientResponse, [{
+  return _createClass(HttpClientResponse, [{
     key: "readBody",
     value: function readBody() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -2048,7 +2040,6 @@ var HttpClientResponse = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return HttpClientResponse;
 }();
 exports.HttpClientResponse = HttpClientResponse;
 function isHttps(requestUrl) {
@@ -2095,7 +2086,7 @@ var HttpClient = /*#__PURE__*/function () {
       }
     }
   }
-  _createClass(HttpClient, [{
+  return _createClass(HttpClient, [{
     key: "options",
     value: function options(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
@@ -2637,7 +2628,7 @@ var HttpClient = /*#__PURE__*/function () {
       if (this._keepAlive && useProxy) {
         agent = this._proxyAgent;
       }
-      if (this._keepAlive && !useProxy) {
+      if (!useProxy) {
         agent = this._agent;
       }
       // if agent is already assigned use that agent.
@@ -2671,18 +2662,14 @@ var HttpClient = /*#__PURE__*/function () {
         agent = tunnelAgent(agentOptions);
         this._proxyAgent = agent;
       }
-      // if reusing agent across request and tunneling agent isn't assigned create a new agent
-      if (this._keepAlive && !agent) {
+      // if tunneling agent isn't assigned create a new agent
+      if (!agent) {
         var options = {
           keepAlive: this._keepAlive,
           maxSockets: maxSockets
         };
         agent = usingSsl ? new https.Agent(options) : new http.Agent(options);
         this._agent = agent;
-      }
-      // if not using private agent and tunnel agent isn't setup then use global agent
-      if (!agent) {
-        agent = usingSsl ? https.globalAgent : http.globalAgent;
       }
       if (usingSsl && this._ignoreSslError) {
         // we don't want to set NODE_TLS_REJECT_UNAUTHORIZED=0 since that will affect request for entire process
@@ -2830,7 +2817,6 @@ var HttpClient = /*#__PURE__*/function () {
       }));
     }
   }]);
-  return HttpClient;
 }();
 exports.HttpClient = HttpClient;
 var lowercaseKeys = function lowercaseKeys(obj) {
@@ -3026,12 +3012,11 @@ function _inherits(subClass, superClass) {
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
   }
   return target;
 }
@@ -3445,7 +3430,7 @@ function withDefaults(oldDefaults, newDefaults) {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@octokit/endpoint/dist-src/version.js
-var VERSION = "9.0.4";
+var VERSION = "9.0.5";
 
 ;// CONCATENATED MODULE: ./node_modules/@octokit/endpoint/dist-src/defaults.js
 
@@ -3469,7 +3454,7 @@ var DEFAULTS = {
 var endpoint = withDefaults(null, DEFAULTS);
 
 ;// CONCATENATED MODULE: ./node_modules/@octokit/request/dist-src/version.js
-var version_VERSION = "8.2.0";
+var version_VERSION = "8.4.0";
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
 var createForOfIteratorHelper = __webpack_require__(4765);
@@ -3540,9 +3525,7 @@ function _wrapNativeSuper(Class) {
 
 
 
-
 var Deprecation = /*#__PURE__*/function (_Error) {
-  _inherits(Deprecation, _Error);
   function Deprecation(message) {
     var _this;
     _classCallCheck(this, Deprecation);
@@ -3551,11 +3534,12 @@ var Deprecation = /*#__PURE__*/function (_Error) {
     /* istanbul ignore next */
 
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+      Error.captureStackTrace(_this, _this.constructor);
     }
     _this.name = 'Deprecation';
     return _this;
   }
+  _inherits(Deprecation, _Error);
   return _createClass(Deprecation);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 
@@ -3570,7 +3554,6 @@ var once_default = /*#__PURE__*/__webpack_require__.n(once);
 
 
 
-
 var logOnceCode = once_default()(function (deprecation) {
   return console.warn(deprecation);
 });
@@ -3578,13 +3561,12 @@ var logOnceHeaders = once_default()(function (deprecation) {
   return console.warn(deprecation);
 });
 var RequestError = /*#__PURE__*/function (_Error) {
-  _inherits(RequestError, _Error);
   function RequestError(message, statusCode, options) {
     var _this;
     _classCallCheck(this, RequestError);
     _this = _callSuper(this, RequestError, [message]);
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+      Error.captureStackTrace(_this, _this.constructor);
     }
     _this.name = "HttpError";
     _this.status = statusCode;
@@ -3604,13 +3586,13 @@ var RequestError = /*#__PURE__*/function (_Error) {
     }
     requestCopy.url = requestCopy.url.replace(/\bclient_secret=\w+/g, "client_secret=[REDACTED]").replace(/\baccess_token=\w+/g, "access_token=[REDACTED]");
     _this.request = requestCopy;
-    Object.defineProperty(_assertThisInitialized(_this), "code", {
+    Object.defineProperty(_this, "code", {
       get: function get() {
         logOnceCode(new Deprecation("[@octokit/request-error] `error.code` is deprecated, use `error.status`."));
         return statusCode;
       }
     });
-    Object.defineProperty(_assertThisInitialized(_this), "headers", {
+    Object.defineProperty(_this, "headers", {
       get: function get() {
         logOnceHeaders(new Deprecation("[@octokit/request-error] `error.headers` is deprecated, use `error.response.headers`."));
         return headers || {};
@@ -3618,6 +3600,7 @@ var RequestError = /*#__PURE__*/function (_Error) {
     });
     return _this;
   }
+  _inherits(RequestError, _Error);
   return _createClass(RequestError);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 
@@ -3635,7 +3618,7 @@ function getBufferResponse(response) {
 
 
 function fetchWrapper(requestOptions) {
-  var _requestOptions$reque, _requestOptions$reque2, _requestOptions$reque3;
+  var _requestOptions$reque, _requestOptions$reque2, _requestOptions$reque3, _requestOptions$reque4;
   var log = requestOptions.request && requestOptions.request.log ? requestOptions.request.log : console;
   var parseSuccessResponseBody = ((_requestOptions$reque = requestOptions.request) === null || _requestOptions$reque === void 0 ? void 0 : _requestOptions$reque.parseSuccessResponseBody) !== false;
   if (is_plain_object_isPlainObject(requestOptions.body) || Array.isArray(requestOptions.body)) {
@@ -3654,8 +3637,9 @@ function fetchWrapper(requestOptions) {
   return fetch(requestOptions.url, (0,objectSpread2/* default */.A)({
     method: requestOptions.method,
     body: requestOptions.body,
+    redirect: (_requestOptions$reque3 = requestOptions.request) === null || _requestOptions$reque3 === void 0 ? void 0 : _requestOptions$reque3.redirect,
     headers: requestOptions.headers,
-    signal: (_requestOptions$reque3 = requestOptions.request) === null || _requestOptions$reque3 === void 0 ? void 0 : _requestOptions$reque3.signal
+    signal: (_requestOptions$reque4 = requestOptions.request) === null || _requestOptions$reque4 === void 0 ? void 0 : _requestOptions$reque4.signal
   }, requestOptions.body && {
     duplex: "half"
   })).then( /*#__PURE__*/function () {
@@ -3891,13 +3875,12 @@ var request = with_defaults_withDefaults(endpoint, {
 
 
 
-
 // pkg/dist-src/index.js
 
 
 
 // pkg/dist-src/version.js
-var dist_web_VERSION = "7.0.2";
+var dist_web_VERSION = "7.1.0";
 
 // pkg/dist-src/with-defaults.js
 
@@ -3912,7 +3895,6 @@ function _buildMessageForResponseErrors(data) {
   }).join("\n");
 }
 var GraphqlResponseError = /*#__PURE__*/function (_Error) {
-  _inherits(GraphqlResponseError, _Error);
   function GraphqlResponseError(request2, headers, response) {
     var _this;
     _classCallCheck(this, GraphqlResponseError);
@@ -3924,10 +3906,11 @@ var GraphqlResponseError = /*#__PURE__*/function (_Error) {
     _this.errors = response.errors;
     _this.data = response.data;
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+      Error.captureStackTrace(_this, _this.constructor);
     }
     return _this;
   }
+  _inherits(GraphqlResponseError, _Error);
   return _createClass(GraphqlResponseError);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 
@@ -4104,7 +4087,7 @@ var _Class;
 
 
 // pkg/dist-src/version.js
-var core_dist_web_VERSION = "5.1.0";
+var core_dist_web_VERSION = "5.2.0";
 
 // pkg/dist-src/index.js
 var noop = function noop() {};
@@ -4189,11 +4172,10 @@ var Octokit = (_Class = /*#__PURE__*/function () {
       Object.assign(this, classConstructor.plugins[i](this, options));
     }
   }
-  _createClass(Octokit, null, [{
+  return _createClass(Octokit, null, [{
     key: "defaults",
     value: function defaults(_defaults) {
       var OctokitWithDefaults = /*#__PURE__*/function (_this) {
-        _inherits(OctokitWithDefaults, _this);
         function OctokitWithDefaults() {
           var _this2;
           _classCallCheck(this, OctokitWithDefaults);
@@ -4206,6 +4188,7 @@ var Octokit = (_Class = /*#__PURE__*/function () {
             userAgent: "".concat(options.userAgent, " ").concat(_defaults.userAgent)
           } : null)]);
         }
+        _inherits(OctokitWithDefaults, _this);
         return _createClass(OctokitWithDefaults);
       }(this);
       return OctokitWithDefaults;
@@ -4224,11 +4207,11 @@ var Octokit = (_Class = /*#__PURE__*/function () {
         _arguments = arguments;
       var currentPlugins = this.plugins;
       var NewOctokit = (_Class2 = /*#__PURE__*/function (_this3) {
-        _inherits(NewOctokit, _this3);
         function NewOctokit() {
           _classCallCheck(this, NewOctokit);
           return _callSuper(this, NewOctokit, arguments);
         }
+        _inherits(NewOctokit, _this3);
         return _createClass(NewOctokit);
       }(this), function () {
         for (var _len = _arguments.length, newPlugins = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -4241,7 +4224,6 @@ var Octokit = (_Class = /*#__PURE__*/function () {
       return NewOctokit;
     }
   }]);
-  return Octokit;
 }(), _Class.VERSION = core_dist_web_VERSION, _Class.plugins = [], _Class);
 
 
@@ -4267,7 +4249,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // pkg/dist-src/version.js
-var VERSION = "9.2.0";
+var VERSION = "9.2.1";
 
 // pkg/dist-src/normalize-paginated-list-response.js
 function normalizePaginatedListResponse(response) {
@@ -4433,7 +4415,7 @@ __webpack_require__.d(__webpack_exports__, {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__(9379);
 ;// CONCATENATED MODULE: ./node_modules/@octokit/plugin-rest-endpoint-methods/dist-src/version.js
-var VERSION = "10.4.0";
+var VERSION = "10.4.1";
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__(4467);
@@ -9506,7 +9488,6 @@ var _objectWithoutProperties = (__webpack_require__(1847)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _excluded = ["factory", "maxRedirections", "connect"];
 var _require = __webpack_require__(3515),
@@ -9538,7 +9519,6 @@ function defaultFactory(origin, opts) {
   return opts && opts.connections === 1 ? new Client(origin, opts) : new Pool(origin, opts);
 }
 var Agent = /*#__PURE__*/function (_DispatcherBase) {
-  _inherits(Agent, _DispatcherBase);
   function Agent() {
     var _this;
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -9578,7 +9558,7 @@ var Agent = /*#__PURE__*/function (_DispatcherBase) {
         _this[kClients]["delete"](key);
       }
     });
-    var agent = _assertThisInitialized(_this);
+    var agent = _this;
     _this[kOnDrain] = function (origin, targets) {
       agent.emit('drain', origin, [agent].concat(_toConsumableArray(targets)));
     };
@@ -9593,7 +9573,8 @@ var Agent = /*#__PURE__*/function (_DispatcherBase) {
     };
     return _this;
   }
-  _createClass(Agent, [{
+  _inherits(Agent, _DispatcherBase);
+  return _createClass(Agent, [{
     key: kRunning,
     get: function get() {
       var ret = 0;
@@ -9708,7 +9689,6 @@ var Agent = /*#__PURE__*/function (_DispatcherBase) {
       return value;
     }()
   }]);
-  return Agent;
 }(DispatcherBase);
 module.exports = Agent;
 
@@ -9775,7 +9755,6 @@ var _objectSpread = (__webpack_require__(2897)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(290),
   AsyncResource = _require.AsyncResource;
@@ -9788,7 +9767,6 @@ var _require3 = __webpack_require__(9350),
   addSignal = _require3.addSignal,
   removeSignal = _require3.removeSignal;
 var ConnectHandler = /*#__PURE__*/function (_AsyncResource) {
-  _inherits(ConnectHandler, _AsyncResource);
   function ConnectHandler(opts, callback) {
     var _this;
     _classCallCheck(this, ConnectHandler);
@@ -9809,10 +9787,11 @@ var ConnectHandler = /*#__PURE__*/function (_AsyncResource) {
     _this.responseHeaders = responseHeaders || null;
     _this.callback = callback;
     _this.abort = null;
-    addSignal(_assertThisInitialized(_this), signal);
+    addSignal(_this, signal);
     return _this;
   }
-  _createClass(ConnectHandler, [{
+  _inherits(ConnectHandler, _AsyncResource);
+  return _createClass(ConnectHandler, [{
     key: "onConnect",
     value: function onConnect(abort, context) {
       if (!this.callback) {
@@ -9864,7 +9843,6 @@ var ConnectHandler = /*#__PURE__*/function (_AsyncResource) {
       }
     }
   }]);
-  return ConnectHandler;
 }(AsyncResource);
 function connect(opts, callback) {
   var _this3 = this;
@@ -9903,7 +9881,6 @@ module.exports = connect;
 
 
 var _objectSpread = (__webpack_require__(2897)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
@@ -9925,7 +9902,6 @@ var _require4 = __webpack_require__(9350),
 var assert = __webpack_require__(2613);
 var kResume = Symbol('resume');
 var PipelineRequest = /*#__PURE__*/function (_Readable) {
-  _inherits(PipelineRequest, _Readable);
   function PipelineRequest() {
     var _this;
     _classCallCheck(this, PipelineRequest);
@@ -9935,7 +9911,8 @@ var PipelineRequest = /*#__PURE__*/function (_Readable) {
     _this[kResume] = null;
     return _this;
   }
-  _createClass(PipelineRequest, [{
+  _inherits(PipelineRequest, _Readable);
+  return _createClass(PipelineRequest, [{
     key: "_read",
     value: function _read() {
       var resume = this[kResume];
@@ -9951,10 +9928,8 @@ var PipelineRequest = /*#__PURE__*/function (_Readable) {
       callback(err);
     }
   }]);
-  return PipelineRequest;
 }(Readable);
 var PipelineResponse = /*#__PURE__*/function (_Readable2) {
-  _inherits(PipelineResponse, _Readable2);
   function PipelineResponse(resume) {
     var _this2;
     _classCallCheck(this, PipelineResponse);
@@ -9964,7 +9939,8 @@ var PipelineResponse = /*#__PURE__*/function (_Readable2) {
     _this2[kResume] = resume;
     return _this2;
   }
-  _createClass(PipelineResponse, [{
+  _inherits(PipelineResponse, _Readable2);
+  return _createClass(PipelineResponse, [{
     key: "_read",
     value: function _read() {
       this[kResume]();
@@ -9978,10 +9954,8 @@ var PipelineResponse = /*#__PURE__*/function (_Readable2) {
       callback(err);
     }
   }]);
-  return PipelineResponse;
 }(Readable);
 var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
-  _inherits(PipelineHandler, _AsyncResource);
   function PipelineHandler(opts, handler) {
     var _this3;
     _classCallCheck(this, PipelineHandler);
@@ -10017,15 +9991,15 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
       readableObjectMode: opts.objectMode,
       autoDestroy: true,
       read: function read() {
-        var _assertThisInitialize = _assertThisInitialized(_this3),
-          body = _assertThisInitialize.body;
+        var _this4 = _this3,
+          body = _this4.body;
         if (body && body.resume) {
           body.resume();
         }
       },
       write: function write(chunk, encoding, callback) {
-        var _assertThisInitialize2 = _assertThisInitialized(_this3),
-          req = _assertThisInitialize2.req;
+        var _this5 = _this3,
+          req = _this5.req;
         if (req.push(chunk, encoding) || req._readableState.destroyed) {
           callback();
         } else {
@@ -10033,12 +10007,12 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
         }
       },
       destroy: function destroy(err, callback) {
-        var _assertThisInitialize3 = _assertThisInitialized(_this3),
-          body = _assertThisInitialize3.body,
-          req = _assertThisInitialize3.req,
-          res = _assertThisInitialize3.res,
-          ret = _assertThisInitialize3.ret,
-          abort = _assertThisInitialize3.abort;
+        var _this6 = _this3,
+          body = _this6.body,
+          req = _this6.req,
+          res = _this6.res,
+          ret = _this6.ret,
+          abort = _this6.abort;
         if (!err && !ret._readableState.endEmitted) {
           err = new RequestAbortedError();
         }
@@ -10048,21 +10022,22 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
         util.destroy(body, err);
         util.destroy(req, err);
         util.destroy(res, err);
-        removeSignal(_assertThisInitialized(_this3));
+        removeSignal(_this3);
         callback(err);
       }
     }).on('prefinish', function () {
-      var _assertThisInitialize4 = _assertThisInitialized(_this3),
-        req = _assertThisInitialize4.req;
+      var _this7 = _this3,
+        req = _this7.req;
 
       // Node < 15 does not call _final in same tick.
       req.push(null);
     });
     _this3.res = null;
-    addSignal(_assertThisInitialized(_this3), signal);
+    addSignal(_this3, signal);
     return _this3;
   }
-  _createClass(PipelineHandler, [{
+  _inherits(PipelineHandler, _AsyncResource);
+  return _createClass(PipelineHandler, [{
     key: "onConnect",
     value: function onConnect(abort, context) {
       var ret = this.ret,
@@ -10077,7 +10052,7 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
   }, {
     key: "onHeaders",
     value: function onHeaders(statusCode, rawHeaders, resume) {
-      var _this4 = this;
+      var _this8 = this;
       var opaque = this.opaque,
         handler = this.handler,
         context = this.context;
@@ -10111,19 +10086,19 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
         throw new InvalidReturnValueError('expected Readable');
       }
       body.on('data', function (chunk) {
-        var ret = _this4.ret,
-          body = _this4.body;
+        var ret = _this8.ret,
+          body = _this8.body;
         if (!ret.push(chunk) && body.pause) {
           body.pause();
         }
       }).on('error', function (err) {
-        var ret = _this4.ret;
+        var ret = _this8.ret;
         util.destroy(ret, err);
       }).on('end', function () {
-        var ret = _this4.ret;
+        var ret = _this8.ret;
         ret.push(null);
       }).on('close', function () {
-        var ret = _this4.ret;
+        var ret = _this8.ret;
         if (!ret._readableState.ended) {
           util.destroy(ret, new RequestAbortedError());
         }
@@ -10150,7 +10125,6 @@ var PipelineHandler = /*#__PURE__*/function (_AsyncResource) {
       util.destroy(ret, err);
     }
   }]);
-  return PipelineHandler;
 }(AsyncResource);
 function pipeline(opts, handler) {
   try {
@@ -10176,7 +10150,6 @@ module.exports = pipeline;
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var Readable = __webpack_require__(5455);
 var _require = __webpack_require__(3515),
@@ -10191,7 +10164,6 @@ var _require4 = __webpack_require__(9350),
   addSignal = _require4.addSignal,
   removeSignal = _require4.removeSignal;
 var RequestHandler = /*#__PURE__*/function (_AsyncResource) {
-  _inherits(RequestHandler, _AsyncResource);
   function RequestHandler(opts, callback) {
     var _this;
     _classCallCheck(this, RequestHandler);
@@ -10245,10 +10217,11 @@ var RequestHandler = /*#__PURE__*/function (_AsyncResource) {
         _this.onError(err);
       });
     }
-    addSignal(_assertThisInitialized(_this), signal);
+    addSignal(_this, signal);
     return _this;
   }
-  _createClass(RequestHandler, [{
+  _inherits(RequestHandler, _AsyncResource);
+  return _createClass(RequestHandler, [{
     key: "onConnect",
     value: function onConnect(abort, context) {
       if (!this.callback) {
@@ -10353,7 +10326,6 @@ var RequestHandler = /*#__PURE__*/function (_AsyncResource) {
       }
     }
   }]);
-  return RequestHandler;
 }(AsyncResource);
 function request(opts, callback) {
   var _this3 = this;
@@ -10392,7 +10364,6 @@ module.exports.RequestHandler = RequestHandler;
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(2203),
   finished = _require.finished,
@@ -10410,7 +10381,6 @@ var _require5 = __webpack_require__(9350),
   addSignal = _require5.addSignal,
   removeSignal = _require5.removeSignal;
 var StreamHandler = /*#__PURE__*/function (_AsyncResource) {
-  _inherits(StreamHandler, _AsyncResource);
   function StreamHandler(opts, factory, callback) {
     var _this;
     _classCallCheck(this, StreamHandler);
@@ -10463,10 +10433,11 @@ var StreamHandler = /*#__PURE__*/function (_AsyncResource) {
         _this.onError(err);
       });
     }
-    addSignal(_assertThisInitialized(_this), signal);
+    addSignal(_this, signal);
     return _this;
   }
-  _createClass(StreamHandler, [{
+  _inherits(StreamHandler, _AsyncResource);
+  return _createClass(StreamHandler, [{
     key: "onConnect",
     value: function onConnect(abort, context) {
       if (!this.callback) {
@@ -10595,7 +10566,6 @@ var StreamHandler = /*#__PURE__*/function (_AsyncResource) {
       }
     }
   }]);
-  return StreamHandler;
 }(AsyncResource);
 function stream(opts, factory, callback) {
   var _this4 = this;
@@ -10634,7 +10604,6 @@ var _objectSpread = (__webpack_require__(2897)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(3515),
   InvalidArgumentError = _require.InvalidArgumentError,
@@ -10648,7 +10617,6 @@ var _require3 = __webpack_require__(9350),
   removeSignal = _require3.removeSignal;
 var assert = __webpack_require__(2613);
 var UpgradeHandler = /*#__PURE__*/function (_AsyncResource) {
-  _inherits(UpgradeHandler, _AsyncResource);
   function UpgradeHandler(opts, callback) {
     var _this;
     _classCallCheck(this, UpgradeHandler);
@@ -10670,10 +10638,11 @@ var UpgradeHandler = /*#__PURE__*/function (_AsyncResource) {
     _this.callback = callback;
     _this.abort = null;
     _this.context = null;
-    addSignal(_assertThisInitialized(_this), signal);
+    addSignal(_this, signal);
     return _this;
   }
-  _createClass(UpgradeHandler, [{
+  _inherits(UpgradeHandler, _AsyncResource);
+  return _createClass(UpgradeHandler, [{
     key: "onConnect",
     value: function onConnect(abort, context) {
       if (!this.callback) {
@@ -10721,7 +10690,6 @@ var UpgradeHandler = /*#__PURE__*/function (_AsyncResource) {
       }
     }
   }]);
-  return UpgradeHandler;
 }(AsyncResource);
 function upgrade(opts, callback) {
   var _this3 = this;
@@ -10804,7 +10772,6 @@ var kAbort = Symbol('abort');
 var kContentType = Symbol('kContentType');
 var noop = function noop() {};
 module.exports = /*#__PURE__*/function (_Readable) {
-  _inherits(BodyReadable, _Readable);
   function BodyReadable(_ref) {
     var _this;
     var resume = _ref.resume,
@@ -10832,7 +10799,8 @@ module.exports = /*#__PURE__*/function (_Readable) {
     _this[kReading] = false;
     return _this;
   }
-  _createClass(BodyReadable, [{
+  _inherits(BodyReadable, _Readable);
+  return _createClass(BodyReadable, [{
     key: "destroy",
     value: function destroy(err) {
       if (this.destroyed) {
@@ -11071,7 +11039,6 @@ module.exports = /*#__PURE__*/function (_Readable) {
       });
     }
   }]);
-  return BodyReadable;
 }(Readable);
 
 // https://streams.spec.whatwg.org/#readablestream-locked
@@ -11386,7 +11353,6 @@ function defaultFactory(origin, opts) {
   return new Pool(origin, opts);
 }
 var BalancedPool = /*#__PURE__*/function (_PoolBase) {
-  _inherits(BalancedPool, _PoolBase);
   function BalancedPool() {
     var _this;
     var upstreams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -11424,7 +11390,8 @@ var BalancedPool = /*#__PURE__*/function (_PoolBase) {
     _this._updateBalancedPoolStats();
     return _this;
   }
-  _createClass(BalancedPool, [{
+  _inherits(BalancedPool, _PoolBase);
+  return _createClass(BalancedPool, [{
     key: "addUpstream",
     value: function addUpstream(upstream) {
       var _this2 = this;
@@ -11547,7 +11514,6 @@ var BalancedPool = /*#__PURE__*/function (_PoolBase) {
       return this[kClients][maxWeightIndex];
     }
   }]);
-  return BalancedPool;
 }(PoolBase);
 module.exports = BalancedPool;
 
@@ -11569,9 +11535,9 @@ var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classPrivateMethodInitSpec = (__webpack_require__(3312)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateMethodGet = (__webpack_require__(137)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
+var _assertClassBrand = (__webpack_require__(1756)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
 var _require = __webpack_require__(1568),
   kConstruct = _require.kConstruct;
 var _require2 = __webpack_require__(2465),
@@ -11618,49 +11584,27 @@ var _require11 = __webpack_require__(4397),
  * @typedef {[any, any][]} requestResponseList
  */
 var _relevantRequestResponseList = /*#__PURE__*/new WeakMap();
-var _batchCacheOperations = /*#__PURE__*/new WeakSet();
-var _queryCache = /*#__PURE__*/new WeakSet();
-var _requestMatchesCachedItem = /*#__PURE__*/new WeakSet();
+var _Cache_brand = /*#__PURE__*/new WeakSet();
 var Cache = /*#__PURE__*/function () {
   function Cache() {
     _classCallCheck(this, Cache);
-    /**
-     * @see https://w3c.github.io/ServiceWorker/#request-matches-cached-item-algorithm
-     * @param {any} requestQuery
-     * @param {any} request
-     * @param {any | null} response
-     * @param {import('../../types/cache').CacheQueryOptions | undefined} options
-     * @returns {boolean}
-     */
-    _classPrivateMethodInitSpec(this, _requestMatchesCachedItem);
-    /**
-     * @see https://w3c.github.io/ServiceWorker/#query-cache
-     * @param {any} requestQuery
-     * @param {import('../../types/cache').CacheQueryOptions} options
-     * @param {requestResponseList} targetStorage
-     * @returns {requestResponseList}
-     */
-    _classPrivateMethodInitSpec(this, _queryCache);
     /**
      * @see https://w3c.github.io/ServiceWorker/#batch-cache-operations-algorithm
      * @param {CacheBatchOperation[]} operations
      * @returns {requestResponseList}
      */
-    _classPrivateMethodInitSpec(this, _batchCacheOperations);
+    _classPrivateMethodInitSpec(this, _Cache_brand);
     /**
      * @see https://w3c.github.io/ServiceWorker/#dfn-relevant-request-response-list
      * @type {requestResponseList}
      */
-    _classPrivateFieldInitSpec(this, _relevantRequestResponseList, {
-      writable: true,
-      value: void 0
-    });
+    _classPrivateFieldInitSpec(this, _relevantRequestResponseList, void 0);
     if (arguments[0] !== kConstruct) {
       webidl.illegalConstructor();
     }
-    _classPrivateFieldSet(this, _relevantRequestResponseList, arguments[1]);
+    _classPrivateFieldSet(_relevantRequestResponseList, this, arguments[1]);
   }
-  _createClass(Cache, [{
+  return _createClass(Cache, [{
     key: "match",
     value: function () {
       var _match = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(request) {
@@ -11765,7 +11709,7 @@ var Cache = /*#__PURE__*/function () {
               responses = []; // 5.2
               if (request === undefined) {
                 // 5.2.1
-                _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _relevantRequestResponseList));
+                _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_relevantRequestResponseList, this));
                 try {
                   for (_iterator.s(); !(_step = _iterator.n()).done;) {
                     requestResponse = _step.value;
@@ -11779,7 +11723,7 @@ var Cache = /*#__PURE__*/function () {
               } else {
                 // 5.3
                 // 5.3.1
-                requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, r, options); // 5.3.2
+                requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, r, options); // 5.3.2
                 _iterator2 = _createForOfIteratorHelper(requestResponses);
                 try {
                   for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -12084,7 +12028,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise(); // 7.6.1
               errorData = null; // 7.6.2
               try {
-                _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12259,7 +12203,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise(); // 19.2.1
               errorData = null; // 19.2.2
               try {
-                _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12342,7 +12286,7 @@ var Cache = /*#__PURE__*/function () {
               cacheJobPromise = createDeferredPromise();
               errorData = null;
               try {
-                requestResponses = _classPrivateMethodGet(this, _batchCacheOperations, _batchCacheOperations2).call(this, operations);
+                requestResponses = _assertClassBrand(_Cache_brand, this, _batchCacheOperations).call(this, operations);
               } catch (e) {
                 errorData = e;
               }
@@ -12432,7 +12376,7 @@ var Cache = /*#__PURE__*/function () {
               requests = []; // 5.2
               if (request === undefined) {
                 // 5.2.1
-                _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _relevantRequestResponseList));
+                _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(_relevantRequestResponseList, this));
                 try {
                   for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
                     requestResponse = _step8.value;
@@ -12447,7 +12391,7 @@ var Cache = /*#__PURE__*/function () {
               } else {
                 // 5.3
                 // 5.3.1
-                requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, r, options); // 5.3.2
+                requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, r, options); // 5.3.2
                 _iterator9 = _createForOfIteratorHelper(requestResponses);
                 try {
                   for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
@@ -12496,11 +12440,10 @@ var Cache = /*#__PURE__*/function () {
       return keys;
     }())
   }]);
-  return Cache;
 }();
-function _batchCacheOperations2(operations) {
+function _batchCacheOperations(operations) {
   // 1.
-  var cache = _classPrivateFieldGet(this, _relevantRequestResponseList);
+  var cache = _classPrivateFieldGet(_relevantRequestResponseList, this);
 
   // 2.
   var backupCache = _toConsumableArray(cache);
@@ -12534,7 +12477,7 @@ function _batchCacheOperations2(operations) {
         }
 
         // 4.2.3
-        if (_classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request, operation.options, addedItems).length) {
+        if (_assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request, operation.options, addedItems).length) {
           throw new DOMException('???', 'InvalidStateError');
         }
 
@@ -12544,7 +12487,7 @@ function _batchCacheOperations2(operations) {
         // 4.2.5
         if (operation.type === 'delete') {
           // 4.2.5.1
-          requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request, operation.options);
+          requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request, operation.options);
 
           // TODO: the spec is wrong, this is needed to pass WPTs
           if (requestResponses.length === 0) {
@@ -12606,7 +12549,7 @@ function _batchCacheOperations2(operations) {
           }
 
           // 4.2.6.6
-          requestResponses = _classPrivateMethodGet(this, _queryCache, _queryCache2).call(this, operation.request);
+          requestResponses = _assertClassBrand(_Cache_brand, this, _queryCache).call(this, operation.request);
 
           // 4.2.6.7
           var _iterator12 = _createForOfIteratorHelper(requestResponses),
@@ -12647,19 +12590,26 @@ function _batchCacheOperations2(operations) {
   } catch (e) {
     // 5.
     // 5.1
-    _classPrivateFieldGet(this, _relevantRequestResponseList).length = 0;
+    _classPrivateFieldGet(_relevantRequestResponseList, this).length = 0;
 
     // 5.2
-    _classPrivateFieldSet(this, _relevantRequestResponseList, backupCache);
+    _classPrivateFieldSet(_relevantRequestResponseList, this, backupCache);
 
     // 5.3
     throw e;
   }
 }
-function _queryCache2(requestQuery, options, targetStorage) {
+/**
+ * @see https://w3c.github.io/ServiceWorker/#query-cache
+ * @param {any} requestQuery
+ * @param {import('../../types/cache').CacheQueryOptions} options
+ * @param {requestResponseList} targetStorage
+ * @returns {requestResponseList}
+ */
+function _queryCache(requestQuery, options, targetStorage) {
   /** @type {requestResponseList} */
   var resultList = [];
-  var storage = targetStorage !== null && targetStorage !== void 0 ? targetStorage : _classPrivateFieldGet(this, _relevantRequestResponseList);
+  var storage = targetStorage !== null && targetStorage !== void 0 ? targetStorage : _classPrivateFieldGet(_relevantRequestResponseList, this);
   var _iterator13 = _createForOfIteratorHelper(storage),
     _step13;
   try {
@@ -12668,7 +12618,7 @@ function _queryCache2(requestQuery, options, targetStorage) {
       var _requestResponse4 = _slicedToArray(requestResponse, 2),
         cachedRequest = _requestResponse4[0],
         cachedResponse = _requestResponse4[1];
-      if (_classPrivateMethodGet(this, _requestMatchesCachedItem, _requestMatchesCachedItem2).call(this, requestQuery, cachedRequest, cachedResponse, options)) {
+      if (_assertClassBrand(_Cache_brand, this, _requestMatchesCachedItem).call(this, requestQuery, cachedRequest, cachedResponse, options)) {
         resultList.push(requestResponse);
       }
     }
@@ -12679,7 +12629,15 @@ function _queryCache2(requestQuery, options, targetStorage) {
   }
   return resultList;
 }
-function _requestMatchesCachedItem2(requestQuery, request) {
+/**
+ * @see https://w3c.github.io/ServiceWorker/#request-matches-cached-item-algorithm
+ * @param {any} requestQuery
+ * @param {any} request
+ * @param {any | null} response
+ * @param {import('../../types/cache').CacheQueryOptions | undefined} options
+ * @returns {boolean}
+ */
+function _requestMatchesCachedItem(requestQuery, request) {
   var response = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var options = arguments.length > 3 ? arguments[3] : undefined;
   // if (options?.ignoreMethod === false && request.method === 'GET') {
@@ -12767,7 +12725,7 @@ var _asyncToGenerator = (__webpack_require__(9293)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
 var _require = __webpack_require__(1568),
   kConstruct = _require.kConstruct;
 var _require2 = __webpack_require__(9319),
@@ -12784,15 +12742,12 @@ var CacheStorage = /*#__PURE__*/function () {
      * @see https://w3c.github.io/ServiceWorker/#dfn-relevant-name-to-cache-map
      * @type {Map<string, import('./cache').requestResponseList}
      */
-    _classPrivateFieldInitSpec(this, _caches, {
-      writable: true,
-      value: new Map()
-    });
+    _classPrivateFieldInitSpec(this, _caches, new Map());
     if (arguments[0] !== kConstruct) {
       webidl.illegalConstructor();
     }
   }
-  _createClass(CacheStorage, [{
+  return _createClass(CacheStorage, [{
     key: "match",
     value: function () {
       var _match = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(request) {
@@ -12821,12 +12776,12 @@ var CacheStorage = /*#__PURE__*/function () {
                 _context.next = 14;
                 break;
               }
-              if (!_classPrivateFieldGet(this, _caches).has(options.cacheName)) {
+              if (!_classPrivateFieldGet(_caches, this).has(options.cacheName)) {
                 _context.next = 12;
                 break;
               }
               // 1.1.1.1.1
-              cacheList = _classPrivateFieldGet(this, _caches).get(options.cacheName);
+              cacheList = _classPrivateFieldGet(_caches, this).get(options.cacheName);
               cache = new Cache(kConstruct, cacheList);
               _context.next = 11;
               return cache.match(request, options);
@@ -12838,7 +12793,7 @@ var CacheStorage = /*#__PURE__*/function () {
             case 14:
               // 2.
               // 2.2
-              _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _caches).values());
+              _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_caches, this).values());
               _context.prev = 15;
               _iterator.s();
             case 17:
@@ -12903,7 +12858,7 @@ var CacheStorage = /*#__PURE__*/function () {
 
               // 2.1.1
               // 2.2
-              return _context2.abrupt("return", _classPrivateFieldGet(this, _caches).has(cacheName));
+              return _context2.abrupt("return", _classPrivateFieldGet(_caches, this).has(cacheName));
             case 4:
             case "end":
               return _context2.stop();
@@ -12938,18 +12893,18 @@ var CacheStorage = /*#__PURE__*/function () {
               cacheName = webidl.converters.DOMString(cacheName);
 
               // 2.1
-              if (!_classPrivateFieldGet(this, _caches).has(cacheName)) {
+              if (!_classPrivateFieldGet(_caches, this).has(cacheName)) {
                 _context3.next = 6;
                 break;
               }
               // await caches.open('v1') !== await caches.open('v1')
               // 2.1.1
-              _cache2 = _classPrivateFieldGet(this, _caches).get(cacheName); // 2.1.1.1
+              _cache2 = _classPrivateFieldGet(_caches, this).get(cacheName); // 2.1.1.1
               return _context3.abrupt("return", new Cache(kConstruct, _cache2));
             case 6:
               // 2.2
               cache = []; // 2.3
-              _classPrivateFieldGet(this, _caches).set(cacheName, cache);
+              _classPrivateFieldGet(_caches, this).set(cacheName, cache);
 
               // 2.4
               return _context3.abrupt("return", new Cache(kConstruct, cache));
@@ -12983,7 +12938,7 @@ var CacheStorage = /*#__PURE__*/function () {
                 header: 'CacheStorage.delete'
               });
               cacheName = webidl.converters.DOMString(cacheName);
-              return _context4.abrupt("return", _classPrivateFieldGet(this, _caches)["delete"](cacheName));
+              return _context4.abrupt("return", _classPrivateFieldGet(_caches, this)["delete"](cacheName));
             case 4:
             case "end":
               return _context4.stop();
@@ -13011,7 +12966,7 @@ var CacheStorage = /*#__PURE__*/function () {
               webidl.brandCheck(this, CacheStorage);
 
               // 2.1
-              keys = _classPrivateFieldGet(this, _caches).keys(); // 2.2
+              keys = _classPrivateFieldGet(_caches, this).keys(); // 2.2
               return _context5.abrupt("return", _toConsumableArray(keys));
             case 3:
             case "end":
@@ -13025,7 +12980,6 @@ var CacheStorage = /*#__PURE__*/function () {
       return keys;
     }())
   }]);
-  return CacheStorage;
 }();
 Object.defineProperties(CacheStorage.prototype, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, Symbol.toStringTag, {
   value: 'CacheStorage',
@@ -13253,7 +13207,6 @@ try {
  * @type {import('../types/client').default}
  */
 var Client = /*#__PURE__*/function (_DispatcherBase) {
-  _inherits(Client, _DispatcherBase);
   /**
    *
    * @param {string|URL} url
@@ -13417,7 +13370,8 @@ var Client = /*#__PURE__*/function (_DispatcherBase) {
     _this[kPendingIdx] = 0;
     return _this;
   }
-  _createClass(Client, [{
+  _inherits(Client, _DispatcherBase);
+  return _createClass(Client, [{
     key: "pipelining",
     get: function get() {
       return this[kPipelining];
@@ -13552,7 +13506,6 @@ var Client = /*#__PURE__*/function (_DispatcherBase) {
       return value;
     }()
   }]);
-  return Client;
 }(DispatcherBase);
 function onHttp2SessionError(err) {
   assert(err.code !== 'ERR_TLS_CERT_ALTNAME_INVALID');
@@ -13715,7 +13668,7 @@ var Parser = /*#__PURE__*/function () {
     this.connection = '';
     this.maxResponseSize = client[kMaxResponseSize];
   }
-  _createClass(Parser, [{
+  return _createClass(Parser, [{
     key: "setTimeout",
     value: function setTimeout(value, type) {
       this.timeoutType = type;
@@ -14116,7 +14069,6 @@ var Parser = /*#__PURE__*/function () {
       }
     }
   }]);
-  return Parser;
 }();
 function onParserTimeout(parser) {
   var socket = parser.socket,
@@ -15311,7 +15263,7 @@ var AsyncWriter = /*#__PURE__*/function () {
     this.header = header;
     socket[kWriting] = true;
   }
-  _createClass(AsyncWriter, [{
+  return _createClass(AsyncWriter, [{
     key: "write",
     value: function write(chunk) {
       var socket = this.socket,
@@ -15426,7 +15378,6 @@ var AsyncWriter = /*#__PURE__*/function () {
       }
     }
   }]);
-  return AsyncWriter;
 }();
 function errorRequest(client, request, err) {
   try {
@@ -15457,20 +15408,19 @@ var CompatWeakRef = /*#__PURE__*/function () {
     _classCallCheck(this, CompatWeakRef);
     this.value = value;
   }
-  _createClass(CompatWeakRef, [{
+  return _createClass(CompatWeakRef, [{
     key: "deref",
     value: function deref() {
       return this.value[kConnected] === 0 && this.value[kSize] === 0 ? undefined : this.value;
     }
   }]);
-  return CompatWeakRef;
 }();
 var CompatFinalizer = /*#__PURE__*/function () {
   function CompatFinalizer(finalizer) {
     _classCallCheck(this, CompatFinalizer);
     this.finalizer = finalizer;
   }
-  _createClass(CompatFinalizer, [{
+  return _createClass(CompatFinalizer, [{
     key: "register",
     value: function register(dispatcher, key) {
       var _this = this;
@@ -15483,7 +15433,6 @@ var CompatFinalizer = /*#__PURE__*/function () {
       }
     }
   }]);
-  return CompatFinalizer;
 }();
 module.exports = function () {
   // FIXME: remove workaround when the Node bug is fixed
@@ -16360,7 +16309,7 @@ if (global.FinalizationRegistry && !process.env.NODE_V8_COVERAGE) {
         }
       });
     }
-    _createClass(WeakSessionCache, [{
+    return _createClass(WeakSessionCache, [{
       key: "get",
       value: function get(sessionKey) {
         var ref = this._sessionCache.get(sessionKey);
@@ -16376,7 +16325,6 @@ if (global.FinalizationRegistry && !process.env.NODE_V8_COVERAGE) {
         this._sessionRegistry.register(session, sessionKey);
       }
     }]);
-    return WeakSessionCache;
   }();
 } else {
   SessionCache = /*#__PURE__*/function () {
@@ -16385,7 +16333,7 @@ if (global.FinalizationRegistry && !process.env.NODE_V8_COVERAGE) {
       this._maxCachedSessions = maxCachedSessions;
       this._sessionCache = new Map();
     }
-    _createClass(SimpleSessionCache, [{
+    return _createClass(SimpleSessionCache, [{
       key: "get",
       value: function get(sessionKey) {
         return this._sessionCache.get(sessionKey);
@@ -16405,7 +16353,6 @@ if (global.FinalizationRegistry && !process.env.NODE_V8_COVERAGE) {
         this._sessionCache.set(sessionKey, session);
       }
     }]);
-    return SimpleSessionCache;
   }();
 }
 function buildConnector(_ref) {
@@ -16526,20 +16473,44 @@ module.exports = buildConnector;
 
 /***/ }),
 
+/***/ 5751:
+/***/ ((module) => {
+
+"use strict";
+
+
+/** @type {Record<string, string | undefined>} */
+var headerNameLowerCasedRecord = {};
+
+// https://developer.mozilla.org/docs/Web/HTTP/Headers
+var wellknownHeaderNames = ['Accept', 'Accept-Encoding', 'Accept-Language', 'Accept-Ranges', 'Access-Control-Allow-Credentials', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Origin', 'Access-Control-Expose-Headers', 'Access-Control-Max-Age', 'Access-Control-Request-Headers', 'Access-Control-Request-Method', 'Age', 'Allow', 'Alt-Svc', 'Alt-Used', 'Authorization', 'Cache-Control', 'Clear-Site-Data', 'Connection', 'Content-Disposition', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-Location', 'Content-Range', 'Content-Security-Policy', 'Content-Security-Policy-Report-Only', 'Content-Type', 'Cookie', 'Cross-Origin-Embedder-Policy', 'Cross-Origin-Opener-Policy', 'Cross-Origin-Resource-Policy', 'Date', 'Device-Memory', 'Downlink', 'ECT', 'ETag', 'Expect', 'Expect-CT', 'Expires', 'Forwarded', 'From', 'Host', 'If-Match', 'If-Modified-Since', 'If-None-Match', 'If-Range', 'If-Unmodified-Since', 'Keep-Alive', 'Last-Modified', 'Link', 'Location', 'Max-Forwards', 'Origin', 'Permissions-Policy', 'Pragma', 'Proxy-Authenticate', 'Proxy-Authorization', 'RTT', 'Range', 'Referer', 'Referrer-Policy', 'Refresh', 'Retry-After', 'Sec-WebSocket-Accept', 'Sec-WebSocket-Extensions', 'Sec-WebSocket-Key', 'Sec-WebSocket-Protocol', 'Sec-WebSocket-Version', 'Server', 'Server-Timing', 'Service-Worker-Allowed', 'Service-Worker-Navigation-Preload', 'Set-Cookie', 'SourceMap', 'Strict-Transport-Security', 'Supports-Loading-Mode', 'TE', 'Timing-Allow-Origin', 'Trailer', 'Transfer-Encoding', 'Upgrade', 'Upgrade-Insecure-Requests', 'User-Agent', 'Vary', 'Via', 'WWW-Authenticate', 'X-Content-Type-Options', 'X-DNS-Prefetch-Control', 'X-Frame-Options', 'X-Permitted-Cross-Domain-Policies', 'X-Powered-By', 'X-Requested-With', 'X-XSS-Protection'];
+for (var i = 0; i < wellknownHeaderNames.length; ++i) {
+  var key = wellknownHeaderNames[i];
+  var lowerCasedKey = key.toLowerCase();
+  headerNameLowerCasedRecord[key] = headerNameLowerCasedRecord[lowerCasedKey] = lowerCasedKey;
+}
+
+// Note: object prototypes should not be able to be referenced. e.g. `Object#hasOwnProperty`.
+Object.setPrototypeOf(headerNameLowerCasedRecord, null);
+module.exports = {
+  wellknownHeaderNames: wellknownHeaderNames,
+  headerNameLowerCasedRecord: headerNameLowerCasedRecord
+};
+
+/***/ }),
+
 /***/ 3515:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var UndiciError = /*#__PURE__*/function (_Error) {
-  _inherits(UndiciError, _Error);
   function UndiciError(message) {
     var _this;
     _classCallCheck(this, UndiciError);
@@ -16548,71 +16519,71 @@ var UndiciError = /*#__PURE__*/function (_Error) {
     _this.code = 'UND_ERR';
     return _this;
   }
+  _inherits(UndiciError, _Error);
   return _createClass(UndiciError);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 var ConnectTimeoutError = /*#__PURE__*/function (_UndiciError) {
-  _inherits(ConnectTimeoutError, _UndiciError);
   function ConnectTimeoutError(message) {
     var _this2;
     _classCallCheck(this, ConnectTimeoutError);
     _this2 = _callSuper(this, ConnectTimeoutError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this2), ConnectTimeoutError);
+    Error.captureStackTrace(_this2, ConnectTimeoutError);
     _this2.name = 'ConnectTimeoutError';
     _this2.message = message || 'Connect Timeout Error';
     _this2.code = 'UND_ERR_CONNECT_TIMEOUT';
     return _this2;
   }
+  _inherits(ConnectTimeoutError, _UndiciError);
   return _createClass(ConnectTimeoutError);
 }(UndiciError);
 var HeadersTimeoutError = /*#__PURE__*/function (_UndiciError2) {
-  _inherits(HeadersTimeoutError, _UndiciError2);
   function HeadersTimeoutError(message) {
     var _this3;
     _classCallCheck(this, HeadersTimeoutError);
     _this3 = _callSuper(this, HeadersTimeoutError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this3), HeadersTimeoutError);
+    Error.captureStackTrace(_this3, HeadersTimeoutError);
     _this3.name = 'HeadersTimeoutError';
     _this3.message = message || 'Headers Timeout Error';
     _this3.code = 'UND_ERR_HEADERS_TIMEOUT';
     return _this3;
   }
+  _inherits(HeadersTimeoutError, _UndiciError2);
   return _createClass(HeadersTimeoutError);
 }(UndiciError);
 var HeadersOverflowError = /*#__PURE__*/function (_UndiciError3) {
-  _inherits(HeadersOverflowError, _UndiciError3);
   function HeadersOverflowError(message) {
     var _this4;
     _classCallCheck(this, HeadersOverflowError);
     _this4 = _callSuper(this, HeadersOverflowError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this4), HeadersOverflowError);
+    Error.captureStackTrace(_this4, HeadersOverflowError);
     _this4.name = 'HeadersOverflowError';
     _this4.message = message || 'Headers Overflow Error';
     _this4.code = 'UND_ERR_HEADERS_OVERFLOW';
     return _this4;
   }
+  _inherits(HeadersOverflowError, _UndiciError3);
   return _createClass(HeadersOverflowError);
 }(UndiciError);
 var BodyTimeoutError = /*#__PURE__*/function (_UndiciError4) {
-  _inherits(BodyTimeoutError, _UndiciError4);
   function BodyTimeoutError(message) {
     var _this5;
     _classCallCheck(this, BodyTimeoutError);
     _this5 = _callSuper(this, BodyTimeoutError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this5), BodyTimeoutError);
+    Error.captureStackTrace(_this5, BodyTimeoutError);
     _this5.name = 'BodyTimeoutError';
     _this5.message = message || 'Body Timeout Error';
     _this5.code = 'UND_ERR_BODY_TIMEOUT';
     return _this5;
   }
+  _inherits(BodyTimeoutError, _UndiciError4);
   return _createClass(BodyTimeoutError);
 }(UndiciError);
 var ResponseStatusCodeError = /*#__PURE__*/function (_UndiciError5) {
-  _inherits(ResponseStatusCodeError, _UndiciError5);
   function ResponseStatusCodeError(message, statusCode, headers, body) {
     var _this6;
     _classCallCheck(this, ResponseStatusCodeError);
     _this6 = _callSuper(this, ResponseStatusCodeError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this6), ResponseStatusCodeError);
+    Error.captureStackTrace(_this6, ResponseStatusCodeError);
     _this6.name = 'ResponseStatusCodeError';
     _this6.message = message || 'Response Status Code Error';
     _this6.code = 'UND_ERR_RESPONSE_STATUS_CODE';
@@ -16622,200 +16593,200 @@ var ResponseStatusCodeError = /*#__PURE__*/function (_UndiciError5) {
     _this6.headers = headers;
     return _this6;
   }
+  _inherits(ResponseStatusCodeError, _UndiciError5);
   return _createClass(ResponseStatusCodeError);
 }(UndiciError);
 var InvalidArgumentError = /*#__PURE__*/function (_UndiciError6) {
-  _inherits(InvalidArgumentError, _UndiciError6);
   function InvalidArgumentError(message) {
     var _this7;
     _classCallCheck(this, InvalidArgumentError);
     _this7 = _callSuper(this, InvalidArgumentError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this7), InvalidArgumentError);
+    Error.captureStackTrace(_this7, InvalidArgumentError);
     _this7.name = 'InvalidArgumentError';
     _this7.message = message || 'Invalid Argument Error';
     _this7.code = 'UND_ERR_INVALID_ARG';
     return _this7;
   }
+  _inherits(InvalidArgumentError, _UndiciError6);
   return _createClass(InvalidArgumentError);
 }(UndiciError);
 var InvalidReturnValueError = /*#__PURE__*/function (_UndiciError7) {
-  _inherits(InvalidReturnValueError, _UndiciError7);
   function InvalidReturnValueError(message) {
     var _this8;
     _classCallCheck(this, InvalidReturnValueError);
     _this8 = _callSuper(this, InvalidReturnValueError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this8), InvalidReturnValueError);
+    Error.captureStackTrace(_this8, InvalidReturnValueError);
     _this8.name = 'InvalidReturnValueError';
     _this8.message = message || 'Invalid Return Value Error';
     _this8.code = 'UND_ERR_INVALID_RETURN_VALUE';
     return _this8;
   }
+  _inherits(InvalidReturnValueError, _UndiciError7);
   return _createClass(InvalidReturnValueError);
 }(UndiciError);
 var RequestAbortedError = /*#__PURE__*/function (_UndiciError8) {
-  _inherits(RequestAbortedError, _UndiciError8);
   function RequestAbortedError(message) {
     var _this9;
     _classCallCheck(this, RequestAbortedError);
     _this9 = _callSuper(this, RequestAbortedError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this9), RequestAbortedError);
+    Error.captureStackTrace(_this9, RequestAbortedError);
     _this9.name = 'AbortError';
     _this9.message = message || 'Request aborted';
     _this9.code = 'UND_ERR_ABORTED';
     return _this9;
   }
+  _inherits(RequestAbortedError, _UndiciError8);
   return _createClass(RequestAbortedError);
 }(UndiciError);
 var InformationalError = /*#__PURE__*/function (_UndiciError9) {
-  _inherits(InformationalError, _UndiciError9);
   function InformationalError(message) {
     var _this10;
     _classCallCheck(this, InformationalError);
     _this10 = _callSuper(this, InformationalError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this10), InformationalError);
+    Error.captureStackTrace(_this10, InformationalError);
     _this10.name = 'InformationalError';
     _this10.message = message || 'Request information';
     _this10.code = 'UND_ERR_INFO';
     return _this10;
   }
+  _inherits(InformationalError, _UndiciError9);
   return _createClass(InformationalError);
 }(UndiciError);
 var RequestContentLengthMismatchError = /*#__PURE__*/function (_UndiciError10) {
-  _inherits(RequestContentLengthMismatchError, _UndiciError10);
   function RequestContentLengthMismatchError(message) {
     var _this11;
     _classCallCheck(this, RequestContentLengthMismatchError);
     _this11 = _callSuper(this, RequestContentLengthMismatchError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this11), RequestContentLengthMismatchError);
+    Error.captureStackTrace(_this11, RequestContentLengthMismatchError);
     _this11.name = 'RequestContentLengthMismatchError';
     _this11.message = message || 'Request body length does not match content-length header';
     _this11.code = 'UND_ERR_REQ_CONTENT_LENGTH_MISMATCH';
     return _this11;
   }
+  _inherits(RequestContentLengthMismatchError, _UndiciError10);
   return _createClass(RequestContentLengthMismatchError);
 }(UndiciError);
 var ResponseContentLengthMismatchError = /*#__PURE__*/function (_UndiciError11) {
-  _inherits(ResponseContentLengthMismatchError, _UndiciError11);
   function ResponseContentLengthMismatchError(message) {
     var _this12;
     _classCallCheck(this, ResponseContentLengthMismatchError);
     _this12 = _callSuper(this, ResponseContentLengthMismatchError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this12), ResponseContentLengthMismatchError);
+    Error.captureStackTrace(_this12, ResponseContentLengthMismatchError);
     _this12.name = 'ResponseContentLengthMismatchError';
     _this12.message = message || 'Response body length does not match content-length header';
     _this12.code = 'UND_ERR_RES_CONTENT_LENGTH_MISMATCH';
     return _this12;
   }
+  _inherits(ResponseContentLengthMismatchError, _UndiciError11);
   return _createClass(ResponseContentLengthMismatchError);
 }(UndiciError);
 var ClientDestroyedError = /*#__PURE__*/function (_UndiciError12) {
-  _inherits(ClientDestroyedError, _UndiciError12);
   function ClientDestroyedError(message) {
     var _this13;
     _classCallCheck(this, ClientDestroyedError);
     _this13 = _callSuper(this, ClientDestroyedError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this13), ClientDestroyedError);
+    Error.captureStackTrace(_this13, ClientDestroyedError);
     _this13.name = 'ClientDestroyedError';
     _this13.message = message || 'The client is destroyed';
     _this13.code = 'UND_ERR_DESTROYED';
     return _this13;
   }
+  _inherits(ClientDestroyedError, _UndiciError12);
   return _createClass(ClientDestroyedError);
 }(UndiciError);
 var ClientClosedError = /*#__PURE__*/function (_UndiciError13) {
-  _inherits(ClientClosedError, _UndiciError13);
   function ClientClosedError(message) {
     var _this14;
     _classCallCheck(this, ClientClosedError);
     _this14 = _callSuper(this, ClientClosedError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this14), ClientClosedError);
+    Error.captureStackTrace(_this14, ClientClosedError);
     _this14.name = 'ClientClosedError';
     _this14.message = message || 'The client is closed';
     _this14.code = 'UND_ERR_CLOSED';
     return _this14;
   }
+  _inherits(ClientClosedError, _UndiciError13);
   return _createClass(ClientClosedError);
 }(UndiciError);
 var SocketError = /*#__PURE__*/function (_UndiciError14) {
-  _inherits(SocketError, _UndiciError14);
   function SocketError(message, socket) {
     var _this15;
     _classCallCheck(this, SocketError);
     _this15 = _callSuper(this, SocketError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this15), SocketError);
+    Error.captureStackTrace(_this15, SocketError);
     _this15.name = 'SocketError';
     _this15.message = message || 'Socket error';
     _this15.code = 'UND_ERR_SOCKET';
     _this15.socket = socket;
     return _this15;
   }
+  _inherits(SocketError, _UndiciError14);
   return _createClass(SocketError);
 }(UndiciError);
 var NotSupportedError = /*#__PURE__*/function (_UndiciError15) {
-  _inherits(NotSupportedError, _UndiciError15);
   function NotSupportedError(message) {
     var _this16;
     _classCallCheck(this, NotSupportedError);
     _this16 = _callSuper(this, NotSupportedError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this16), NotSupportedError);
+    Error.captureStackTrace(_this16, NotSupportedError);
     _this16.name = 'NotSupportedError';
     _this16.message = message || 'Not supported error';
     _this16.code = 'UND_ERR_NOT_SUPPORTED';
     return _this16;
   }
+  _inherits(NotSupportedError, _UndiciError15);
   return _createClass(NotSupportedError);
 }(UndiciError);
 var BalancedPoolMissingUpstreamError = /*#__PURE__*/function (_UndiciError16) {
-  _inherits(BalancedPoolMissingUpstreamError, _UndiciError16);
   function BalancedPoolMissingUpstreamError(message) {
     var _this17;
     _classCallCheck(this, BalancedPoolMissingUpstreamError);
     _this17 = _callSuper(this, BalancedPoolMissingUpstreamError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this17), NotSupportedError);
+    Error.captureStackTrace(_this17, NotSupportedError);
     _this17.name = 'MissingUpstreamError';
     _this17.message = message || 'No upstream has been added to the BalancedPool';
     _this17.code = 'UND_ERR_BPL_MISSING_UPSTREAM';
     return _this17;
   }
+  _inherits(BalancedPoolMissingUpstreamError, _UndiciError16);
   return _createClass(BalancedPoolMissingUpstreamError);
 }(UndiciError);
 var HTTPParserError = /*#__PURE__*/function (_Error2) {
-  _inherits(HTTPParserError, _Error2);
   function HTTPParserError(message, code, data) {
     var _this18;
     _classCallCheck(this, HTTPParserError);
     _this18 = _callSuper(this, HTTPParserError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this18), HTTPParserError);
+    Error.captureStackTrace(_this18, HTTPParserError);
     _this18.name = 'HTTPParserError';
     _this18.code = code ? "HPE_".concat(code) : undefined;
     _this18.data = data ? data.toString() : undefined;
     return _this18;
   }
+  _inherits(HTTPParserError, _Error2);
   return _createClass(HTTPParserError);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 var ResponseExceededMaxSizeError = /*#__PURE__*/function (_UndiciError17) {
-  _inherits(ResponseExceededMaxSizeError, _UndiciError17);
   function ResponseExceededMaxSizeError(message) {
     var _this19;
     _classCallCheck(this, ResponseExceededMaxSizeError);
     _this19 = _callSuper(this, ResponseExceededMaxSizeError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this19), ResponseExceededMaxSizeError);
+    Error.captureStackTrace(_this19, ResponseExceededMaxSizeError);
     _this19.name = 'ResponseExceededMaxSizeError';
     _this19.message = message || 'Response content exceeded max size';
     _this19.code = 'UND_ERR_RES_EXCEEDED_MAX_SIZE';
     return _this19;
   }
+  _inherits(ResponseExceededMaxSizeError, _UndiciError17);
   return _createClass(ResponseExceededMaxSizeError);
 }(UndiciError);
 var RequestRetryError = /*#__PURE__*/function (_UndiciError18) {
-  _inherits(RequestRetryError, _UndiciError18);
   function RequestRetryError(message, code, _ref) {
     var _this20;
     var headers = _ref.headers,
       data = _ref.data;
     _classCallCheck(this, RequestRetryError);
     _this20 = _callSuper(this, RequestRetryError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this20), RequestRetryError);
+    Error.captureStackTrace(_this20, RequestRetryError);
     _this20.name = 'RequestRetryError';
     _this20.message = message || 'Request retry error';
     _this20.code = 'UND_ERR_REQ_RETRY';
@@ -16824,6 +16795,7 @@ var RequestRetryError = /*#__PURE__*/function (_UndiciError18) {
     _this20.headers = headers;
     return _this20;
   }
+  _inherits(RequestRetryError, _UndiciError18);
   return _createClass(RequestRetryError);
 }(UndiciError);
 module.exports = {
@@ -17061,7 +17033,7 @@ var Request = /*#__PURE__*/function () {
       });
     }
   }
-  _createClass(Request, [{
+  return _createClass(Request, [{
     key: "onBodySent",
     value: function onBodySent(chunk) {
       if (this[kHandler].onBodySent) {
@@ -17254,7 +17226,6 @@ var Request = /*#__PURE__*/function () {
       return headers;
     }
   }]);
-  return Request;
 }();
 function processHeaderValue(key, val, skipAppend) {
   if (val && typeof val === 'object') {
@@ -17418,6 +17389,8 @@ var _require4 = __webpack_require__(181),
 var nodeUtil = __webpack_require__(9023);
 var _require5 = __webpack_require__(3480),
   stringify = _require5.stringify;
+var _require6 = __webpack_require__(5751),
+  headerNameLowerCasedRecord = _require6.headerNameLowerCasedRecord;
 var _process$versions$nod = process.versions.node.split('.').map(function (v) {
     return Number(v);
   }),
@@ -17573,6 +17546,15 @@ var KEEPALIVE_TIMEOUT_EXPR = /timeout=(\d+)/;
 function parseKeepAliveTimeout(val) {
   var m = val.toString().match(KEEPALIVE_TIMEOUT_EXPR);
   return m ? parseInt(m[1], 10) * 1000 : null;
+}
+
+/**
+ * Retrieves a header name and returns its lowercase value.
+ * @param {string | Buffer} value Header name
+ * @returns {string}
+ */
+function headerNameToString(value) {
+  return headerNameLowerCasedRecord[value] || value.toLowerCase();
 }
 function parseHeaders(headers) {
   var obj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -17898,6 +17880,7 @@ module.exports = {
   isIterable: isIterable,
   isAsyncIterable: isAsyncIterable,
   isDestroyed: isDestroyed,
+  headerNameToString: headerNameToString,
   parseRawHeaders: parseRawHeaders,
   parseHeaders: parseHeaders,
   parseKeepAliveTimeout: parseKeepAliveTimeout,
@@ -17947,7 +17930,6 @@ var kOnDestroyed = Symbol('onDestroyed');
 var kOnClosed = Symbol('onClosed');
 var kInterceptedDispatch = Symbol('Intercepted Dispatch');
 var DispatcherBase = /*#__PURE__*/function (_Dispatcher) {
-  _inherits(DispatcherBase, _Dispatcher);
   function DispatcherBase() {
     var _this;
     _classCallCheck(this, DispatcherBase);
@@ -17958,7 +17940,8 @@ var DispatcherBase = /*#__PURE__*/function (_Dispatcher) {
     _this[kOnClosed] = [];
     return _this;
   }
-  _createClass(DispatcherBase, [{
+  _inherits(DispatcherBase, _Dispatcher);
+  return _createClass(DispatcherBase, [{
     key: "destroyed",
     get: function get() {
       return this[kDestroyed];
@@ -18118,7 +18101,6 @@ var DispatcherBase = /*#__PURE__*/function (_Dispatcher) {
       }
     }
   }]);
-  return DispatcherBase;
 }(Dispatcher);
 module.exports = DispatcherBase;
 
@@ -18136,12 +18118,12 @@ var _callSuper = (__webpack_require__(8336)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var EventEmitter = __webpack_require__(4434);
 var Dispatcher = /*#__PURE__*/function (_EventEmitter) {
-  _inherits(Dispatcher, _EventEmitter);
   function Dispatcher() {
     _classCallCheck(this, Dispatcher);
     return _callSuper(this, Dispatcher, arguments);
   }
-  _createClass(Dispatcher, [{
+  _inherits(Dispatcher, _EventEmitter);
+  return _createClass(Dispatcher, [{
     key: "dispatch",
     value: function dispatch() {
       throw new Error('not implemented');
@@ -18157,7 +18139,6 @@ var Dispatcher = /*#__PURE__*/function (_EventEmitter) {
       throw new Error('not implemented');
     }
   }]);
-  return Dispatcher;
 }(EventEmitter);
 module.exports = Dispatcher;
 
@@ -19784,7 +19765,6 @@ var _require7 = __webpack_require__(6632),
   kEnumerableProperty = _require7.kEnumerableProperty;
 var encoder = new TextEncoder();
 var File = /*#__PURE__*/function (_Blob) {
-  _inherits(File, _Blob);
   function File(fileBits, fileName) {
     var _this;
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -19853,7 +19833,8 @@ var File = /*#__PURE__*/function (_Blob) {
     };
     return _this;
   }
-  _createClass(File, [{
+  _inherits(File, _Blob);
+  return _createClass(File, [{
     key: "name",
     get: function get() {
       webidl.brandCheck(this, File);
@@ -19872,9 +19853,8 @@ var File = /*#__PURE__*/function (_Blob) {
       return this[kState].type;
     }
   }]);
-  return File;
 }(Blob);
-var FileLike = /*#__PURE__*/function (_Symbol$toStringTag) {
+var FileLike = /*#__PURE__*/function () {
   function FileLike(blobLike, fileName) {
     var _options$lastModified;
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -19924,7 +19904,7 @@ var FileLike = /*#__PURE__*/function (_Symbol$toStringTag) {
       lastModified: d
     };
   }
-  _createClass(FileLike, [{
+  return _createClass(FileLike, [{
     key: "stream",
     value: function stream() {
       var _this$kState$blobLike;
@@ -19977,13 +19957,12 @@ var FileLike = /*#__PURE__*/function (_Symbol$toStringTag) {
       return this[kState].lastModified;
     }
   }, {
-    key: _Symbol$toStringTag,
+    key: Symbol.toStringTag,
     get: function get() {
       return 'File';
     }
   }]);
-  return FileLike;
-}(Symbol.toStringTag);
+}();
 Object.defineProperties(File.prototype, _defineProperty(_defineProperty(_defineProperty({}, Symbol.toStringTag, {
   value: 'File',
   configurable: true
@@ -20160,7 +20139,7 @@ var FormData = /*#__PURE__*/function () {
     }
     this[kState] = [];
   }
-  _createClass(FormData, [{
+  return _createClass(FormData, [{
     key: "append",
     value: function append(name, value) {
       var filename = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
@@ -20364,7 +20343,6 @@ var FormData = /*#__PURE__*/function () {
       }
     }
   }]);
-  return FormData;
 }();
 FormData.prototype[Symbol.iterator] = FormData.prototype.entries;
 Object.defineProperties(FormData.prototype, _defineProperty({}, Symbol.toStringTag, {
@@ -20482,7 +20460,6 @@ var _toConsumableArray = (__webpack_require__(1132)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _defineProperty = (__webpack_require__(3693)["default"]);
-var _Symbol$iterator;
 var _require = __webpack_require__(6771),
   kHeadersList = _require.kHeadersList,
   kConstruct = _require.kConstruct;
@@ -20601,7 +20578,6 @@ function appendHeader(headers, name, value) {
   // 8. If headers’s guard is "request-no-cors", then remove
   //    privileged no-CORS request headers from headers
 }
-_Symbol$iterator = Symbol.iterator;
 var HeadersList = /*#__PURE__*/function () {
   function HeadersList(init) {
     _classCallCheck(this, HeadersList);
@@ -20618,7 +20594,7 @@ var HeadersList = /*#__PURE__*/function () {
   }
 
   // https://fetch.spec.whatwg.org/#header-list-contains
-  _createClass(HeadersList, [{
+  return _createClass(HeadersList, [{
     key: "contains",
     value: function contains(name) {
       // A header list list contains a header name name if list
@@ -20711,7 +20687,7 @@ var HeadersList = /*#__PURE__*/function () {
       return value === undefined ? null : value.value;
     }
   }, {
-    key: _Symbol$iterator,
+    key: Symbol.iterator,
     value: /*#__PURE__*/_regeneratorRuntime().mark(function value() {
       var _iterator, _step, _step$value, name, value;
       return _regeneratorRuntime().wrap(function value$(_context) {
@@ -20772,9 +20748,8 @@ var HeadersList = /*#__PURE__*/function () {
       return headers;
     }
   }]);
-  return HeadersList;
 }(); // https://fetch.spec.whatwg.org/#headers-class
-var Headers = /*#__PURE__*/function (_Symbol$for) {
+var Headers = /*#__PURE__*/function () {
   function Headers() {
     var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
     _classCallCheck(this, Headers);
@@ -20796,7 +20771,7 @@ var Headers = /*#__PURE__*/function (_Symbol$for) {
   }
 
   // https://fetch.spec.whatwg.org/#dom-headers-append
-  _createClass(Headers, [{
+  return _createClass(Headers, [{
     key: "append",
     value: function append(name, value) {
       webidl.brandCheck(this, Headers);
@@ -21099,14 +21074,13 @@ var Headers = /*#__PURE__*/function (_Symbol$for) {
       }
     }
   }, {
-    key: _Symbol$for,
+    key: Symbol["for"]('nodejs.util.inspect.custom'),
     value: function value() {
       webidl.brandCheck(this, Headers);
       return this[kHeadersList];
     }
   }]);
-  return Headers;
-}(Symbol["for"]('nodejs.util.inspect.custom'));
+}();
 Headers.prototype[Symbol.iterator] = Headers.prototype.entries;
 Object.defineProperties(Headers.prototype, _defineProperty(_defineProperty({
   append: kEnumerableProperty,
@@ -21252,7 +21226,6 @@ var GET_OR_HEAD = ['GET', 'HEAD'];
 var resolveObjectURL;
 var ReadableStream = globalThis.ReadableStream;
 var Fetch = /*#__PURE__*/function (_EE) {
-  _inherits(Fetch, _EE);
   function Fetch(dispatcher) {
     var _this;
     _classCallCheck(this, Fetch);
@@ -21269,7 +21242,8 @@ var Fetch = /*#__PURE__*/function (_EE) {
     _this.setMaxListeners(21);
     return _this;
   }
-  _createClass(Fetch, [{
+  _inherits(Fetch, _EE);
+  return _createClass(Fetch, [{
     key: "terminate",
     value: function terminate(reason) {
       var _this$connection;
@@ -21309,7 +21283,6 @@ var Fetch = /*#__PURE__*/function (_EE) {
       this.emit('terminated', error);
     }
   }]);
-  return Fetch;
 }(EE); // https://fetch.spec.whatwg.org/#fetch-method
 function fetch(input) {
   var _globalObject$constru, _init$dispatcher;
@@ -24067,7 +24040,7 @@ var Request = /*#__PURE__*/function () {
   }
 
   // Returns request’s HTTP method, which is "GET" by default.
-  _createClass(Request, [{
+  return _createClass(Request, [{
     key: "method",
     get: function get() {
       webidl.brandCheck(this, Request);
@@ -24313,7 +24286,6 @@ var Request = /*#__PURE__*/function () {
       return clonedRequestObject;
     }
   }]);
-  return Request;
 }();
 mixinBody(Request);
 function makeRequest(init) {
@@ -24588,7 +24560,7 @@ var Response = /*#__PURE__*/function () {
   }
 
   // Returns response’s type, e.g., "cors".
-  _createClass(Response, [{
+  return _createClass(Response, [{
     key: "type",
     get: function get() {
       webidl.brandCheck(this, Response);
@@ -24819,7 +24791,6 @@ var Response = /*#__PURE__*/function () {
       return responseObject;
     }
   }]);
-  return Response;
 }();
 mixinBody(Response);
 Object.defineProperties(Response.prototype, _defineProperty({
@@ -25139,12 +25110,18 @@ var _require4 = __webpack_require__(6632),
 var assert = __webpack_require__(2613);
 var _require5 = __webpack_require__(8253),
   isUint8Array = _require5.isUint8Array;
+var supportedHashes = [];
 
 // https://nodejs.org/api/crypto.html#determining-if-crypto-support-is-unavailable
 /** @type {import('crypto')|undefined} */
 var crypto;
 try {
   crypto = __webpack_require__(6982);
+  var possibleRelevantHashes = ['sha256', 'sha384', 'sha512'];
+  supportedHashes = crypto.getHashes().filter(function (hash) {
+    return possibleRelevantHashes.includes(hash);
+  });
+  /* c8 ignore next 3 */
 } catch (_unused) {}
 function responseURL(response) {
   // https://fetch.spec.whatwg.org/#responses
@@ -25648,24 +25625,20 @@ function bytesMatch(bytes, metadataList) {
     return true;
   }
 
-  // 3. If parsedMetadata is the empty set, return true.
+  // 3. If response is not eligible for integrity validation, return false.
+  // TODO
+
+  // 4. If parsedMetadata is the empty set, return true.
   if (parsedMetadata.length === 0) {
     return true;
   }
 
-  // 4. Let metadata be the result of getting the strongest
+  // 5. Let metadata be the result of getting the strongest
   //    metadata from parsedMetadata.
-  var list = parsedMetadata.sort(function (c, d) {
-    return d.algo.localeCompare(c.algo);
-  });
-  // get the strongest algorithm
-  var strongest = list[0].algo;
-  // get all entries that use the strongest algorithm; ignore weaker
-  var metadata = list.filter(function (item) {
-    return item.algo === strongest;
-  });
+  var strongest = getStrongestMetadata(parsedMetadata);
+  var metadata = filterMetadataListByAlgorithm(parsedMetadata, strongest);
 
-  // 5. For each item in metadata:
+  // 6. For each item in metadata:
   var _iterator = _createForOfIteratorHelper(metadata),
     _step;
   try {
@@ -25680,31 +25653,24 @@ function bytesMatch(bytes, metadataList) {
       // See https://github.com/web-platform-tests/wpt/commit/e4c5cc7a5e48093220528dfdd1c4012dc3837a0e
       // "be liberal with padding". This is annoying, and it's not even in the spec.
 
-      if (expectedValue.endsWith('==')) {
-        expectedValue = expectedValue.slice(0, -2);
-      }
-
       // 3. Let actualValue be the result of applying algorithm to bytes.
       var actualValue = crypto.createHash(algorithm).update(bytes).digest('base64');
-      if (actualValue.endsWith('==')) {
-        actualValue = actualValue.slice(0, -2);
+      if (actualValue[actualValue.length - 1] === '=') {
+        if (actualValue[actualValue.length - 2] === '=') {
+          actualValue = actualValue.slice(0, -2);
+        } else {
+          actualValue = actualValue.slice(0, -1);
+        }
       }
 
       // 4. If actualValue is a case-sensitive match for expectedValue,
       //    return true.
-      if (actualValue === expectedValue) {
-        return true;
-      }
-      var actualBase64URL = crypto.createHash(algorithm).update(bytes).digest('base64url');
-      if (actualBase64URL.endsWith('==')) {
-        actualBase64URL = actualBase64URL.slice(0, -2);
-      }
-      if (actualBase64URL === expectedValue) {
+      if (compareBase64Mixed(actualValue, expectedValue)) {
         return true;
       }
     }
 
-    // 6. Return false.
+    // 7. Return false.
   } catch (err) {
     _iterator.e(err);
   } finally {
@@ -25716,8 +25682,8 @@ function bytesMatch(bytes, metadataList) {
 // https://w3c.github.io/webappsec-subresource-integrity/#grammardef-hash-with-options
 // https://www.w3.org/TR/CSP2/#source-list-syntax
 // https://www.rfc-editor.org/rfc/rfc5234#appendix-B.1
-var parseHashWithOptions = /*#__PURE__*/_wrapRegExp(/((sha256|sha384|sha512)\x2D([A-z0-9+/]{1}.*={0,2}))( +[\x21-\x7E]?)?/i, {
-  algo: 2,
+var parseHashWithOptions = /*#__PURE__*/_wrapRegExp(/(sha256|sha384|sha512)\x2D(([A-Za-z0-9+/]+|[A-Za-z0-9_-]+)={0,2}(?:\s|$)( +[!-~]*)?)?/i, {
+  algo: 1,
   hash: 3
 });
 
@@ -25732,7 +25698,6 @@ function parseMetadata(metadata) {
 
   // 2. Let empty be equal to true.
   var empty = true;
-  var supportedHashes = crypto.getHashes();
 
   // 3. For each token returned by splitting metadata on spaces:
   var _iterator2 = _createForOfIteratorHelper(metadata.split(' ')),
@@ -25747,7 +25712,7 @@ function parseMetadata(metadata) {
       var parsedToken = parseHashWithOptions.exec(token);
 
       // 3. If token does not parse, continue to the next token.
-      if (parsedToken === null || parsedToken.groups === undefined) {
+      if (parsedToken === null || parsedToken.groups === undefined || parsedToken.groups.algo === undefined) {
         // Note: Chromium blocks the request at this point, but Firefox
         // gives a warning that an invalid integrity was given. The
         // correct behavior is to ignore these, and subsequently not
@@ -25756,11 +25721,11 @@ function parseMetadata(metadata) {
       }
 
       // 4. Let algorithm be the hash-algo component of token.
-      var algorithm = parsedToken.groups.algo;
+      var algorithm = parsedToken.groups.algo.toLowerCase();
 
       // 5. If algorithm is a hash function recognized by the user
       //    agent, add the parsed token to result.
-      if (supportedHashes.includes(algorithm.toLowerCase())) {
+      if (supportedHashes.includes(algorithm)) {
         result.push(parsedToken.groups);
       }
     }
@@ -25775,6 +25740,73 @@ function parseMetadata(metadata) {
     return 'no metadata';
   }
   return result;
+}
+
+/**
+ * @param {{ algo: 'sha256' | 'sha384' | 'sha512' }[]} metadataList
+ */
+function getStrongestMetadata(metadataList) {
+  // Let algorithm be the algo component of the first item in metadataList.
+  // Can be sha256
+  var algorithm = metadataList[0].algo;
+  // If the algorithm is sha512, then it is the strongest
+  // and we can return immediately
+  if (algorithm[3] === '5') {
+    return algorithm;
+  }
+  for (var i = 1; i < metadataList.length; ++i) {
+    var metadata = metadataList[i];
+    // If the algorithm is sha512, then it is the strongest
+    // and we can break the loop immediately
+    if (metadata.algo[3] === '5') {
+      algorithm = 'sha512';
+      break;
+      // If the algorithm is sha384, then a potential sha256 or sha384 is ignored
+    } else if (algorithm[3] === '3') {
+      continue;
+      // algorithm is sha256, check if algorithm is sha384 and if so, set it as
+      // the strongest
+    } else if (metadata.algo[3] === '3') {
+      algorithm = 'sha384';
+    }
+  }
+  return algorithm;
+}
+function filterMetadataListByAlgorithm(metadataList, algorithm) {
+  if (metadataList.length === 1) {
+    return metadataList;
+  }
+  var pos = 0;
+  for (var i = 0; i < metadataList.length; ++i) {
+    if (metadataList[i].algo === algorithm) {
+      metadataList[pos++] = metadataList[i];
+    }
+  }
+  metadataList.length = pos;
+  return metadataList;
+}
+
+/**
+ * Compares two base64 strings, allowing for base64url
+ * in the second string.
+ *
+* @param {string} actualValue always base64
+ * @param {string} expectedValue base64 or base64url
+ * @returns {boolean}
+ */
+function compareBase64Mixed(actualValue, expectedValue) {
+  if (actualValue.length !== expectedValue.length) {
+    return false;
+  }
+  for (var i = 0; i < actualValue.length; ++i) {
+    if (actualValue[i] !== expectedValue[i]) {
+      if (actualValue[i] === '+' && expectedValue[i] === '-' || actualValue[i] === '/' && expectedValue[i] === '_') {
+        continue;
+      }
+      return false;
+    }
+  }
+  return true;
 }
 
 // https://w3c.github.io/webappsec-upgrade-insecure-requests/#upgrade-request
@@ -26224,7 +26256,8 @@ module.exports = {
   urlHasHttpsScheme: urlHasHttpsScheme,
   urlIsHttpHttpsScheme: urlIsHttpHttpsScheme,
   readAllBytes: readAllBytes,
-  normalizeMethodRecord: normalizeMethodRecord
+  normalizeMethodRecord: normalizeMethodRecord,
+  parseMetadata: parseMetadata
 };
 
 /***/ }),
@@ -27184,7 +27217,6 @@ var _require3 = __webpack_require__(3702),
 var _require4 = __webpack_require__(6632),
   kEnumerableProperty = _require4.kEnumerableProperty;
 var FileReader = /*#__PURE__*/function (_EventTarget) {
-  _inherits(FileReader, _EventTarget);
   function FileReader() {
     var _this;
     _classCallCheck(this, FileReader);
@@ -27207,7 +27239,8 @@ var FileReader = /*#__PURE__*/function (_EventTarget) {
    * @see https://w3c.github.io/FileAPI/#dfn-readAsArrayBuffer
    * @param {import('buffer').Blob} blob
    */
-  _createClass(FileReader, [{
+  _inherits(FileReader, _EventTarget);
+  return _createClass(FileReader, [{
     key: "readAsArrayBuffer",
     value: function readAsArrayBuffer(blob) {
       webidl.brandCheck(this, FileReader);
@@ -27478,7 +27511,6 @@ var FileReader = /*#__PURE__*/function (_EventTarget) {
       }
     }
   }]);
-  return FileReader;
 }( /*#__PURE__*/_wrapNativeSuper(EventTarget)); // https://w3c.github.io/FileAPI/#dom-filereader-empty
 FileReader.EMPTY = FileReader.prototype.EMPTY = 0;
 // https://w3c.github.io/FileAPI/#dom-filereader-loading
@@ -27539,7 +27571,6 @@ var kState = Symbol('ProgressEvent state');
  * @see https://xhr.spec.whatwg.org/#progressevent
  */
 var ProgressEvent = /*#__PURE__*/function (_Event) {
-  _inherits(ProgressEvent, _Event);
   function ProgressEvent(type) {
     var _eventInitDict;
     var _this;
@@ -27555,7 +27586,8 @@ var ProgressEvent = /*#__PURE__*/function (_Event) {
     };
     return _this;
   }
-  _createClass(ProgressEvent, [{
+  _inherits(ProgressEvent, _Event);
+  return _createClass(ProgressEvent, [{
     key: "lengthComputable",
     get: function get() {
       webidl.brandCheck(this, ProgressEvent);
@@ -27574,7 +27606,6 @@ var ProgressEvent = /*#__PURE__*/function (_Event) {
       return this[kState].total;
     }
   }]);
-  return ProgressEvent;
 }( /*#__PURE__*/_wrapNativeSuper(Event));
 webidl.converters.ProgressEventInit = webidl.dictionaryConverter([{
   key: 'lengthComputable',
@@ -28142,7 +28173,7 @@ module.exports = /*#__PURE__*/function () {
     _classCallCheck(this, DecoratorHandler);
     this.handler = handler;
   }
-  _createClass(DecoratorHandler, [{
+  return _createClass(DecoratorHandler, [{
     key: "onConnect",
     value: function onConnect() {
       var _this$handler;
@@ -28185,7 +28216,6 @@ module.exports = /*#__PURE__*/function () {
       return (_this$handler7 = this.handler).onBodySent.apply(_this$handler7, arguments);
     }
   }]);
-  return DecoratorHandler;
 }();
 
 /***/ }),
@@ -28213,14 +28243,14 @@ var _require2 = __webpack_require__(3515),
 var EE = __webpack_require__(4434);
 var redirectableStatusCodes = [300, 301, 302, 303, 307, 308];
 var kBody = Symbol('body');
-var BodyAsyncIterable = /*#__PURE__*/function (_Symbol$asyncIterator) {
+var BodyAsyncIterable = /*#__PURE__*/function () {
   function BodyAsyncIterable(body) {
     _classCallCheck(this, BodyAsyncIterable);
     this[kBody] = body;
     this[kBodyUsed] = false;
   }
-  _createClass(BodyAsyncIterable, [{
-    key: _Symbol$asyncIterator,
+  return _createClass(BodyAsyncIterable, [{
+    key: Symbol.asyncIterator,
     value: function value() {
       var _this = this;
       return _wrapAsyncGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -28238,8 +28268,7 @@ var BodyAsyncIterable = /*#__PURE__*/function (_Symbol$asyncIterator) {
       }))();
     }
   }]);
-  return BodyAsyncIterable;
-}(Symbol.asyncIterator);
+}();
 var RedirectHandler = /*#__PURE__*/function () {
   function RedirectHandler(dispatch, maxRedirections, opts, handler) {
     _classCallCheck(this, RedirectHandler);
@@ -28282,7 +28311,7 @@ var RedirectHandler = /*#__PURE__*/function () {
       this.opts.body = new BodyAsyncIterable(this.opts.body);
     }
   }
-  _createClass(RedirectHandler, [{
+  return _createClass(RedirectHandler, [{
     key: "onConnect",
     value: function onConnect(abort) {
       this.abort = abort;
@@ -28379,7 +28408,6 @@ var RedirectHandler = /*#__PURE__*/function () {
       }
     }
   }]);
-  return RedirectHandler;
 }();
 function parseLocation(statusCode, headers) {
   if (redirectableStatusCodes.indexOf(statusCode) === -1) {
@@ -28394,7 +28422,17 @@ function parseLocation(statusCode, headers) {
 
 // https://tools.ietf.org/html/rfc7231#section-6.4.4
 function shouldRemoveHeader(header, removeContent, unknownOrigin) {
-  return header.length === 4 && header.toString().toLowerCase() === 'host' || removeContent && header.toString().toLowerCase().indexOf('content-') === 0 || unknownOrigin && header.length === 13 && header.toString().toLowerCase() === 'authorization' || unknownOrigin && header.length === 6 && header.toString().toLowerCase() === 'cookie';
+  if (header.length === 4) {
+    return util.headerNameToString(header) === 'host';
+  }
+  if (removeContent && util.headerNameToString(header).startsWith('content-')) {
+    return true;
+  }
+  if (unknownOrigin && (header.length === 13 || header.length === 6 || header.length === 19)) {
+    var name = util.headerNameToString(header);
+    return name === 'authorization' || name === 'cookie' || name === 'proxy-authorization';
+  }
+  return false;
 }
 
 // https://tools.ietf.org/html/rfc7231#section-6.4
@@ -28499,7 +28537,7 @@ var RetryHandler = /*#__PURE__*/function () {
       }
     });
   }
-  _createClass(RetryHandler, [{
+  return _createClass(RetryHandler, [{
     key: "onRequestSent",
     value: function onRequestSent() {
       if (this.handler.onRequestSent) {
@@ -28711,7 +28749,6 @@ var RetryHandler = /*#__PURE__*/function () {
       }, retryTimeout);
     }
   }]);
-  return RetryHandler;
 }();
 module.exports = RetryHandler;
 
@@ -29077,16 +29114,14 @@ var FakeWeakRef = /*#__PURE__*/function () {
     _classCallCheck(this, FakeWeakRef);
     this.value = value;
   }
-  _createClass(FakeWeakRef, [{
+  return _createClass(FakeWeakRef, [{
     key: "deref",
     value: function deref() {
       return this.value;
     }
   }]);
-  return FakeWeakRef;
 }();
 var MockAgent = /*#__PURE__*/function (_Dispatcher) {
-  _inherits(MockAgent, _Dispatcher);
   function MockAgent(opts) {
     var _this;
     _classCallCheck(this, MockAgent);
@@ -29104,7 +29139,8 @@ var MockAgent = /*#__PURE__*/function (_Dispatcher) {
     _this[kOptions] = buildMockOptions(opts);
     return _this;
   }
-  _createClass(MockAgent, [{
+  _inherits(MockAgent, _Dispatcher);
+  return _createClass(MockAgent, [{
     key: "get",
     value: function get(origin) {
       var dispatcher = this[kMockAgentGet](origin);
@@ -29261,7 +29297,6 @@ var MockAgent = /*#__PURE__*/function (_Dispatcher) {
       throw new UndiciError("\n".concat(pluralizer.count, " ").concat(pluralizer.noun, " ").concat(pluralizer.is, " pending:\n\n").concat(pendingInterceptorsFormatter.format(pending), "\n").trim());
     }
   }]);
-  return MockAgent;
 }(Dispatcher);
 module.exports = MockAgent;
 
@@ -29278,7 +29313,6 @@ var _asyncToGenerator = (__webpack_require__(9293)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(9023),
   promisify = _require.promisify;
@@ -29303,7 +29337,6 @@ var _require5 = __webpack_require__(3515),
  * MockClient provides an API that extends the Client to influence the mockDispatches.
  */
 var MockClient = /*#__PURE__*/function (_Client, _Symbols$kConnected) {
-  _inherits(MockClient, _Client);
   function MockClient(origin, opts) {
     var _this;
     _classCallCheck(this, MockClient);
@@ -29316,12 +29349,13 @@ var MockClient = /*#__PURE__*/function (_Client, _Symbols$kConnected) {
     _this[kDispatches] = [];
     _this[kConnected] = 1;
     _this[kOriginalDispatch] = _this.dispatch;
-    _this[kOriginalClose] = _this.close.bind(_assertThisInitialized(_this));
-    _this.dispatch = buildMockDispatch.call(_assertThisInitialized(_this));
+    _this[kOriginalClose] = _this.close.bind(_this);
+    _this.dispatch = buildMockDispatch.call(_this);
     _this.close = _this[kClose];
     return _this;
   }
-  _createClass(MockClient, [{
+  _inherits(MockClient, _Client);
+  return _createClass(MockClient, [{
     key: _Symbols$kConnected,
     get: function get() {
       return this[kConnected];
@@ -29359,7 +29393,6 @@ var MockClient = /*#__PURE__*/function (_Client, _Symbols$kConnected) {
       return value;
     }()
   }]);
-  return MockClient;
 }(Client, Symbols.kConnected);
 module.exports = MockClient;
 
@@ -29374,22 +29407,21 @@ module.exports = MockClient;
 var _createClass = (__webpack_require__(4579)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(3515),
   UndiciError = _require.UndiciError;
 var MockNotMatchedError = /*#__PURE__*/function (_UndiciError) {
-  _inherits(MockNotMatchedError, _UndiciError);
   function MockNotMatchedError(message) {
     var _this;
     _classCallCheck(this, MockNotMatchedError);
     _this = _callSuper(this, MockNotMatchedError, [message]);
-    Error.captureStackTrace(_assertThisInitialized(_this), MockNotMatchedError);
+    Error.captureStackTrace(_this, MockNotMatchedError);
     _this.name = 'MockNotMatchedError';
     _this.message = message || 'The request does not match any registered mock dispatches';
     _this.code = 'UND_MOCK_ERR_MOCK_NOT_MATCHED';
     return _this;
   }
+  _inherits(MockNotMatchedError, _UndiciError);
   return _createClass(MockNotMatchedError);
 }(UndiciError);
 module.exports = {
@@ -29435,7 +29467,7 @@ var MockScope = /*#__PURE__*/function () {
   /**
    * Delay a reply by a set amount in ms.
    */
-  _createClass(MockScope, [{
+  return _createClass(MockScope, [{
     key: "delay",
     value: function delay(waitInMs) {
       if (typeof waitInMs !== 'number' || !Number.isInteger(waitInMs) || waitInMs <= 0) {
@@ -29468,7 +29500,6 @@ var MockScope = /*#__PURE__*/function () {
       return this;
     }
   }]);
-  return MockScope;
 }();
 /**
  * Defines an interceptor for a Mock
@@ -29506,7 +29537,7 @@ var MockInterceptor = /*#__PURE__*/function () {
     this[kDefaultTrailers] = {};
     this[kContentLength] = false;
   }
-  _createClass(MockInterceptor, [{
+  return _createClass(MockInterceptor, [{
     key: "createMockScopeDispatchData",
     value: function createMockScopeDispatchData(statusCode, data) {
       var responseOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -29643,7 +29674,6 @@ var MockInterceptor = /*#__PURE__*/function () {
       return this;
     }
   }]);
-  return MockInterceptor;
 }();
 module.exports.MockInterceptor = MockInterceptor;
 module.exports.MockScope = MockScope;
@@ -29661,7 +29691,6 @@ var _asyncToGenerator = (__webpack_require__(9293)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _require = __webpack_require__(9023),
   promisify = _require.promisify;
@@ -29686,7 +29715,6 @@ var _require5 = __webpack_require__(3515),
  * MockPool provides an API that extends the Pool to influence the mockDispatches.
  */
 var MockPool = /*#__PURE__*/function (_Pool, _Symbols$kConnected) {
-  _inherits(MockPool, _Pool);
   function MockPool(origin, opts) {
     var _this;
     _classCallCheck(this, MockPool);
@@ -29699,12 +29727,13 @@ var MockPool = /*#__PURE__*/function (_Pool, _Symbols$kConnected) {
     _this[kDispatches] = [];
     _this[kConnected] = 1;
     _this[kOriginalDispatch] = _this.dispatch;
-    _this[kOriginalClose] = _this.close.bind(_assertThisInitialized(_this));
-    _this.dispatch = buildMockDispatch.call(_assertThisInitialized(_this));
+    _this[kOriginalClose] = _this.close.bind(_this);
+    _this.dispatch = buildMockDispatch.call(_this);
     _this.close = _this[kClose];
     return _this;
   }
-  _createClass(MockPool, [{
+  _inherits(MockPool, _Pool);
+  return _createClass(MockPool, [{
     key: _Symbols$kConnected,
     get: function get() {
       return this[kConnected];
@@ -29742,7 +29771,6 @@ var MockPool = /*#__PURE__*/function (_Pool, _Symbols$kConnected) {
       return value;
     }()
   }]);
-  return MockPool;
 }(Pool, Symbols.kConnected);
 module.exports = MockPool;
 
@@ -30261,7 +30289,7 @@ module.exports = /*#__PURE__*/function () {
       }
     });
   }
-  _createClass(PendingInterceptorsFormatter, [{
+  return _createClass(PendingInterceptorsFormatter, [{
     key: "format",
     value: function format(pendingInterceptors) {
       var withPrettyHeaders = pendingInterceptors.map(function (_ref2) {
@@ -30286,7 +30314,6 @@ module.exports = /*#__PURE__*/function () {
       return this.transform.read().toString();
     }
   }]);
-  return PendingInterceptorsFormatter;
 }();
 
 /***/ }),
@@ -30318,7 +30345,7 @@ module.exports = /*#__PURE__*/function () {
     this.singular = singular;
     this.plural = plural;
   }
-  _createClass(Pluralizer, [{
+  return _createClass(Pluralizer, [{
     key: "pluralize",
     value: function pluralize(count) {
       var one = count === 1;
@@ -30330,7 +30357,6 @@ module.exports = /*#__PURE__*/function () {
       });
     }
   }]);
-  return Pluralizer;
 }();
 
 /***/ }),
@@ -30406,7 +30432,7 @@ var FixedCircularBuffer = /*#__PURE__*/function () {
     this.list = new Array(kSize);
     this.next = null;
   }
-  _createClass(FixedCircularBuffer, [{
+  return _createClass(FixedCircularBuffer, [{
     key: "isEmpty",
     value: function isEmpty() {
       return this.top === this.bottom;
@@ -30432,14 +30458,13 @@ var FixedCircularBuffer = /*#__PURE__*/function () {
       return nextItem;
     }
   }]);
-  return FixedCircularBuffer;
 }();
 module.exports = /*#__PURE__*/function () {
   function FixedQueue() {
     _classCallCheck(this, FixedQueue);
     this.head = this.tail = new FixedCircularBuffer();
   }
-  _createClass(FixedQueue, [{
+  return _createClass(FixedQueue, [{
     key: "isEmpty",
     value: function isEmpty() {
       return this.head.isEmpty();
@@ -30466,7 +30491,6 @@ module.exports = /*#__PURE__*/function () {
       return next;
     }
   }]);
-  return FixedQueue;
 }();
 
 /***/ }),
@@ -30484,7 +30508,6 @@ var _toConsumableArray = (__webpack_require__(1132)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var DispatcherBase = __webpack_require__(8281);
 var FixedQueue = __webpack_require__(2557);
@@ -30514,7 +30537,6 @@ var kAddClient = Symbol('add client');
 var kRemoveClient = Symbol('remove client');
 var kStats = Symbol('stats');
 var PoolBase = /*#__PURE__*/function (_DispatcherBase) {
-  _inherits(PoolBase, _DispatcherBase);
   function PoolBase() {
     var _this;
     _classCallCheck(this, PoolBase);
@@ -30522,7 +30544,7 @@ var PoolBase = /*#__PURE__*/function (_DispatcherBase) {
     _this[kQueue] = new FixedQueue();
     _this[kClients] = [];
     _this[kQueued] = 0;
-    var pool = _assertThisInitialized(_this);
+    var pool = _this;
     _this[kOnDrain] = function onDrain(origin, targets) {
       var queue = pool[kQueue];
       var needDrain = false;
@@ -30554,10 +30576,11 @@ var PoolBase = /*#__PURE__*/function (_DispatcherBase) {
     _this[kOnConnectionError] = function (origin, targets, err) {
       pool.emit('connectionError', origin, [pool].concat(_toConsumableArray(targets)), err);
     };
-    _this[kStats] = new PoolStats(_assertThisInitialized(_this));
+    _this[kStats] = new PoolStats(_this);
     return _this;
   }
-  _createClass(PoolBase, [{
+  _inherits(PoolBase, _DispatcherBase);
+  return _createClass(PoolBase, [{
     key: kBusy,
     get: function get() {
       return this[kNeedDrain];
@@ -30746,7 +30769,6 @@ var PoolBase = /*#__PURE__*/function (_DispatcherBase) {
       });
     }
   }]);
-  return PoolBase;
 }(DispatcherBase);
 module.exports = {
   PoolBase: PoolBase,
@@ -30779,7 +30801,7 @@ var PoolStats = /*#__PURE__*/function () {
     _classCallCheck(this, PoolStats);
     this[kPool] = pool;
   }
-  _createClass(PoolStats, [{
+  return _createClass(PoolStats, [{
     key: "connected",
     get: function get() {
       return this[kPool][kConnected];
@@ -30810,7 +30832,6 @@ var PoolStats = /*#__PURE__*/function () {
       return this[kPool][kSize];
     }
   }]);
-  return PoolStats;
 }();
 module.exports = PoolStats;
 
@@ -30850,7 +30871,6 @@ function defaultFactory(origin, opts) {
   return new Client(origin, opts);
 }
 var Pool = /*#__PURE__*/function (_PoolBase) {
-  _inherits(Pool, _PoolBase);
   function Pool(origin) {
     var _this;
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
@@ -30899,7 +30919,8 @@ var Pool = /*#__PURE__*/function (_PoolBase) {
     _this[kFactory] = factory;
     return _this;
   }
-  _createClass(Pool, [{
+  _inherits(Pool, _PoolBase);
+  return _createClass(Pool, [{
     key: kGetDispatcher,
     value: function value() {
       var dispatcher = this[kClients].find(function (dispatcher) {
@@ -30915,7 +30936,6 @@ var Pool = /*#__PURE__*/function (_PoolBase) {
       return dispatcher;
     }
   }]);
-  return Pool;
 }(PoolBase);
 module.exports = Pool;
 
@@ -30975,7 +30995,6 @@ function defaultFactory(origin, opts) {
   return new Pool(origin, opts);
 }
 var ProxyAgent = /*#__PURE__*/function (_DispatcherBase) {
-  _inherits(ProxyAgent, _DispatcherBase);
   function ProxyAgent(opts) {
     var _this;
     _classCallCheck(this, ProxyAgent);
@@ -31087,7 +31106,8 @@ var ProxyAgent = /*#__PURE__*/function (_DispatcherBase) {
     }));
     return _this;
   }
-  _createClass(ProxyAgent, [{
+  _inherits(ProxyAgent, _DispatcherBase);
+  return _createClass(ProxyAgent, [{
     key: "dispatch",
     value: function dispatch(opts, handler) {
       var _URL = new URL(opts.origin),
@@ -31147,7 +31167,6 @@ var ProxyAgent = /*#__PURE__*/function (_DispatcherBase) {
       return value;
     }()
   }]);
-  return ProxyAgent;
 }(DispatcherBase);
 /**
  * @param {string[] | Record<string, string>} headers
@@ -31251,7 +31270,7 @@ var Timeout = /*#__PURE__*/function () {
     this.state = -2;
     this.refresh();
   }
-  _createClass(Timeout, [{
+  return _createClass(Timeout, [{
     key: "refresh",
     value: function refresh() {
       if (this.state === -2) {
@@ -31268,7 +31287,6 @@ var Timeout = /*#__PURE__*/function () {
       this.state = -1;
     }
   }]);
-  return Timeout;
 }();
 module.exports = {
   setTimeout: function (_setTimeout) {
@@ -31666,12 +31684,11 @@ var _defineProperty = (__webpack_require__(3693)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
 var _require = __webpack_require__(3702),
   webidl = _require.webidl;
 var _require2 = __webpack_require__(6632),
@@ -31684,7 +31701,6 @@ var _require3 = __webpack_require__(8167),
  */
 var _eventInit = /*#__PURE__*/new WeakMap();
 var MessageEvent = /*#__PURE__*/function (_Event) {
-  _inherits(MessageEvent, _Event);
   function MessageEvent(type) {
     var _this;
     var eventInitDict = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -31695,45 +31711,43 @@ var MessageEvent = /*#__PURE__*/function (_Event) {
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.MessageEventInit(eventInitDict);
     _this = _callSuper(this, MessageEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _eventInit, {
-      writable: true,
-      value: void 0
-    });
-    _classPrivateFieldSet(_assertThisInitialized(_this), _eventInit, eventInitDict);
+    _classPrivateFieldInitSpec(_this, _eventInit, void 0);
+    _classPrivateFieldSet(_eventInit, _this, eventInitDict);
     return _this;
   }
-  _createClass(MessageEvent, [{
+  _inherits(MessageEvent, _Event);
+  return _createClass(MessageEvent, [{
     key: "data",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).data;
+      return _classPrivateFieldGet(_eventInit, this).data;
     }
   }, {
     key: "origin",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).origin;
+      return _classPrivateFieldGet(_eventInit, this).origin;
     }
   }, {
     key: "lastEventId",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).lastEventId;
+      return _classPrivateFieldGet(_eventInit, this).lastEventId;
     }
   }, {
     key: "source",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      return _classPrivateFieldGet(this, _eventInit).source;
+      return _classPrivateFieldGet(_eventInit, this).source;
     }
   }, {
     key: "ports",
     get: function get() {
       webidl.brandCheck(this, MessageEvent);
-      if (!Object.isFrozen(_classPrivateFieldGet(this, _eventInit).ports)) {
-        Object.freeze(_classPrivateFieldGet(this, _eventInit).ports);
+      if (!Object.isFrozen(_classPrivateFieldGet(_eventInit, this).ports)) {
+        Object.freeze(_classPrivateFieldGet(_eventInit, this).ports);
       }
-      return _classPrivateFieldGet(this, _eventInit).ports;
+      return _classPrivateFieldGet(_eventInit, this).ports;
     }
   }, {
     key: "initMessageEvent",
@@ -31760,14 +31774,12 @@ var MessageEvent = /*#__PURE__*/function (_Event) {
       });
     }
   }]);
-  return MessageEvent;
 }( /*#__PURE__*/_wrapNativeSuper(Event));
 /**
  * @see https://websockets.spec.whatwg.org/#the-closeevent-interface
  */
 var _eventInit2 = /*#__PURE__*/new WeakMap();
 var CloseEvent = /*#__PURE__*/function (_Event2) {
-  _inherits(CloseEvent, _Event2);
   function CloseEvent(type) {
     var _this2;
     var eventInitDict = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -31778,37 +31790,33 @@ var CloseEvent = /*#__PURE__*/function (_Event2) {
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.CloseEventInit(eventInitDict);
     _this2 = _callSuper(this, CloseEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this2), _eventInit2, {
-      writable: true,
-      value: void 0
-    });
-    _classPrivateFieldSet(_assertThisInitialized(_this2), _eventInit2, eventInitDict);
+    _classPrivateFieldInitSpec(_this2, _eventInit2, void 0);
+    _classPrivateFieldSet(_eventInit2, _this2, eventInitDict);
     return _this2;
   }
-  _createClass(CloseEvent, [{
+  _inherits(CloseEvent, _Event2);
+  return _createClass(CloseEvent, [{
     key: "wasClean",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).wasClean;
+      return _classPrivateFieldGet(_eventInit2, this).wasClean;
     }
   }, {
     key: "code",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).code;
+      return _classPrivateFieldGet(_eventInit2, this).code;
     }
   }, {
     key: "reason",
     get: function get() {
       webidl.brandCheck(this, CloseEvent);
-      return _classPrivateFieldGet(this, _eventInit2).reason;
+      return _classPrivateFieldGet(_eventInit2, this).reason;
     }
   }]);
-  return CloseEvent;
 }( /*#__PURE__*/_wrapNativeSuper(Event)); // https://html.spec.whatwg.org/multipage/webappapis.html#the-errorevent-interface
 var _eventInit3 = /*#__PURE__*/new WeakMap();
 var ErrorEvent = /*#__PURE__*/function (_Event3) {
-  _inherits(ErrorEvent, _Event3);
   function ErrorEvent(type, eventInitDict) {
     var _eventInitDict;
     var _this3;
@@ -31817,47 +31825,44 @@ var ErrorEvent = /*#__PURE__*/function (_Event3) {
       header: 'ErrorEvent constructor'
     });
     _this3 = _callSuper(this, ErrorEvent, [type, eventInitDict]);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this3), _eventInit3, {
-      writable: true,
-      value: void 0
-    });
+    _classPrivateFieldInitSpec(_this3, _eventInit3, void 0);
     type = webidl.converters.DOMString(type);
     eventInitDict = webidl.converters.ErrorEventInit((_eventInitDict = eventInitDict) !== null && _eventInitDict !== void 0 ? _eventInitDict : {});
-    _classPrivateFieldSet(_assertThisInitialized(_this3), _eventInit3, eventInitDict);
+    _classPrivateFieldSet(_eventInit3, _this3, eventInitDict);
     return _this3;
   }
-  _createClass(ErrorEvent, [{
+  _inherits(ErrorEvent, _Event3);
+  return _createClass(ErrorEvent, [{
     key: "message",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).message;
+      return _classPrivateFieldGet(_eventInit3, this).message;
     }
   }, {
     key: "filename",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).filename;
+      return _classPrivateFieldGet(_eventInit3, this).filename;
     }
   }, {
     key: "lineno",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).lineno;
+      return _classPrivateFieldGet(_eventInit3, this).lineno;
     }
   }, {
     key: "colno",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).colno;
+      return _classPrivateFieldGet(_eventInit3, this).colno;
     }
   }, {
     key: "error",
     get: function get() {
       webidl.brandCheck(this, ErrorEvent);
-      return _classPrivateFieldGet(this, _eventInit3).error;
+      return _classPrivateFieldGet(_eventInit3, this).error;
     }
   }]);
-  return ErrorEvent;
 }( /*#__PURE__*/_wrapNativeSuper(Event));
 Object.defineProperties(MessageEvent.prototype, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, Symbol.toStringTag, {
   value: 'MessageEvent',
@@ -31977,7 +31982,7 @@ var WebsocketFrameSend = /*#__PURE__*/function () {
     this.frameData = data;
     this.maskKey = crypto.randomBytes(4);
   }
-  _createClass(WebsocketFrameSend, [{
+  return _createClass(WebsocketFrameSend, [{
     key: "createFrame",
     value: function createFrame(opcode) {
       var _this$frameData$byteL, _this$frameData;
@@ -32022,7 +32027,6 @@ var WebsocketFrameSend = /*#__PURE__*/function () {
       return buffer;
     }
   }]);
-  return WebsocketFrameSend;
 }();
 module.exports = {
   WebsocketFrameSend: WebsocketFrameSend
@@ -32039,11 +32043,10 @@ module.exports = {
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
 var _require = __webpack_require__(2203),
   Writable = _require.Writable;
 var diagnosticsChannel = __webpack_require__(1637);
@@ -32078,31 +32081,15 @@ var _state = /*#__PURE__*/new WeakMap();
 var _info = /*#__PURE__*/new WeakMap();
 var _fragments = /*#__PURE__*/new WeakMap();
 var ByteParser = /*#__PURE__*/function (_Writable) {
-  _inherits(ByteParser, _Writable);
   function ByteParser(ws) {
     var _this;
     _classCallCheck(this, ByteParser);
     _this = _callSuper(this, ByteParser);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _buffers, {
-      writable: true,
-      value: []
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _byteOffset, {
-      writable: true,
-      value: 0
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _state, {
-      writable: true,
-      value: parserStates.INFO
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _info, {
-      writable: true,
-      value: {}
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _fragments, {
-      writable: true,
-      value: []
-    });
+    _classPrivateFieldInitSpec(_this, _buffers, []);
+    _classPrivateFieldInitSpec(_this, _byteOffset, 0);
+    _classPrivateFieldInitSpec(_this, _state, parserStates.INFO);
+    _classPrivateFieldInitSpec(_this, _info, {});
+    _classPrivateFieldInitSpec(_this, _fragments, []);
     _this.ws = ws;
     return _this;
   }
@@ -32111,11 +32098,12 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
    * @param {Buffer} chunk
    * @param {() => void} callback
    */
-  _createClass(ByteParser, [{
+  _inherits(ByteParser, _Writable);
+  return _createClass(ByteParser, [{
     key: "_write",
     value: function _write(chunk, _, callback) {
-      _classPrivateFieldGet(this, _buffers).push(chunk);
-      _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) + chunk.length);
+      _classPrivateFieldGet(_buffers, this).push(chunk);
+      _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) + chunk.length);
       this.run(callback);
     }
 
@@ -32129,56 +32117,56 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
     value: function run(callback) {
       var _this2 = this;
       while (true) {
-        if (_classPrivateFieldGet(this, _state) === parserStates.INFO) {
+        if (_classPrivateFieldGet(_state, this) === parserStates.INFO) {
           var _classPrivateFieldGet2, _classPrivateFieldGet3;
           // If there aren't enough bytes to parse the payload length, etc.
-          if (_classPrivateFieldGet(this, _byteOffset) < 2) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 2) {
             return callback();
           }
           var buffer = this.consume(2);
-          _classPrivateFieldGet(this, _info).fin = (buffer[0] & 0x80) !== 0;
-          _classPrivateFieldGet(this, _info).opcode = buffer[0] & 0x0F;
+          _classPrivateFieldGet(_info, this).fin = (buffer[0] & 0x80) !== 0;
+          _classPrivateFieldGet(_info, this).opcode = buffer[0] & 0x0F;
 
           // If we receive a fragmented message, we use the type of the first
           // frame to parse the full message as binary/text, when it's terminated
-          (_classPrivateFieldGet3 = (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _info)).originalOpcode) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : _classPrivateFieldGet2.originalOpcode = _classPrivateFieldGet(this, _info).opcode;
-          _classPrivateFieldGet(this, _info).fragmented = !_classPrivateFieldGet(this, _info).fin && _classPrivateFieldGet(this, _info).opcode !== opcodes.CONTINUATION;
-          if (_classPrivateFieldGet(this, _info).fragmented && _classPrivateFieldGet(this, _info).opcode !== opcodes.BINARY && _classPrivateFieldGet(this, _info).opcode !== opcodes.TEXT) {
+          (_classPrivateFieldGet3 = (_classPrivateFieldGet2 = _classPrivateFieldGet(_info, this)).originalOpcode) !== null && _classPrivateFieldGet3 !== void 0 ? _classPrivateFieldGet3 : _classPrivateFieldGet2.originalOpcode = _classPrivateFieldGet(_info, this).opcode;
+          _classPrivateFieldGet(_info, this).fragmented = !_classPrivateFieldGet(_info, this).fin && _classPrivateFieldGet(_info, this).opcode !== opcodes.CONTINUATION;
+          if (_classPrivateFieldGet(_info, this).fragmented && _classPrivateFieldGet(_info, this).opcode !== opcodes.BINARY && _classPrivateFieldGet(_info, this).opcode !== opcodes.TEXT) {
             // Only text and binary frames can be fragmented
             failWebsocketConnection(this.ws, 'Invalid frame type was fragmented.');
             return;
           }
           var payloadLength = buffer[1] & 0x7F;
           if (payloadLength <= 125) {
-            _classPrivateFieldGet(this, _info).payloadLength = payloadLength;
-            _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
+            _classPrivateFieldGet(_info, this).payloadLength = payloadLength;
+            _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
           } else if (payloadLength === 126) {
-            _classPrivateFieldSet(this, _state, parserStates.PAYLOADLENGTH_16);
+            _classPrivateFieldSet(_state, this, parserStates.PAYLOADLENGTH_16);
           } else if (payloadLength === 127) {
-            _classPrivateFieldSet(this, _state, parserStates.PAYLOADLENGTH_64);
+            _classPrivateFieldSet(_state, this, parserStates.PAYLOADLENGTH_64);
           }
-          if (_classPrivateFieldGet(this, _info).fragmented && payloadLength > 125) {
+          if (_classPrivateFieldGet(_info, this).fragmented && payloadLength > 125) {
             // A fragmented frame can't be fragmented itself
             failWebsocketConnection(this.ws, 'Fragmented frame exceeded 125 bytes.');
             return;
-          } else if ((_classPrivateFieldGet(this, _info).opcode === opcodes.PING || _classPrivateFieldGet(this, _info).opcode === opcodes.PONG || _classPrivateFieldGet(this, _info).opcode === opcodes.CLOSE) && payloadLength > 125) {
+          } else if ((_classPrivateFieldGet(_info, this).opcode === opcodes.PING || _classPrivateFieldGet(_info, this).opcode === opcodes.PONG || _classPrivateFieldGet(_info, this).opcode === opcodes.CLOSE) && payloadLength > 125) {
             // Control frames can have a payload length of 125 bytes MAX
             failWebsocketConnection(this.ws, 'Payload length for control frame exceeded 125 bytes.');
             return;
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.CLOSE) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.CLOSE) {
             if (payloadLength === 1) {
               failWebsocketConnection(this.ws, 'Received close frame with a 1-byte body.');
               return;
             }
             var body = this.consume(payloadLength);
-            _classPrivateFieldGet(this, _info).closeInfo = this.parseCloseBody(false, body);
+            _classPrivateFieldGet(_info, this).closeInfo = this.parseCloseBody(false, body);
             if (!this.ws[kSentClose]) {
               // If an endpoint receives a Close frame and did not previously send a
               // Close frame, the endpoint MUST send a Close frame in response.  (When
               // sending a Close frame in response, the endpoint typically echos the
               // status code it received.)
               var _body = Buffer.allocUnsafe(2);
-              _body.writeUInt16BE(_classPrivateFieldGet(this, _info).closeInfo.code, 0);
+              _body.writeUInt16BE(_classPrivateFieldGet(_info, this).closeInfo.code, 0);
               var closeFrame = new WebsocketFrameSend(_body);
               this.ws[kResponse].socket.write(closeFrame.createFrame(opcodes.CLOSE), function (err) {
                 if (!err) {
@@ -32194,7 +32182,7 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
             this.ws[kReceivedClose] = true;
             this.end();
             return;
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.PING) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.PING) {
             // Upon receipt of a Ping frame, an endpoint MUST send a Pong frame in
             // response, unless it already received a Close frame.
             // A Pong frame sent in response to a Ping frame must have identical
@@ -32210,14 +32198,14 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
                 });
               }
             }
-            _classPrivateFieldSet(this, _state, parserStates.INFO);
-            if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+            _classPrivateFieldSet(_state, this, parserStates.INFO);
+            if (_classPrivateFieldGet(_byteOffset, this) > 0) {
               continue;
             } else {
               callback();
               return;
             }
-          } else if (_classPrivateFieldGet(this, _info).opcode === opcodes.PONG) {
+          } else if (_classPrivateFieldGet(_info, this).opcode === opcodes.PONG) {
             // A Pong frame MAY be sent unsolicited.  This serves as a
             // unidirectional heartbeat.  A response to an unsolicited Pong frame is
             // not expected.
@@ -32228,22 +32216,22 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
                 payload: _body3
               });
             }
-            if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+            if (_classPrivateFieldGet(_byteOffset, this) > 0) {
               continue;
             } else {
               callback();
               return;
             }
           }
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.PAYLOADLENGTH_16) {
-          if (_classPrivateFieldGet(this, _byteOffset) < 2) {
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.PAYLOADLENGTH_16) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 2) {
             return callback();
           }
           var _buffer = this.consume(2);
-          _classPrivateFieldGet(this, _info).payloadLength = _buffer.readUInt16BE(0);
-          _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.PAYLOADLENGTH_64) {
-          if (_classPrivateFieldGet(this, _byteOffset) < 8) {
+          _classPrivateFieldGet(_info, this).payloadLength = _buffer.readUInt16BE(0);
+          _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.PAYLOADLENGTH_64) {
+          if (_classPrivateFieldGet(_byteOffset, this) < 8) {
             return callback();
           }
           var _buffer2 = this.consume(8);
@@ -32260,30 +32248,30 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
             return;
           }
           var lower = _buffer2.readUInt32BE(4);
-          _classPrivateFieldGet(this, _info).payloadLength = (upper << 8) + lower;
-          _classPrivateFieldSet(this, _state, parserStates.READ_DATA);
-        } else if (_classPrivateFieldGet(this, _state) === parserStates.READ_DATA) {
-          if (_classPrivateFieldGet(this, _byteOffset) < _classPrivateFieldGet(this, _info).payloadLength) {
+          _classPrivateFieldGet(_info, this).payloadLength = (upper << 8) + lower;
+          _classPrivateFieldSet(_state, this, parserStates.READ_DATA);
+        } else if (_classPrivateFieldGet(_state, this) === parserStates.READ_DATA) {
+          if (_classPrivateFieldGet(_byteOffset, this) < _classPrivateFieldGet(_info, this).payloadLength) {
             // If there is still more data in this chunk that needs to be read
             return callback();
-          } else if (_classPrivateFieldGet(this, _byteOffset) >= _classPrivateFieldGet(this, _info).payloadLength) {
+          } else if (_classPrivateFieldGet(_byteOffset, this) >= _classPrivateFieldGet(_info, this).payloadLength) {
             // If the server sent multiple frames in a single chunk
 
-            var _body4 = this.consume(_classPrivateFieldGet(this, _info).payloadLength);
-            _classPrivateFieldGet(this, _fragments).push(_body4);
+            var _body4 = this.consume(_classPrivateFieldGet(_info, this).payloadLength);
+            _classPrivateFieldGet(_fragments, this).push(_body4);
 
             // If the frame is unfragmented, or a fragmented frame was terminated,
             // a message was received
-            if (!_classPrivateFieldGet(this, _info).fragmented || _classPrivateFieldGet(this, _info).fin && _classPrivateFieldGet(this, _info).opcode === opcodes.CONTINUATION) {
-              var fullMessage = Buffer.concat(_classPrivateFieldGet(this, _fragments));
-              websocketMessageReceived(this.ws, _classPrivateFieldGet(this, _info).originalOpcode, fullMessage);
-              _classPrivateFieldSet(this, _info, {});
-              _classPrivateFieldGet(this, _fragments).length = 0;
+            if (!_classPrivateFieldGet(_info, this).fragmented || _classPrivateFieldGet(_info, this).fin && _classPrivateFieldGet(_info, this).opcode === opcodes.CONTINUATION) {
+              var fullMessage = Buffer.concat(_classPrivateFieldGet(_fragments, this));
+              websocketMessageReceived(this.ws, _classPrivateFieldGet(_info, this).originalOpcode, fullMessage);
+              _classPrivateFieldSet(_info, this, {});
+              _classPrivateFieldGet(_fragments, this).length = 0;
             }
-            _classPrivateFieldSet(this, _state, parserStates.INFO);
+            _classPrivateFieldSet(_state, this, parserStates.INFO);
           }
         }
-        if (_classPrivateFieldGet(this, _byteOffset) > 0) {
+        if (_classPrivateFieldGet(_byteOffset, this) > 0) {
           continue;
         } else {
           callback();
@@ -32300,33 +32288,33 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
   }, {
     key: "consume",
     value: function consume(n) {
-      if (n > _classPrivateFieldGet(this, _byteOffset)) {
+      if (n > _classPrivateFieldGet(_byteOffset, this)) {
         return null;
       } else if (n === 0) {
         return emptyBuffer;
       }
-      if (_classPrivateFieldGet(this, _buffers)[0].length === n) {
-        _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) - _classPrivateFieldGet(this, _buffers)[0].length);
-        return _classPrivateFieldGet(this, _buffers).shift();
+      if (_classPrivateFieldGet(_buffers, this)[0].length === n) {
+        _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) - _classPrivateFieldGet(_buffers, this)[0].length);
+        return _classPrivateFieldGet(_buffers, this).shift();
       }
       var buffer = Buffer.allocUnsafe(n);
       var offset = 0;
       while (offset !== n) {
-        var next = _classPrivateFieldGet(this, _buffers)[0];
+        var next = _classPrivateFieldGet(_buffers, this)[0];
         var length = next.length;
         if (length + offset === n) {
-          buffer.set(_classPrivateFieldGet(this, _buffers).shift(), offset);
+          buffer.set(_classPrivateFieldGet(_buffers, this).shift(), offset);
           break;
         } else if (length + offset > n) {
           buffer.set(next.subarray(0, n - offset), offset);
-          _classPrivateFieldGet(this, _buffers)[0] = next.subarray(n - offset);
+          _classPrivateFieldGet(_buffers, this)[0] = next.subarray(n - offset);
           break;
         } else {
-          buffer.set(_classPrivateFieldGet(this, _buffers).shift(), offset);
+          buffer.set(_classPrivateFieldGet(_buffers, this).shift(), offset);
           offset += next.length;
         }
       }
-      _classPrivateFieldSet(this, _byteOffset, _classPrivateFieldGet(this, _byteOffset) - n);
+      _classPrivateFieldSet(_byteOffset, this, _classPrivateFieldGet(_byteOffset, this) - n);
       return buffer;
     }
   }, {
@@ -32377,10 +32365,9 @@ var ByteParser = /*#__PURE__*/function (_Writable) {
   }, {
     key: "closingInfo",
     get: function get() {
-      return _classPrivateFieldGet(this, _info).closeInfo;
+      return _classPrivateFieldGet(_info, this).closeInfo;
     }
   }]);
-  return ByteParser;
 }(Writable);
 module.exports = {
   ByteParser: ByteParser
@@ -32621,14 +32608,13 @@ var _defineProperty = (__webpack_require__(3693)["default"]);
 var _classCallCheck = (__webpack_require__(7383)["default"]);
 var _createClass = (__webpack_require__(4579)["default"]);
 var _callSuper = (__webpack_require__(8336)["default"]);
-var _assertThisInitialized = (__webpack_require__(2475)["default"]);
 var _inherits = (__webpack_require__(9511)["default"]);
 var _wrapNativeSuper = (__webpack_require__(1837)["default"]);
 var _classPrivateMethodInitSpec = (__webpack_require__(3312)["default"]);
 var _classPrivateFieldInitSpec = (__webpack_require__(2459)["default"]);
-var _classPrivateFieldSet = (__webpack_require__(2808)["default"]);
-var _classPrivateFieldGet = (__webpack_require__(4972)["default"]);
-var _classPrivateMethodGet = (__webpack_require__(137)["default"]);
+var _classPrivateFieldSet = (__webpack_require__(7088)["default"]);
+var _classPrivateFieldGet = (__webpack_require__(6668)["default"]);
+var _assertClassBrand = (__webpack_require__(1756)["default"]);
 var _require = __webpack_require__(3702),
   webidl = _require.webidl;
 var _require2 = __webpack_require__(8422),
@@ -32676,9 +32662,8 @@ var _events = /*#__PURE__*/new WeakMap();
 var _bufferedAmount = /*#__PURE__*/new WeakMap();
 var _protocol = /*#__PURE__*/new WeakMap();
 var _extensions = /*#__PURE__*/new WeakMap();
-var _onConnectionEstablished = /*#__PURE__*/new WeakSet();
+var _WebSocket_brand = /*#__PURE__*/new WeakSet();
 var WebSocket = /*#__PURE__*/function (_EventTarget) {
-  _inherits(WebSocket, _EventTarget);
   /**
    * @param {string} url
    * @param {string|string[]} protocols
@@ -32691,28 +32676,16 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     /**
      * @see https://websockets.spec.whatwg.org/#feedback-from-the-protocol
      */
-    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _onConnectionEstablished);
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _events, {
-      writable: true,
-      value: {
-        open: null,
-        error: null,
-        close: null,
-        message: null
-      }
+    _classPrivateMethodInitSpec(_this, _WebSocket_brand);
+    _classPrivateFieldInitSpec(_this, _events, {
+      open: null,
+      error: null,
+      close: null,
+      message: null
     });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _bufferedAmount, {
-      writable: true,
-      value: 0
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _protocol, {
-      writable: true,
-      value: ''
-    });
-    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _extensions, {
-      writable: true,
-      value: ''
-    });
+    _classPrivateFieldInitSpec(_this, _bufferedAmount, 0);
+    _classPrivateFieldInitSpec(_this, _protocol, '');
+    _classPrivateFieldInitSpec(_this, _extensions, '');
     webidl.argumentLengthCheck(arguments, 1, {
       header: 'WebSocket constructor'
     });
@@ -32787,8 +32760,8 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
 
     //    1. Establish a WebSocket connection given urlRecord, protocols,
     //       and client.
-    _this[kController] = establishWebSocketConnection(urlRecord, protocols, _assertThisInitialized(_this), function (response) {
-      return _classPrivateMethodGet(_assertThisInitialized(_this), _onConnectionEstablished, _onConnectionEstablished2).call(_assertThisInitialized(_this), response);
+    _this[kController] = establishWebSocketConnection(urlRecord, protocols, _this, function (response) {
+      return _assertClassBrand(_WebSocket_brand, _this, _onConnectionEstablished).call(_this, response);
     }, options);
 
     // Each WebSocket object has an associated ready state, which is a
@@ -32811,7 +32784,8 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
    * @param {number|undefined} code
    * @param {string|undefined} reason
    */
-  _createClass(WebSocket, [{
+  _inherits(WebSocket, _EventTarget);
+  return _createClass(WebSocket, [{
     key: "close",
     value: function close() {
       var _this2 = this;
@@ -32956,9 +32930,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var value = Buffer.from(data);
         var frame = new WebsocketFrameSend(value);
         var buffer = frame.createFrame(opcodes.TEXT);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + value.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + value.byteLength);
         socket.write(buffer, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - value.byteLength);
         });
       } else if (types.isArrayBuffer(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -32976,9 +32950,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var _value = Buffer.from(data);
         var _frame = new WebsocketFrameSend(_value);
         var _buffer = _frame.createFrame(opcodes.BINARY);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + _value.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + _value.byteLength);
         socket.write(_buffer, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - _value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - _value.byteLength);
         });
       } else if (ArrayBuffer.isView(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -32996,9 +32970,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
         var ab = Buffer.from(data, data.byteOffset, data.byteLength);
         var _frame2 = new WebsocketFrameSend(ab);
         var _buffer2 = _frame2.createFrame(opcodes.BINARY);
-        _classPrivateFieldSet(this, _bufferedAmount, _classPrivateFieldGet(this, _bufferedAmount) + ab.byteLength);
+        _classPrivateFieldSet(_bufferedAmount, this, _classPrivateFieldGet(_bufferedAmount, this) + ab.byteLength);
         socket.write(_buffer2, function () {
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - ab.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - ab.byteLength);
         });
       } else if (isBlobLike(data)) {
         // If the WebSocket connection is established, and the WebSocket
@@ -33017,9 +32991,9 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
           var value = Buffer.from(ab);
           _frame3.frameData = value;
           var buffer = _frame3.createFrame(opcodes.BINARY);
-          _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) + value.byteLength);
+          _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) + value.byteLength);
           socket.write(buffer, function () {
-            _classPrivateFieldSet(_this3, _bufferedAmount, _classPrivateFieldGet(_this3, _bufferedAmount) - value.byteLength);
+            _classPrivateFieldSet(_bufferedAmount, _this3, _classPrivateFieldGet(_bufferedAmount, _this3) - value.byteLength);
           });
         });
       }
@@ -33036,7 +33010,7 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     key: "bufferedAmount",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _bufferedAmount);
+      return _classPrivateFieldGet(_bufferedAmount, this);
     }
   }, {
     key: "url",
@@ -33050,84 +33024,84 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
     key: "extensions",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _extensions);
+      return _classPrivateFieldGet(_extensions, this);
     }
   }, {
     key: "protocol",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _protocol);
+      return _classPrivateFieldGet(_protocol, this);
     }
   }, {
     key: "onopen",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).open;
+      return _classPrivateFieldGet(_events, this).open;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).open) {
-        this.removeEventListener('open', _classPrivateFieldGet(this, _events).open);
+      if (_classPrivateFieldGet(_events, this).open) {
+        this.removeEventListener('open', _classPrivateFieldGet(_events, this).open);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).open = fn;
+        _classPrivateFieldGet(_events, this).open = fn;
         this.addEventListener('open', fn);
       } else {
-        _classPrivateFieldGet(this, _events).open = null;
+        _classPrivateFieldGet(_events, this).open = null;
       }
     }
   }, {
     key: "onerror",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).error;
+      return _classPrivateFieldGet(_events, this).error;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).error) {
-        this.removeEventListener('error', _classPrivateFieldGet(this, _events).error);
+      if (_classPrivateFieldGet(_events, this).error) {
+        this.removeEventListener('error', _classPrivateFieldGet(_events, this).error);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).error = fn;
+        _classPrivateFieldGet(_events, this).error = fn;
         this.addEventListener('error', fn);
       } else {
-        _classPrivateFieldGet(this, _events).error = null;
+        _classPrivateFieldGet(_events, this).error = null;
       }
     }
   }, {
     key: "onclose",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).close;
+      return _classPrivateFieldGet(_events, this).close;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).close) {
-        this.removeEventListener('close', _classPrivateFieldGet(this, _events).close);
+      if (_classPrivateFieldGet(_events, this).close) {
+        this.removeEventListener('close', _classPrivateFieldGet(_events, this).close);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).close = fn;
+        _classPrivateFieldGet(_events, this).close = fn;
         this.addEventListener('close', fn);
       } else {
-        _classPrivateFieldGet(this, _events).close = null;
+        _classPrivateFieldGet(_events, this).close = null;
       }
     }
   }, {
     key: "onmessage",
     get: function get() {
       webidl.brandCheck(this, WebSocket);
-      return _classPrivateFieldGet(this, _events).message;
+      return _classPrivateFieldGet(_events, this).message;
     },
     set: function set(fn) {
       webidl.brandCheck(this, WebSocket);
-      if (_classPrivateFieldGet(this, _events).message) {
-        this.removeEventListener('message', _classPrivateFieldGet(this, _events).message);
+      if (_classPrivateFieldGet(_events, this).message) {
+        this.removeEventListener('message', _classPrivateFieldGet(_events, this).message);
       }
       if (typeof fn === 'function') {
-        _classPrivateFieldGet(this, _events).message = fn;
+        _classPrivateFieldGet(_events, this).message = fn;
         this.addEventListener('message', fn);
       } else {
-        _classPrivateFieldGet(this, _events).message = null;
+        _classPrivateFieldGet(_events, this).message = null;
       }
     }
   }, {
@@ -33145,9 +33119,8 @@ var WebSocket = /*#__PURE__*/function (_EventTarget) {
       }
     }
   }]);
-  return WebSocket;
 }( /*#__PURE__*/_wrapNativeSuper(EventTarget)); // https://websockets.spec.whatwg.org/#dom-websocket-connecting
-function _onConnectionEstablished2(response) {
+function _onConnectionEstablished(response) {
   // processResponse is called when the "response’s header list has been received and initialized."
   // once this happens, the connection is open
   this[kResponse] = response;
@@ -33166,7 +33139,7 @@ function _onConnectionEstablished2(response) {
   // https://datatracker.ietf.org/doc/html/rfc6455#section-9.1
   var extensions = response.headersList.get('sec-websocket-extensions');
   if (extensions !== null) {
-    _classPrivateFieldSet(this, _extensions, extensions);
+    _classPrivateFieldSet(_extensions, this, extensions);
   }
 
   // 3. Change the protocol attribute’s value to the subprotocol in use, if
@@ -33174,7 +33147,7 @@ function _onConnectionEstablished2(response) {
   // https://datatracker.ietf.org/doc/html/rfc6455#section-1.9
   var protocol = response.headersList.get('sec-websocket-protocol');
   if (protocol !== null) {
-    _classPrivateFieldSet(this, _protocol, protocol);
+    _classPrivateFieldSet(_protocol, this, protocol);
   }
 
   // 4. Fire an event named open at the WebSocket object.
@@ -34009,6 +33982,17 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
+/***/ 1756:
+/***/ ((module) => {
+
+function _assertClassBrand(e, t, n) {
+  if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n;
+  throw new TypeError("Private element is not present on this object");
+}
+module.exports = _assertClassBrand, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ 2475:
 /***/ ((module) => {
 
@@ -34176,36 +34160,6 @@ module.exports = _checkPrivateRedeclaration, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 5764:
-/***/ ((module) => {
-
-function _classApplyDescriptorGet(receiver, descriptor) {
-  if (descriptor.get) {
-    return descriptor.get.call(receiver);
-  }
-  return descriptor.value;
-}
-module.exports = _classApplyDescriptorGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 9056:
-/***/ ((module) => {
-
-function _classApplyDescriptorSet(receiver, descriptor, value) {
-  if (descriptor.set) {
-    descriptor.set.call(receiver, value);
-  } else {
-    if (!descriptor.writable) {
-      throw new TypeError("attempted to set read only private field");
-    }
-    descriptor.value = value;
-  }
-}
-module.exports = _classApplyDescriptorSet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
 /***/ 7383:
 /***/ ((module) => {
 
@@ -34218,29 +34172,14 @@ module.exports = _classCallCheck, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 1413:
-/***/ ((module) => {
-
-function _classExtractFieldDescriptor(receiver, privateMap, action) {
-  if (!privateMap.has(receiver)) {
-    throw new TypeError("attempted to " + action + " private field on non-instance");
-  }
-  return privateMap.get(receiver);
-}
-module.exports = _classExtractFieldDescriptor, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 4972:
+/***/ 6668:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorGet = __webpack_require__(5764);
-var classExtractFieldDescriptor = __webpack_require__(1413);
-function _classPrivateFieldGet(receiver, privateMap) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "get");
-  return classApplyDescriptorGet(receiver, descriptor);
+var assertClassBrand = __webpack_require__(1756);
+function _classPrivateFieldGet2(s, a) {
+  return s.get(assertClassBrand(s, a));
 }
-module.exports = _classPrivateFieldGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _classPrivateFieldGet2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -34256,30 +34195,14 @@ module.exports = _classPrivateFieldInitSpec, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 2808:
+/***/ 7088:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var classApplyDescriptorSet = __webpack_require__(9056);
-var classExtractFieldDescriptor = __webpack_require__(1413);
-function _classPrivateFieldSet(receiver, privateMap, value) {
-  var descriptor = classExtractFieldDescriptor(receiver, privateMap, "set");
-  classApplyDescriptorSet(receiver, descriptor, value);
-  return value;
+var assertClassBrand = __webpack_require__(1756);
+function _classPrivateFieldSet2(s, a, r) {
+  return s.set(assertClassBrand(s, a), r), r;
 }
-module.exports = _classPrivateFieldSet, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 137:
-/***/ ((module) => {
-
-function _classPrivateMethodGet(receiver, privateSet, fn) {
-  if (!privateSet.has(receiver)) {
-    throw new TypeError("attempted to get private field on non-instance");
-  }
-  return fn;
-}
-module.exports = _classPrivateMethodGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _classPrivateFieldSet2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -34629,12 +34552,11 @@ module.exports = _objectWithoutProperties, module.exports.__esModule = true, mod
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
   }
   return target;
 }
@@ -34772,7 +34694,7 @@ function _regeneratorRuntime() {
   function makeInvokeMethod(e, r, n) {
     var o = h;
     return function (i, a) {
-      if (o === f) throw new Error("Generator is already running");
+      if (o === f) throw Error("Generator is already running");
       if (o === s) {
         if ("throw" === i) throw a;
         return {
@@ -34914,7 +34836,7 @@ function _regeneratorRuntime() {
           } else if (c) {
             if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
           } else {
-            if (!u) throw new Error("try statement without catch or finally");
+            if (!u) throw Error("try statement without catch or finally");
             if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
           }
         }
@@ -34954,7 +34876,7 @@ function _regeneratorRuntime() {
           return o;
         }
       }
-      throw new Error("illegal catch attempt");
+      throw Error("illegal catch attempt");
     },
     delegateYield: function delegateYield(e, r, n) {
       return this.delegate = {
@@ -35065,7 +34987,7 @@ var _typeof = (__webpack_require__(3738)["default"]);
 var toPrimitive = __webpack_require__(9045);
 function toPropertyKey(t) {
   var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : String(i);
+  return "symbol" == _typeof(i) ? i : i + "";
 }
 module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
@@ -35166,7 +35088,7 @@ function _wrapRegExp() {
   var e = RegExp.prototype,
     r = new WeakMap();
   function BabelRegExp(e, t, p) {
-    var o = new RegExp(e, t);
+    var o = RegExp(e, t);
     return r.set(o, p || r.get(e)), setPrototypeOf(o, BabelRegExp.prototype);
   }
   function buildGroups(e, t) {
@@ -35296,7 +35218,7 @@ Dicer.prototype._write = function (data, encoding, cb) {
   if (this._headerFirst && this._isPreamble) {
     if (!this._part) {
       this._part = new PartStream(this._partOpts);
-      if (this._events.preamble) {
+      if (this.listenerCount('preamble') !== 0) {
         this.emit('preamble', this._part);
       } else {
         this._ignore();
@@ -35364,7 +35286,7 @@ Dicer.prototype._oninfo = function (isMatch, data, start, end) {
       }
     }
     if (this._dashes === 2) {
-      if (start + i < end && this._events.trailer) {
+      if (start + i < end && this.listenerCount('trailer') !== 0) {
         this.emit('trailer', data.slice(start + i, end));
       }
       this.reset();
@@ -35388,9 +35310,9 @@ Dicer.prototype._oninfo = function (isMatch, data, start, end) {
     this._part._read = function (n) {
       self._unpause();
     };
-    if (this._isPreamble && this._events.preamble) {
+    if (this._isPreamble && this.listenerCount('preamble') !== 0) {
       this.emit('preamble', this._part);
-    } else if (this._isPreamble !== true && this._events.part) {
+    } else if (this._isPreamble !== true && this.listenerCount('part') !== 0) {
       this.emit('part', this._part);
     } else {
       this._ignore();
@@ -36041,7 +35963,7 @@ function Multipart(boy, cfg) {
           return skipPart(part);
         }
         ++nfiles;
-        if (!boy._events.file) {
+        if (boy.listenerCount('file') === 0) {
           self.parser._ignore();
           return;
         }
@@ -36550,7 +36472,7 @@ var decoders = {
     if (textDecoders.has(_this.toString())) {
       try {
         return textDecoders.get(_this).decode(data);
-      } catch (e) {}
+      } catch (_unused) {}
     }
     return typeof data === 'string' ? data : data.toString();
   }
@@ -37472,7 +37394,7 @@ function _regeneratorRuntime() {
   function makeInvokeMethod(e, r, n) {
     var o = h;
     return function (i, a) {
-      if (o === f) throw new Error("Generator is already running");
+      if (o === f) throw Error("Generator is already running");
       if (o === s) {
         if ("throw" === i) throw a;
         return {
@@ -37614,7 +37536,7 @@ function _regeneratorRuntime() {
           } else if (c) {
             if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
           } else {
-            if (!u) throw new Error("try statement without catch or finally");
+            if (!u) throw Error("try statement without catch or finally");
             if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
           }
         }
@@ -37654,7 +37576,7 @@ function _regeneratorRuntime() {
           return o;
         }
       }
-      throw new Error("illegal catch attempt");
+      throw Error("illegal catch attempt");
     },
     delegateYield: function delegateYield(e, r, n) {
       return this.delegate = {
@@ -37756,7 +37678,7 @@ function toPrimitive(t, r) {
 
 function toPropertyKey(t) {
   var i = toPrimitive(t, "string");
-  return "symbol" == (0,esm_typeof/* default */.A)(i) ? i : String(i);
+  return "symbol" == (0,esm_typeof/* default */.A)(i) ? i : i + "";
 }
 
 /***/ }),
