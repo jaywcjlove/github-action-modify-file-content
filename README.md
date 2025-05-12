@@ -97,7 +97,12 @@ Read file contents. You can also get the file content in the branch.
 
 As always, thanks to our amazing contributors!
 
-<!--CONTRIBUTING--><a href="https://github.com/jaywcjlove" title="小弟调调"><img src="https://avatars.githubusercontent.com/u/1680273?v=4" width="24;" alt="小弟调调"/></a><!--CONTRIBUTING-END-->
+<!--CONTRIBUTING-->
+
+<a href="https://github.com/jaywcjlove" title="小弟调调"><img src="https://avatars.githubusercontent.com/u/1680273?v=4" width="24;" alt="小弟调调"/></a>
+
+
+<!--CONTRIBUTING-END-->
 
 ## License
 
