@@ -64,7 +64,6 @@ jobs:
           closeDelimiter: '<!--CONTRIBUTING-END-->'
           message: 'chore: update contributors'
           body: |
-            
             ${{steps.contributors.outputs.htmlList}}
 
       # - name: Converts Markdown to HTML
