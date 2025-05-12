@@ -63,6 +63,7 @@ jobs:
           closeDelimiter: '<!--CONTRIBUTING-END-->'
           body: |
 
+            
             ${{steps.contributors.outputs.htmlList}}
 
       # - name: Converts Markdown to HTML
