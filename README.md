@@ -91,6 +91,12 @@ Replace the content between `<!--GAMFC-->2024-06-25 15:56:51<!--GAMFC-END-->`.
 - [Github Action Read File Content](https://github.com/jaywcjlove/github-action-read-file) 
 Read file contents. You can also get the file content in the branch.
 
+## Contributors
+
+As always, thanks to our amazing contributors!
+
+<!--CONTRIBUTING--><!--CONTRIBUTING-END-->
+
 ## License
 
 Licensed under the MIT License.

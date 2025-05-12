@@ -17,6 +17,10 @@ jobs:
       - run: npm run build
       # - run: mkdir -p build
 
+      - name: Generate Contributors Images
+        uses: jaywcjlove/github-action-contributors@main
+        id: contributors
+
       - name: Overwrite test/overwrite.file.md
         # uses: github-action-modify-file-content@main
         uses: ./
@@ -49,6 +53,17 @@ jobs:
           closeDelimiter: '<!--GAMFC_TABEL-END-->'
           path: README.md
           body: "different `GAMFC_TABEL` & `GAMFC_TABEL-END` (test)"
+
+
+      - name: Modify CONTRIBUTING
+        uses: jaywcjlove/github-action-modify-file-content@main
+        with:
+          path: README.md
+          openDelimiter: '<!--CONTRIBUTING-->'
+          closeDelimiter: '<!--CONTRIBUTING-END-->'
+          body: |
+
+            ${{steps.contributors.outputs.htmlList}}
 
       # - name: Converts Markdown to HTML
       #   uses: jaywcjlove/markdown-to-html-cli@main
