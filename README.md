@@ -12,18 +12,21 @@ Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABE
 
 ## Inputs
 
-- `token` Your `GITHUB_TOKEN`. This is required. Why do we need `token`? Read more here: [About the GITHUB_TOKEN secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret). Default: `${{ github.token }}`
-- `body` what needs to be replaced
-- `path` file to be replaced
-- `branch` The branch where the files are committed. Default: `${{ github.ref_name }}`
-- `ref` The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
-- `overwrite` Overwrite the entire file content, by default `false`
-- `sync_local_file` Sync local file content, by default `true`
-- `message` The commit message. by default `doc: update <file path>.`
-- `committer_name` The name of the author or committer of the commit. by default `github-actions[bot]`
-- `committer_email` The email of the author or committer of the commit. by default `github-actions[bot]@users.noreply.github.com`
-- `openDelimiter` Character to use for opening delimiter, by default "<\!--GAMFC-->"
-- `closeDelimiter` Character to use for closing delimiter, by default "<\!--GAMFC-END-->"
+| Name | Required | Default | Description |
+| -------- | -------- | -------- | -------- |
+| `token`           | ✅        | `${{ github.token }}`                          | GitHub Token used to authenticate API requests. [Why?](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret) |
+| `body`            | ✅        | —                                              | The content to insert between delimiters in the target file. |
+| `trim_whitespace` | ❌        | `true`                                         | Trim leading and trailing whitespace in `body`. |
+| `path`            | ✅        | —                                              | File path to be modified. |
+| `branch`          | ❌        | `${{ github.ref_name }}`                       | Branch to commit changes to. |
+| `ref`             | ❌        | Default branch (usually `master`)              | The target commit, branch, or tag. |
+| `overwrite`       | ❌        | `false`                                        | Whether to overwrite the entire file. |
+| `sync_local_file` | ❌        | `true`                                         | Whether to sync the file from the local content. |
+| `message`         | ❌        | `doc: update <file path>.`                     | Commit message. |
+| `committer_name`  | ❌        | `github-actions[bot]`                          | Name used for the Git commit author. |
+| `committer_email` | ❌        | `github-actions[bot]@users.noreply.github.com` | Email used for the Git commit author. |
+| `openDelimiter`   | ❌        | `<!--GAMFC-->`                                 | Start delimiter for content replacement. |
+| `closeDelimiter`  | ❌        | `<!--GAMFC-END-->`                             | End delimiter for content replacement. |
 
 ## Outputs
 

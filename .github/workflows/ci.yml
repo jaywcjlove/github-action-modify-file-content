@@ -56,13 +56,14 @@ jobs:
 
 
       - name: Modify CONTRIBUTING
-        uses: jaywcjlove/github-action-modify-file-content@main
+        uses: ./
         with:
           path: README.md
+          trim_whitespace: false
           openDelimiter: '<!--CONTRIBUTING-->'
           closeDelimiter: '<!--CONTRIBUTING-END-->'
+          message: 'chore: update contributors'
           body: |
-
             
             ${{steps.contributors.outputs.htmlList}}
 

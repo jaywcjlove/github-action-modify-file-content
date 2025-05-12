@@ -10,6 +10,10 @@ inputs:
     description: 'what needs to be replaced'
     default: ''
     required: true
+  trim_whitespace:
+    description: 'Optional. Whether leading/trailing whitespace will be trimmed for the body input. Defaults to true'
+    default: true
+    required: false
   path:
     description: 'File to be replaced'
     default: ''

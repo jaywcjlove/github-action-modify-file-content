@@ -1,4 +1,4 @@
-import { getInput, startGroup, endGroup, setFailed, info, warning } from '@actions/core';
+import { getInput, getBooleanInput, startGroup, endGroup, setFailed, info, warning } from '@actions/core';
 import formatter from '@uiw/formatter';
 import { modifyPathContents } from './utils';
 
@@ -7,7 +7,8 @@ const REGEXP = /\{\{date:?(.*?)\}\}/ig
 ;(async () => {
   const filepath = getInput('path') || '';
   try {
-    let body = getInput('body') || '';
+    let trimWhitespace = getBooleanInput('trim_whitespace');
+    let body = getInput('body', { trimWhitespace }) || '';
     if (!body) {
       warning(`👉 [github-action-modify-file-content]: "body" input value does not exist.`)
       return
