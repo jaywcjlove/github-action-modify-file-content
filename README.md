@@ -6,7 +6,7 @@ Modify File Content
 
 Replace text content and submit content
 
-Here is the example: update time <!--GAMFC-->2025-05-12 16:54:13<!--GAMFC-END-->
+Here is the example: update time <!--GAMFC-->2025-05-12 17:09:57<!--GAMFC-END-->
 
 Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABEL` & `GAMFC_TABEL-END` (test)<!--GAMFC_TABEL-END-->
 
@@ -25,8 +25,7 @@ Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABE
 | `message`         | ❌        | `doc: update <file path>.`                     | Commit message. |
 | `committer_name`  | ❌        | `github-actions[bot]`                          | Name used for the Git commit author. |
 | `committer_email` | ❌        | `github-actions[bot]@users.noreply.github.com` | Email used for the Git commit author. |
-| `openDelimiter`   | ❌        | `<!--GAMFC-->`                                 | Start delimiter for content replacement. |
-| `closeDelimiter`  | ❌        | `<!--GAMFC-END-->`                             | End delimiter for content replacement. |
+| `openDelimiter`   | ❌        | `<!--GAMFC-->2025-05-12 17:09:57<!--GAMFC-END-->`                             | End delimiter for content replacement. |
 
 ## Outputs
 
@@ -44,10 +43,10 @@ Here is the different delimiter example: <!--GAMFC_TABEL-->different `GAMFC_TABE
 `README.md` file content
 
 ```markdown
-update time <!--GAMFC-->2025-05-12 16:54:13<!--GAMFC-END-->
+update time <!--GAMFC-->2025-05-12 17:09:57<!--GAMFC-END-->
 ```
 
-Replace the content between `<!--GAMFC-->2025-05-12 16:54:13<!--GAMFC-END-->`.
+Replace the content between `<!--GAMFC-->2025-05-12 17:09:57<!--GAMFC-END-->`.
 
 ### format date
 
