@@ -128,7 +128,7 @@ Replace the content between `<!--GAMFC-->2026-03-15 09:29:20<!--GAMFC-END-->`.
 - [Generated Badges](https://github.com/jaywcjlove/generated-badges) Create a badge using GitHub Actions and GitHub Workflow CPU time (no 3rd parties servers)
 - [Create Coverage Badges](https://github.com/jaywcjlove/coverage-badges-cli) Create coverage badges from coverage reports. (no 3rd parties servers)
 - [Github Action package](https://github.com/jaywcjlove/github-action-package) Read and modify the contents of `package.json`.
-- [Github Action EJS](https://github.com/jaywcjlove/github-action-package) A github action to render a ejs template using github context.
+- [Github Action EJS](https://github.com/jaywcjlove/action-ejs) A github action to render a ejs template using github context.
 - [Github Action Read File Content](https://github.com/jaywcjlove/github-action-read-file) 
 Read file contents. You can also get the file content in the branch.
 
