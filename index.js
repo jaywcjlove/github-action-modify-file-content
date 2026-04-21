@@ -8866,6 +8866,9 @@ function stringify(obj) {
     spaces = _ref.spaces;
   var EOF = finalEOL ? EOL : '';
   var str = JSON.stringify(obj, replacer, spaces);
+  if (str === undefined) {
+    throw new TypeError("Converting ".concat(typeof obj, " value to JSON is not supported"));
+  }
   return str.replace(/\n/g, EOL) + EOF;
 }
 function stripBom(content) {
